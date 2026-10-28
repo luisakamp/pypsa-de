@@ -46,10 +46,11 @@ rule build_exogenous_mobility_data:
 rule build_egon_data:
     input:
         demandregio_spatial=f"{EGON['folder']}/demandregio_spatial_2018.json",
-        mapping_38_to_4=storage(
-            "https://ffeopendatastorage.blob.core.windows.net/opendata/mapping_from_4_to_38.json",
-            keep_local=True,
-        ),
+        #mapping_38_to_4=storage(
+        #    "https://ffeopendatastorage.blob.core.windows.net/opendata/mapping_from_4_to_38.json",
+        #    keep_local=True,
+        #),
+        mapping_38_to_4="data/LuKa_data/mapping_from_4_to_38.json",                                         ### ANPASSUNG LuKa
         mapping_technologies=f"{EGON['folder']}/mapping_technologies.json",
         nuts3=resources("nuts3_shapes.geojson"),
     output:

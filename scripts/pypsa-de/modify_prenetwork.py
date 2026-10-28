@@ -1078,6 +1078,97 @@ def add_hydrogen_turbines(n, H2_plants):
     h2_plants.efficiency3 = 1
     n.add("Link", h2_plants.index, **h2_plants)
 
+############# Anpassung LuKa
+
+def partial_retrofit_sr27(n, investment_year, targets_gw):
+    """Festen Methanbestand durch Teilumrüstung auf den Zielwert reduzieren."""
+    target = targets_gw.get(
+        investment_year, targets_gw.get(str(investment_year))
+    )
+    if target is None:
+        return
+
+    target_mw = float(target) * 1e3
+    if not 0 <= target_mw < float("inf"):
+        raise ValueError("Methan-Ziel muss endlich und nicht negativ sein.")
+
+    links = n.links
+    gas_carriers = [
+        "OCGT", "CCGT",
+        "urban central gas CHP",
+        "urban central gas CHP CC",
+    ]
+
+    # Aktiver, fester Methanbestand mit deutschem Stromausgang.
+    fixed = (
+        links.carrier.isin(gas_carriers)
+        & links.bus1.str.startswith("DE", na=False)
+        & links.bus1.map(n.buses.carrier).eq("AC")
+        & ~links.p_nom_extendable
+        & links.active
+    )
+    capacity_el = links.p_nom * links.efficiency
+    existing_mw = capacity_el.loc[fixed].sum()
+    excess_mw = existing_mw - target_mw
+
+    if excess_mw <= 1e-3:
+        logger.info(
+            f"SR27 {investment_year}: fester Methanbestand "
+            f"{existing_mw / 1e3:.3f} GW_el; keine Umrüstung nötig."
+        )
+        return
+
+    # Nur reine Gasturbinen umrüsten, keine KWK.
+    candidates = links.index[
+        fixed
+        & links.carrier.isin(["OCGT", "CCGT"])
+        & links.p_nom.gt(0)
+        & links.efficiency.gt(0)
+    ]
+    available_mw = capacity_el.loc[candidates].sum()
+
+    if excess_mw > available_mw + 1e-3:
+        raise ValueError(
+            f"SR27 {investment_year}: Methanüberschuss "
+            f"{excess_mw / 1e3:.3f} GW_el übersteigt umrüstbare "
+            f"OCGT/CCGT-Leistung {available_mw / 1e3:.3f} GW_el."
+        )
+
+    fraction = min(excess_mw / available_mw, 1.0)
+    h2 = links.loc[candidates].copy()
+    h2.index = candidates + " SR27 H2 retrofit"
+
+    if h2.index.isin(links.index).any():
+        raise ValueError("SR27-Umrüstungslinks existieren bereits.")
+
+    # Zeitabhängige Linkattribute müssten gesondert kopiert werden.
+    for attr, table in n.links_t.items():
+        if table.columns.isin(candidates).any():
+            raise ValueError(
+                f"Zeitabhängiges Linkattribut '{attr}' vorhanden: "
+                "vor der Umrüstung gesondert behandeln."
+            )
+
+    h2["p_nom"] *= fraction
+    h2["carrier"] = "H2 retrofit " + h2.carrier
+    h2["bus0"] = h2.bus1 + " H2"
+    h2["bus2"] = ""
+    h2["efficiency2"] = 1.0
+
+    if not h2.bus0.isin(n.buses.index).all():
+        raise ValueError("Für mindestens eine Anlage fehlt der H2-Bus.")
+
+    # Erst H2-Anteile ergänzen, dann Methananteile reduzieren.
+    n.add("Link", h2.index, **h2)
+    n.links.loc[candidates, "p_nom"] *= 1 - fraction
+
+    logger.info(
+        f"SR27 {investment_year}: {excess_mw / 1e3:.3f} GW_el "
+        f"von Methan auf H2 umgerüstet; fester Methanbestand "
+        f"verbleibt bei {target_mw / 1e3:.3f} GW_el."
+    )
+
+############
 
 def force_retrofit(n, params):
     """
@@ -1475,6 +1566,16 @@ if __name__ == "__main__":
             snakemake.wildcards.planning_horizons
         ):
             add_hydrogen_turbines(n, snakemake.params.H2_plants)
+
+        #### Anpassung LuKa: Teilumrüstung
+        partial_retrofit_sr27(
+            n,
+            int(snakemake.wildcards.planning_horizons),
+            snakemake.params.H2_plants.get(
+                "sr27_methane_target_gw", {}
+            ),
+        )
+
         if snakemake.params.H2_plants["force"] <= int(
             snakemake.wildcards.planning_horizons
         ):

@@ -1,0 +1,1075 @@
+rules/build_sector.smk-1058-    params:
+rules/build_sector.smk-1059-        industry=config_provider("industry"),
+rules/build_sector.smk-1060-        ammonia=config_provider("sector", "ammonia", default=False),
+rules/build_sector.smk-1061-    message:
+rules/build_sector.smk-1062-        "Building industry sector energy demand ratios"
+rules/build_sector.smk-1063-    script:
+rules/build_sector.smk-1064-        scripts("build_industry_sector_ratios.py")
+rules/build_sector.smk-1065-
+rules/build_sector.smk-1066-
+rules/build_sector.smk-1067-rule build_industry_sector_ratios_intermediate:
+rules/build_sector.smk-1068-    input:
+rules/build_sector.smk-1069-        industry_sector_ratios=resources("industry_sector_ratios.csv"),
+rules/build_sector.smk:1070:        industrial_energy_demand_per_country_today=resources(
+rules/build_sector.smk:1071:            "industrial_energy_demand_per_country_today.csv"
+rules/build_sector.smk-1072-        ),
+rules/build_sector.smk-1073-        industrial_production_per_country=resources(
+rules/build_sector.smk-1074-            "industrial_production_per_country.csv"
+rules/build_sector.smk-1075-        ),
+rules/build_sector.smk-1076-    output:
+rules/build_sector.smk-1077-        industry_sector_ratios=resources(
+rules/build_sector.smk-1078-            "industry_sector_ratios_{planning_horizons}.csv"
+rules/build_sector.smk-1079-        ),
+rules/build_sector.smk-1080-    log:
+rules/build_sector.smk-1081-        logs("build_industry_sector_ratios_{planning_horizons}.log"),
+rules/build_sector.smk-1082-    benchmark:
+rules/build_sector.smk-1083-        benchmarks("build_industry_sector_ratios_{planning_horizons}")
+rules/build_sector.smk-1084-    threads: 1
+rules/build_sector.smk-1085-    resources:
+rules/build_sector.smk-1086-        mem_mb=1000,
+rules/build_sector.smk-1087-    params:
+rules/build_sector.smk-1088-        industry=config_provider("industry"),
+rules/build_sector.smk-1089-    message:
+rules/build_sector.smk-1090-        "Building intermediate industry sector ratios for {wildcards.planning_horizons} planning horizon"
+rules/build_sector.smk-1091-    script:
+--
+rules/build_sector.smk-1197-                "build_industrial_production_per_node/s_{clusters}_{planning_horizons}"
+rules/build_sector.smk-1198-            )
+rules/build_sector.smk-1199-        )
+rules/build_sector.smk-1200-    threads: 1
+rules/build_sector.smk-1201-    resources:
+rules/build_sector.smk-1202-        mem_mb=1000,
+rules/build_sector.smk-1203-    message:
+rules/build_sector.smk-1204-        "Distributing industrial production to network nodes for {wildcards.clusters} clusters and {wildcards.planning_horizons} planning horizon"
+rules/build_sector.smk-1205-    script:
+rules/build_sector.smk-1206-        scripts("build_industrial_production_per_node.py")
+rules/build_sector.smk-1207-
+rules/build_sector.smk-1208-
+rules/build_sector.smk:1209:rule build_industrial_energy_demand_per_node:
+rules/build_sector.smk-1210-    input:
+rules/build_sector.smk-1211-        industry_sector_ratios=resources(
+rules/build_sector.smk-1212-            "industry_sector_ratios_{planning_horizons}.csv"
+rules/build_sector.smk-1213-        ),
+rules/build_sector.smk-1214-        industrial_production_per_node=resources(
+rules/build_sector.smk-1215-            "industrial_production_base_s_{clusters}_{planning_horizons}.csv"
+rules/build_sector.smk-1216-        ),
+rules/build_sector.smk:1217:        industrial_energy_demand_per_node_today=resources(
+rules/build_sector.smk:1218:            "industrial_energy_demand_today_base_s_{clusters}.csv"
+rules/build_sector.smk-1219-        ),
+rules/build_sector.smk-1220-    output:
+rules/build_sector.smk:1221:        industrial_energy_demand_per_node=resources(
+rules/build_sector.smk:1222:            "industrial_energy_demand_base_s_{clusters}_{planning_horizons}.csv"
+rules/build_sector.smk-1223-        ),
+rules/build_sector.smk-1224-    log:
+rules/build_sector.smk-1225-        logs(
+rules/build_sector.smk:1226:            "build_industrial_energy_demand_per_node_{clusters}_{planning_horizons}.log"
+rules/build_sector.smk-1227-        ),
+rules/build_sector.smk-1228-    benchmark:
+rules/build_sector.smk-1229-        (
+rules/build_sector.smk-1230-            benchmarks(
+rules/build_sector.smk:1231:                "build_industrial_energy_demand_per_node/s_{clusters}_{planning_horizons}"
+rules/build_sector.smk-1232-            )
+rules/build_sector.smk-1233-        )
+rules/build_sector.smk-1234-    threads: 1
+rules/build_sector.smk-1235-    resources:
+rules/build_sector.smk-1236-        mem_mb=1000,
+rules/build_sector.smk-1237-    message:
+rules/build_sector.smk-1238-        "Building industrial energy demand per network node for {wildcards.clusters} clusters and {wildcards.planning_horizons} planning horizon"
+rules/build_sector.smk-1239-    script:
+rules/build_sector.smk:1240:        scripts("build_industrial_energy_demand_per_node.py")
+rules/build_sector.smk-1241-
+rules/build_sector.smk-1242-
+rules/build_sector.smk:1243:rule build_industrial_energy_demand_per_country_today:
+rules/build_sector.smk-1244-    input:
+rules/build_sector.smk-1245-        transformation_output_coke=resources("transformation_output_coke.csv"),
+rules/build_sector.smk-1246-        jrc=rules.retrieve_jrc_idees.output["directory"],
+rules/build_sector.smk-1247-        industrial_production_per_country=resources(
+rules/build_sector.smk-1248-            "industrial_production_per_country.csv"
+rules/build_sector.smk-1249-        ),
+rules/build_sector.smk-1250-    output:
+rules/build_sector.smk:1251:        industrial_energy_demand_per_country_today=resources(
+rules/build_sector.smk:1252:            "industrial_energy_demand_per_country_today.csv"
+rules/build_sector.smk-1253-        ),
+rules/build_sector.smk-1254-    log:
+rules/build_sector.smk:1255:        logs("build_industrial_energy_demand_per_country_today.log"),
+rules/build_sector.smk-1256-    benchmark:
+rules/build_sector.smk:1257:        benchmarks("build_industrial_energy_demand_per_country_today")
+rules/build_sector.smk-1258-    threads: 8
+rules/build_sector.smk-1259-    resources:
+rules/build_sector.smk-1260-        mem_mb=2000,
+rules/build_sector.smk-1261-    params:
+rules/build_sector.smk-1262-        countries=config_provider("countries"),
+rules/build_sector.smk-1263-        industry=config_provider("industry"),
+rules/build_sector.smk-1264-        ammonia=config_provider("sector", "ammonia", default=False),
+rules/build_sector.smk-1265-    message:
+rules/build_sector.smk-1266-        "Building current industrial energy demand by country"
+rules/build_sector.smk-1267-    script:
+rules/build_sector.smk:1268:        scripts("build_industrial_energy_demand_per_country_today.py")
+rules/build_sector.smk-1269-
+rules/build_sector.smk-1270-
+rules/build_sector.smk:1271:rule build_industrial_energy_demand_per_node_today:
+rules/build_sector.smk-1272-    input:
+rules/build_sector.smk-1273-        industrial_distribution_key=resources(
+rules/build_sector.smk-1274-            "industrial_distribution_key_base_s_{clusters}.csv"
+rules/build_sector.smk-1275-        ),
+rules/build_sector.smk:1276:        industrial_energy_demand_per_country_today=resources(
+rules/build_sector.smk:1277:            "industrial_energy_demand_per_country_today.csv"
+rules/build_sector.smk-1278-        ),
+rules/build_sector.smk-1279-    output:
+rules/build_sector.smk:1280:        industrial_energy_demand_per_node_today=resources(
+rules/build_sector.smk:1281:            "industrial_energy_demand_today_base_s_{clusters}.csv"
+rules/build_sector.smk-1282-        ),
+rules/build_sector.smk-1283-    log:
+rules/build_sector.smk:1284:        logs("build_industrial_energy_demand_per_node_today_{clusters}.log"),
+rules/build_sector.smk-1285-    benchmark:
+rules/build_sector.smk:1286:        benchmarks("build_industrial_energy_demand_per_node_today/s_{clusters}")
+rules/build_sector.smk-1287-    threads: 1
+rules/build_sector.smk-1288-    resources:
+rules/build_sector.smk-1289-        mem_mb=1000,
+rules/build_sector.smk-1290-    message:
+rules/build_sector.smk-1291-        "Building current industrial energy demand per network node for {wildcards.clusters} clusters"
+rules/build_sector.smk-1292-    script:
+rules/build_sector.smk:1293:        scripts("build_industrial_energy_demand_per_node_today.py")
+rules/build_sector.smk-1294-
+rules/build_sector.smk-1295-
+rules/build_sector.smk-1296-rule build_retro_cost:
+rules/build_sector.smk-1297-    input:
+rules/build_sector.smk-1298-        building_stock="data/retro/data_building_stock.csv",
+rules/build_sector.smk-1299-        data_tabula="data/bundle/retro/tabula-calculator-calcsetbuilding.csv",
+rules/build_sector.smk-1300-        air_temperature=resources("temp_air_total_base_s_{clusters}.nc"),
+rules/build_sector.smk-1301-        u_values_PL="data/retro/u_values_poland.csv",
+rules/build_sector.smk-1302-        tax_w="data/retro/electricity_taxes_eu.csv",
+rules/build_sector.smk-1303-        construction_index="data/retro/comparative_level_investment.csv",
+rules/build_sector.smk-1304-        floor_area_missing="data/retro/floor_area_missing.csv",
+rules/build_sector.smk-1305-        clustered_pop_layout=resources("pop_layout_base_s_{clusters}.csv"),
+rules/build_sector.smk-1306-        cost_germany="data/retro/retro_cost_germany.csv",
+rules/build_sector.smk-1307-        window_assumptions="data/retro/window_assumptions.csv",
+rules/build_sector.smk-1308-    output:
+rules/build_sector.smk-1309-        retro_cost=resources("retro_cost_base_s_{clusters}.csv"),
+rules/build_sector.smk-1310-        floor_area=resources("floor_area_base_s_{clusters}.csv"),
+rules/build_sector.smk-1311-    log:
+rules/build_sector.smk-1312-        logs("build_retro_cost_{clusters}.log"),
+rules/build_sector.smk-1313-    benchmark:
+--
+rules/build_sector.smk-1631-        biomass_potentials=resources(
+rules/build_sector.smk-1632-            "biomass_potentials_s_{clusters}_{planning_horizons}.csv"
+rules/build_sector.smk-1633-        ),
+rules/build_sector.smk-1634-        costs=lambda w: (
+rules/build_sector.smk-1635-            resources(f"costs_{config_provider('costs', 'year')(w)}_processed.csv")
+rules/build_sector.smk-1636-            if config_provider("foresight")(w) == "overnight"
+rules/build_sector.smk-1637-            else resources("costs_{planning_horizons}_processed.csv")
+rules/build_sector.smk-1638-        ),
+rules/build_sector.smk-1639-        h2_cavern=resources("salt_cavern_potentials_s_{clusters}.csv"),
+rules/build_sector.smk-1640-        busmap_s=resources("busmap_base_s.csv"),
+rules/build_sector.smk-1641-        busmap=resources("busmap_base_s_{clusters}.csv"),
+rules/build_sector.smk-1642-        clustered_pop_layout=resources("pop_layout_base_s_{clusters}.csv"),
+rules/build_sector.smk:1643:        industrial_demand=resources(
+rules/build_sector.smk:1644:            "industrial_energy_demand_base_s_{clusters}_{planning_horizons}.csv"
+rules/build_sector.smk-1645-        ),
+rules/build_sector.smk-1646-        hourly_heat_demand_total=resources(
+rules/build_sector.smk-1647-            "hourly_heat_demand_total_base_s_{clusters}.nc"
+rules/build_sector.smk-1648-        ),
+rules/build_sector.smk-1649-        industrial_production=resources(
+rules/build_sector.smk-1650-            "industrial_production_base_s_{clusters}_{planning_horizons}.csv"
+rules/build_sector.smk-1651-        ),
+rules/build_sector.smk-1652-        district_heat_share=resources(
+rules/build_sector.smk-1653-            "district_heat_share_base_s_{clusters}_{planning_horizons}-modified.csv"
+rules/build_sector.smk-1654-        ),
+rules/build_sector.smk-1655-        heating_efficiencies=resources("heating_efficiencies.csv"),
+rules/build_sector.smk-1656-        temp_soil_total=resources("temp_soil_total_base_s_{clusters}.nc"),
+rules/build_sector.smk-1657-        temp_air_total=resources("temp_air_total_base_s_{clusters}.nc"),
+rules/build_sector.smk-1658-        cop_profiles=resources("cop_profiles_base_s_{clusters}_{planning_horizons}.nc"),
+rules/build_sector.smk-1659-        ptes_e_max_pu_profiles=lambda w: (
+rules/build_sector.smk-1660-            resources(
+rules/build_sector.smk-1661-                "ptes_e_max_pu_profiles_base_s_{clusters}_{planning_horizons}.nc"
+rules/build_sector.smk-1662-            )
+rules/build_sector.smk-1663-            if config_provider(
+rules/build_sector.smk-1664-                "sector", "district_heating", "ptes", "dynamic_capacity"
+--
+rules/pypsa-de/modifications.smk-189-        wkn=lambda w: (
+rules/pypsa-de/modifications.smk-190-            resources("wasserstoff_kernnetz_base_s_{clusters}.csv")
+rules/pypsa-de/modifications.smk-191-            if config_provider("wasserstoff_kernnetz", "enable")(w)
+rules/pypsa-de/modifications.smk-192-            else []
+rules/pypsa-de/modifications.smk-193-        ),
+rules/pypsa-de/modifications.smk-194-        costs=resources("costs_{planning_horizons}_processed.csv"),
+rules/pypsa-de/modifications.smk-195-        modified_mobility_data=resources(
+rules/pypsa-de/modifications.smk-196-            "modified_mobility_data_{clusters}_{planning_horizons}.csv"
+rules/pypsa-de/modifications.smk-197-        ),
+rules/pypsa-de/modifications.smk-198-        biomass_potentials=resources(
+rules/pypsa-de/modifications.smk-199-            "biomass_potentials_s_{clusters}_{planning_horizons}.csv"
+rules/pypsa-de/modifications.smk-200-        ),
+rules/pypsa-de/modifications.smk:201:        industrial_demand=resources(
+rules/pypsa-de/modifications.smk:202:            "industrial_energy_demand_base_s_{clusters}_{planning_horizons}.csv"
+rules/pypsa-de/modifications.smk-203-        ),
+rules/pypsa-de/modifications.smk-204-        industrial_production_per_country_tomorrow=resources(
+rules/pypsa-de/modifications.smk-205-            "industrial_production_per_country_tomorrow_{planning_horizons}-modified.csv"
+rules/pypsa-de/modifications.smk-206-        ),
+rules/pypsa-de/modifications.smk-207-        industry_sector_ratios=resources(
+rules/pypsa-de/modifications.smk-208-            "industry_sector_ratios_{planning_horizons}.csv"
+rules/pypsa-de/modifications.smk-209-        ),
+rules/pypsa-de/modifications.smk-210-        pop_weighted_energy_totals=resources(
+rules/pypsa-de/modifications.smk-211-            "pop_weighted_energy_totals_s_{clusters}.csv"
+rules/pypsa-de/modifications.smk-212-        ),
+rules/pypsa-de/modifications.smk-213-        shipping_demand=resources("shipping_demand_s_{clusters}.csv"),
+rules/pypsa-de/modifications.smk-214-        regions_onshore=resources("regions_onshore_base_s_{clusters}.geojson"),
+rules/pypsa-de/modifications.smk-215-        regions_offshore=resources("regions_offshore_base_s_{clusters}.geojson"),
+rules/pypsa-de/modifications.smk-216-        offshore_connection_points="data/pypsa-de/offshore_connection_points.csv",
+rules/pypsa-de/modifications.smk:217:        new_industrial_energy_demand="data/pypsa-de/UBA_Projektionsbericht2025_Abbildung31_MWMS.csv",
+rules/pypsa-de/modifications.smk-218-    output:
+rules/pypsa-de/modifications.smk-219-        network=resources(
+rules/pypsa-de/modifications.smk-220-            "networks/base_s_{clusters}_{opts}_{sector_opts}_{planning_horizons}_final.nc"
+rules/pypsa-de/modifications.smk-221-        ),
+rules/pypsa-de/modifications.smk-222-    log:
+rules/pypsa-de/modifications.smk-223-        RESULTS
+rules/pypsa-de/modifications.smk-224-        + "logs/modify_prenetwork_base_s_{clusters}_{opts}_{sector_opts}_{planning_horizons}.log",
+rules/pypsa-de/modifications.smk-225-    resources:
+rules/pypsa-de/modifications.smk-226-        mem_mb=4000,
+rules/pypsa-de/modifications.smk-227-    params:
+rules/pypsa-de/modifications.smk-228-        efuel_export_ban=config_provider("solving", "constraints", "efuel_export_ban"),
+rules/pypsa-de/modifications.smk-229-        enable_kernnetz=config_provider("wasserstoff_kernnetz", "enable"),
+rules/pypsa-de/modifications.smk-230-        technology_occurrence=config_provider("first_technology_occurrence"),
+rules/pypsa-de/modifications.smk-231-        fossil_boiler_ban=config_provider("new_decentral_fossil_boiler_ban"),
+rules/pypsa-de/modifications.smk-232-        coal_ban=config_provider("coal_generation_ban"),
+rules/pypsa-de/modifications.smk-233-        nuclear_ban=config_provider("nuclear_generation_ban"),
+rules/pypsa-de/modifications.smk-234-        planning_horizons=config_provider("scenario", "planning_horizons"),
+rules/pypsa-de/modifications.smk-235-        H2_transmission_efficiency=config_provider(
+rules/pypsa-de/modifications.smk-236-            "sector", "transmission_efficiency", "H2 pipeline"
+rules/pypsa-de/modifications.smk-237-        ),
+--
+rules/pypsa-de/reporting.smk-1-# SPDX-FileCopyrightText: Contributors to PyPSA-DE <https://github.com/pypsa/pypsa-eur>
+rules/pypsa-de/reporting.smk-2-#
+rules/pypsa-de/reporting.smk-3-# SPDX-License-Identifier: CC BY 4.0
+rules/pypsa-de/reporting.smk-4-
+rules/pypsa-de/reporting.smk-5-
+rules/pypsa-de/reporting.smk-6-rule export_ariadne_variables:
+rules/pypsa-de/reporting.smk-7-    input:
+rules/pypsa-de/reporting.smk-8-        template="data/template_ariadne_database.xlsx",
+rules/pypsa-de/reporting.smk-9-        industry_demands=expand(
+rules/pypsa-de/reporting.smk-10-            resources(
+rules/pypsa-de/reporting.smk:11:                "industrial_energy_demand_base_s_{clusters}_{planning_horizons}.csv"
+rules/pypsa-de/reporting.smk-12-            ),
+rules/pypsa-de/reporting.smk-13-            **config["scenario"],
+rules/pypsa-de/reporting.smk-14-            allow_missing=True,
+rules/pypsa-de/reporting.smk-15-        ),
+rules/pypsa-de/reporting.smk-16-        networks=expand(
+rules/pypsa-de/reporting.smk-17-            RESULTS
+rules/pypsa-de/reporting.smk-18-            + "networks/base_s_{clusters}_{opts}_{sector_opts}_{planning_horizons}.nc",
+rules/pypsa-de/reporting.smk-19-            **config["scenario"],
+rules/pypsa-de/reporting.smk-20-            allow_missing=True,
+rules/pypsa-de/reporting.smk-21-        ),
+rules/pypsa-de/reporting.smk-22-        costs=expand(
+rules/pypsa-de/reporting.smk-23-            resources("costs_{planning_horizons}_processed.csv"),
+rules/pypsa-de/reporting.smk-24-            **config["scenario"],
+rules/pypsa-de/reporting.smk-25-            allow_missing=True,
+rules/pypsa-de/reporting.smk-26-        ),
+rules/pypsa-de/reporting.smk-27-        industrial_production_per_country_tomorrow=expand(
+rules/pypsa-de/reporting.smk-28-            resources(
+rules/pypsa-de/reporting.smk-29-                "industrial_production_per_country_tomorrow_{planning_horizons}-modified.csv"
+rules/pypsa-de/reporting.smk-30-            ),
+rules/pypsa-de/reporting.smk-31-            **config["scenario"],
+--
+scripts/build_industrial_energy_demand_per_country_today.py-120-    "N900H": "heat",  # Nuclear heat
+scripts/build_industrial_energy_demand_per_country_today.py-121-    "H8000": "heat",  # Heat
+scripts/build_industrial_energy_demand_per_country_today.py-122-    "RA000": "biomass",  # Renewables and biofuels
+scripts/build_industrial_energy_demand_per_country_today.py-123-    "W6100_6220": "waste",  # Non-renewable waste
+scripts/build_industrial_energy_demand_per_country_today.py-124-    "E7000": "electricity",  # Electricity
+scripts/build_industrial_energy_demand_per_country_today.py-125-}
+scripts/build_industrial_energy_demand_per_country_today.py-126-
+scripts/build_industrial_energy_demand_per_country_today.py-127-eu27 = cc.EU27as("ISO2").ISO2.tolist()
+scripts/build_industrial_energy_demand_per_country_today.py-128-
+scripts/build_industrial_energy_demand_per_country_today.py-129-jrc_names = {"GR": "EL", "GB": "UK"}
+scripts/build_industrial_energy_demand_per_country_today.py-130-
+scripts/build_industrial_energy_demand_per_country_today.py-131-
+scripts/build_industrial_energy_demand_per_country_today.py:132:def industrial_energy_demand_per_country(country, year, jrc_dir, endogenous_ammonia):
+scripts/build_industrial_energy_demand_per_country_today.py-133-    jrc_country = jrc_names.get(country, country)
+scripts/build_industrial_energy_demand_per_country_today.py-134-
+scripts/build_industrial_energy_demand_per_country_today.py-135-    root = Path(jrc_dir, jrc_country)
+scripts/build_industrial_energy_demand_per_country_today.py-136-    fn = next(
+scripts/build_industrial_energy_demand_per_country_today.py-137-        p
+scripts/build_industrial_energy_demand_per_country_today.py-138-        for y in ("2023", "2021")
+scripts/build_industrial_energy_demand_per_country_today.py-139-        if (p := root / f"JRC-IDEES-{y}_EnergyBalance_{jrc_country}.xlsx").exists()
+scripts/build_industrial_energy_demand_per_country_today.py-140-    )
+scripts/build_industrial_energy_demand_per_country_today.py-141-
+scripts/build_industrial_energy_demand_per_country_today.py-142-    sheets = list(sector_sheets.values())
+scripts/build_industrial_energy_demand_per_country_today.py-143-    df_dict = pd.read_excel(fn, sheet_name=sheets, index_col=0)
+scripts/build_industrial_energy_demand_per_country_today.py-144-
+scripts/build_industrial_energy_demand_per_country_today.py-145-    def get_subsector_data(sheet):
+scripts/build_industrial_energy_demand_per_country_today.py-146-        df = df_dict[sheet][year].groupby(fuels).sum()
+scripts/build_industrial_energy_demand_per_country_today.py-147-
+scripts/build_industrial_energy_demand_per_country_today.py-148-        df["hydrogen"] = 0.0
+scripts/build_industrial_energy_demand_per_country_today.py-149-
+scripts/build_industrial_energy_demand_per_country_today.py-150-        # ammonia is handled separately
+scripts/build_industrial_energy_demand_per_country_today.py-151-        if endogenous_ammonia:
+scripts/build_industrial_energy_demand_per_country_today.py-152-            df["ammonia"] = 0.0
+--
+scripts/build_industrial_energy_demand_per_country_today.py-206-        ammonia = ammonia_exo
+scripts/build_industrial_energy_demand_per_country_today.py-207-
+scripts/build_industrial_energy_demand_per_country_today.py-208-    demand["Ammonia"] = ammonia.unstack().reindex(index=demand.index, fill_value=0.0)
+scripts/build_industrial_energy_demand_per_country_today.py-209-    demand["HVC"] -= ammonia_exo.unstack().reindex(index=demand.index, fill_value=0.0)
+scripts/build_industrial_energy_demand_per_country_today.py-210-
+scripts/build_industrial_energy_demand_per_country_today.py-211-    demand.drop(columns="Basic chemicals", inplace=True)
+scripts/build_industrial_energy_demand_per_country_today.py-212-
+scripts/build_industrial_energy_demand_per_country_today.py-213-    demand["HVC"] = demand["HVC"].clip(lower=0)
+scripts/build_industrial_energy_demand_per_country_today.py-214-
+scripts/build_industrial_energy_demand_per_country_today.py-215-    return demand
+scripts/build_industrial_energy_demand_per_country_today.py-216-
+scripts/build_industrial_energy_demand_per_country_today.py-217-
+scripts/build_industrial_energy_demand_per_country_today.py:218:def add_non_eu27_industrial_energy_demand(countries, demand, production):
+scripts/build_industrial_energy_demand_per_country_today.py-219-    non_eu27 = countries.difference(eu27)
+scripts/build_industrial_energy_demand_per_country_today.py-220-    if non_eu27.empty:
+scripts/build_industrial_energy_demand_per_country_today.py-221-        return demand
+scripts/build_industrial_energy_demand_per_country_today.py-222-
+scripts/build_industrial_energy_demand_per_country_today.py-223-    eu27_production = production.loc[countries.intersection(eu27)].sum()
+scripts/build_industrial_energy_demand_per_country_today.py-224-    eu27_energy = demand.groupby(level=1).sum()
+scripts/build_industrial_energy_demand_per_country_today.py-225-    eu27_averages = eu27_energy / eu27_production
+scripts/build_industrial_energy_demand_per_country_today.py-226-
+scripts/build_industrial_energy_demand_per_country_today.py-227-    demand_non_eu27 = pd.concat(
+scripts/build_industrial_energy_demand_per_country_today.py-228-        {k: v * eu27_averages for k, v in production.loc[non_eu27].iterrows()}
+scripts/build_industrial_energy_demand_per_country_today.py-229-    )
+scripts/build_industrial_energy_demand_per_country_today.py-230-
+scripts/build_industrial_energy_demand_per_country_today.py-231-    return pd.concat([demand, demand_non_eu27])
+scripts/build_industrial_energy_demand_per_country_today.py-232-
+scripts/build_industrial_energy_demand_per_country_today.py-233-
+scripts/build_industrial_energy_demand_per_country_today.py:234:def industrial_energy_demand(countries, year):
+scripts/build_industrial_energy_demand_per_country_today.py-235-    nprocesses = snakemake.threads
+scripts/build_industrial_energy_demand_per_country_today.py-236-    disable_progress = snakemake.config["run"].get("disable_progressbar", False)
+scripts/build_industrial_energy_demand_per_country_today.py-237-    func = partial(
+scripts/build_industrial_energy_demand_per_country_today.py:238:        industrial_energy_demand_per_country,
+scripts/build_industrial_energy_demand_per_country_today.py-239-        year=year,
+scripts/build_industrial_energy_demand_per_country_today.py-240-        jrc_dir=snakemake.input.jrc,
+scripts/build_industrial_energy_demand_per_country_today.py-241-        endogenous_ammonia=snakemake.params.ammonia,
+scripts/build_industrial_energy_demand_per_country_today.py-242-    )
+scripts/build_industrial_energy_demand_per_country_today.py-243-    tqdm_kwargs = dict(
+scripts/build_industrial_energy_demand_per_country_today.py-244-        ascii=False,
+scripts/build_industrial_energy_demand_per_country_today.py-245-        unit=" country",
+scripts/build_industrial_energy_demand_per_country_today.py-246-        total=len(countries),
+scripts/build_industrial_energy_demand_per_country_today.py-247-        desc="Build industrial energy demand",
+scripts/build_industrial_energy_demand_per_country_today.py-248-        disable=disable_progress,
+scripts/build_industrial_energy_demand_per_country_today.py-249-    )
+scripts/build_industrial_energy_demand_per_country_today.py-250-    with mp.Pool(processes=nprocesses) as pool:
+scripts/build_industrial_energy_demand_per_country_today.py-251-        demand_l = list(tqdm(pool.imap(func, countries), **tqdm_kwargs))
+scripts/build_industrial_energy_demand_per_country_today.py-252-
+scripts/build_industrial_energy_demand_per_country_today.py-253-    return pd.concat(demand_l, keys=countries)
+scripts/build_industrial_energy_demand_per_country_today.py-254-
+scripts/build_industrial_energy_demand_per_country_today.py-255-
+scripts/build_industrial_energy_demand_per_country_today.py-256-def add_coke_ovens(demand, fn, year, factor=0.75):
+scripts/build_industrial_energy_demand_per_country_today.py-257-    """
+scripts/build_industrial_energy_demand_per_country_today.py-258-    Adds the energy consumption of coke ovens to the energy demand for
+--
+scripts/build_industrial_energy_demand_per_country_today.py-297-        0
+scripts/build_industrial_energy_demand_per_country_today.py-298-    )
+scripts/build_industrial_energy_demand_per_country_today.py-299-    sel = demand.columns.get_level_values(1) == "Integrated steelworks"
+scripts/build_industrial_energy_demand_per_country_today.py-300-    demand.loc[:, sel] += factor * df.values
+scripts/build_industrial_energy_demand_per_country_today.py-301-
+scripts/build_industrial_energy_demand_per_country_today.py-302-    return demand
+scripts/build_industrial_energy_demand_per_country_today.py-303-
+scripts/build_industrial_energy_demand_per_country_today.py-304-
+scripts/build_industrial_energy_demand_per_country_today.py-305-if __name__ == "__main__":
+scripts/build_industrial_energy_demand_per_country_today.py-306-    if "snakemake" not in globals():
+scripts/build_industrial_energy_demand_per_country_today.py-307-        from scripts._helpers import mock_snakemake
+scripts/build_industrial_energy_demand_per_country_today.py-308-
+scripts/build_industrial_energy_demand_per_country_today.py:309:        snakemake = mock_snakemake("build_industrial_energy_demand_per_country_today")
+scripts/build_industrial_energy_demand_per_country_today.py-310-    configure_logging(snakemake)
+scripts/build_industrial_energy_demand_per_country_today.py-311-    set_scenario_config(snakemake)
+scripts/build_industrial_energy_demand_per_country_today.py-312-
+scripts/build_industrial_energy_demand_per_country_today.py-313-    params = snakemake.params.industry
+scripts/build_industrial_energy_demand_per_country_today.py-314-    year = params.get("reference_year", 2019)
+scripts/build_industrial_energy_demand_per_country_today.py-315-    countries = pd.Index(snakemake.params.countries)
+scripts/build_industrial_energy_demand_per_country_today.py-316-
+scripts/build_industrial_energy_demand_per_country_today.py:317:    demand = industrial_energy_demand(countries.intersection(eu27), year)
+scripts/build_industrial_energy_demand_per_country_today.py-318-
+scripts/build_industrial_energy_demand_per_country_today.py-319-    # output in MtMaterial/a
+scripts/build_industrial_energy_demand_per_country_today.py-320-    production = (
+scripts/build_industrial_energy_demand_per_country_today.py-321-        pd.read_csv(snakemake.input.industrial_production_per_country, index_col=0)
+scripts/build_industrial_energy_demand_per_country_today.py-322-        / 1e3
+scripts/build_industrial_energy_demand_per_country_today.py-323-    )
+scripts/build_industrial_energy_demand_per_country_today.py-324-
+scripts/build_industrial_energy_demand_per_country_today.py-325-    demand = separate_basic_chemicals(demand, production)
+scripts/build_industrial_energy_demand_per_country_today.py-326-
+scripts/build_industrial_energy_demand_per_country_today.py:327:    demand = add_non_eu27_industrial_energy_demand(countries, demand, production)
+scripts/build_industrial_energy_demand_per_country_today.py-328-
+scripts/build_industrial_energy_demand_per_country_today.py-329-    # for format compatibility
+scripts/build_industrial_energy_demand_per_country_today.py-330-    demand = demand.stack(future_stack=True).unstack(level=[0, 2])
+scripts/build_industrial_energy_demand_per_country_today.py-331-
+scripts/build_industrial_energy_demand_per_country_today.py-332-    # add energy consumption of coke ovens
+scripts/build_industrial_energy_demand_per_country_today.py-333-    demand = add_coke_ovens(demand, snakemake.input.transformation_output_coke, year)
+scripts/build_industrial_energy_demand_per_country_today.py-334-
+scripts/build_industrial_energy_demand_per_country_today.py-335-    # style and annotation
+scripts/build_industrial_energy_demand_per_country_today.py-336-    demand.index.name = "TWh/a"
+scripts/build_industrial_energy_demand_per_country_today.py-337-    demand.sort_index(axis=1, inplace=True)
+scripts/build_industrial_energy_demand_per_country_today.py-338-
+scripts/build_industrial_energy_demand_per_country_today.py:339:    fn = snakemake.output.industrial_energy_demand_per_country_today
+scripts/build_industrial_energy_demand_per_country_today.py-340-    demand.to_csv(fn)
+--
+scripts/build_industrial_energy_demand_per_node.py-27-
+scripts/build_industrial_energy_demand_per_node.py-28-import pandas as pd
+scripts/build_industrial_energy_demand_per_node.py-29-
+scripts/build_industrial_energy_demand_per_node.py-30-from scripts._helpers import configure_logging, set_scenario_config
+scripts/build_industrial_energy_demand_per_node.py-31-
+scripts/build_industrial_energy_demand_per_node.py-32-logger = logging.getLogger(__name__)
+scripts/build_industrial_energy_demand_per_node.py-33-
+scripts/build_industrial_energy_demand_per_node.py-34-if __name__ == "__main__":
+scripts/build_industrial_energy_demand_per_node.py-35-    if "snakemake" not in globals():
+scripts/build_industrial_energy_demand_per_node.py-36-        from scripts._helpers import mock_snakemake
+scripts/build_industrial_energy_demand_per_node.py-37-
+scripts/build_industrial_energy_demand_per_node.py-38-        snakemake = mock_snakemake(
+scripts/build_industrial_energy_demand_per_node.py:39:            "build_industrial_energy_demand_per_node",
+scripts/build_industrial_energy_demand_per_node.py-40-            clusters=48,
+scripts/build_industrial_energy_demand_per_node.py-41-            planning_horizons=2030,
+scripts/build_industrial_energy_demand_per_node.py-42-        )
+scripts/build_industrial_energy_demand_per_node.py-43-    configure_logging(snakemake)
+scripts/build_industrial_energy_demand_per_node.py-44-    set_scenario_config(snakemake)
+scripts/build_industrial_energy_demand_per_node.py-45-
+scripts/build_industrial_energy_demand_per_node.py-46-    # import ratios
+scripts/build_industrial_energy_demand_per_node.py-47-    fn = snakemake.input.industry_sector_ratios
+scripts/build_industrial_energy_demand_per_node.py-48-    sector_ratios = pd.read_csv(fn, header=[0, 1], index_col=0)
+scripts/build_industrial_energy_demand_per_node.py-49-
+scripts/build_industrial_energy_demand_per_node.py-50-    # material demand per node and industry (Mton/a)
+scripts/build_industrial_energy_demand_per_node.py-51-    fn = snakemake.input.industrial_production_per_node
+scripts/build_industrial_energy_demand_per_node.py-52-    nodal_production = pd.read_csv(fn, index_col=0) / 1e3
+scripts/build_industrial_energy_demand_per_node.py-53-
+scripts/build_industrial_energy_demand_per_node.py-54-    # energy demand today to get current electricity
+scripts/build_industrial_energy_demand_per_node.py:55:    fn = snakemake.input.industrial_energy_demand_per_node_today
+scripts/build_industrial_energy_demand_per_node.py-56-    nodal_today = pd.read_csv(fn, index_col=0)
+scripts/build_industrial_energy_demand_per_node.py-57-
+scripts/build_industrial_energy_demand_per_node.py-58-    nodal_sector_ratios = pd.concat(
+scripts/build_industrial_energy_demand_per_node.py-59-        {node: sector_ratios[node[:2]] for node in nodal_production.index}, axis=1
+scripts/build_industrial_energy_demand_per_node.py-60-    )
+scripts/build_industrial_energy_demand_per_node.py-61-
+scripts/build_industrial_energy_demand_per_node.py-62-    nodal_production_stacked = nodal_production.stack()
+scripts/build_industrial_energy_demand_per_node.py-63-    nodal_production_stacked.index.names = [None, None]
+scripts/build_industrial_energy_demand_per_node.py-64-
+scripts/build_industrial_energy_demand_per_node.py-65-    # final energy consumption per node and industry (TWh/a)
+scripts/build_industrial_energy_demand_per_node.py-66-    nodal_df = (
+scripts/build_industrial_energy_demand_per_node.py-67-        (nodal_sector_ratios.multiply(nodal_production_stacked))
+scripts/build_industrial_energy_demand_per_node.py-68-        .T.groupby(level=0)
+scripts/build_industrial_energy_demand_per_node.py-69-        .sum()
+scripts/build_industrial_energy_demand_per_node.py-70-    )
+scripts/build_industrial_energy_demand_per_node.py-71-
+scripts/build_industrial_energy_demand_per_node.py-72-    rename_sectors = {
+scripts/build_industrial_energy_demand_per_node.py-73-        "elec": "electricity",
+scripts/build_industrial_energy_demand_per_node.py-74-        "biomass": "solid biomass",
+scripts/build_industrial_energy_demand_per_node.py-75-        "heat": "low-temperature heat",
+scripts/build_industrial_energy_demand_per_node.py-76-    }
+scripts/build_industrial_energy_demand_per_node.py-77-    nodal_df.rename(columns=rename_sectors, inplace=True)
+scripts/build_industrial_energy_demand_per_node.py-78-
+scripts/build_industrial_energy_demand_per_node.py-79-    nodal_df["current electricity"] = nodal_today["electricity"]
+scripts/build_industrial_energy_demand_per_node.py-80-
+scripts/build_industrial_energy_demand_per_node.py-81-    nodal_df.index.name = "TWh/a (MtCO2/a)"
+scripts/build_industrial_energy_demand_per_node.py-82-
+scripts/build_industrial_energy_demand_per_node.py:83:    fn = snakemake.output.industrial_energy_demand_per_node
+scripts/build_industrial_energy_demand_per_node.py-84-    nodal_df.to_csv(fn, float_format="%.2f")
+--
+scripts/build_industrial_energy_demand_per_node_today.py-1-# SPDX-FileCopyrightText: Contributors to PyPSA-Eur <https://github.com/pypsa/pypsa-eur>>
+scripts/build_industrial_energy_demand_per_node_today.py-2-#
+scripts/build_industrial_energy_demand_per_node_today.py-3-# SPDX-License-Identifier: MIT
+scripts/build_industrial_energy_demand_per_node_today.py-4-"""
+scripts/build_industrial_energy_demand_per_node_today.py-5-Build industrial energy demand per model region.
+scripts/build_industrial_energy_demand_per_node_today.py-6-
+scripts/build_industrial_energy_demand_per_node_today.py-7-Description
+scripts/build_industrial_energy_demand_per_node_today.py-8--------
+scripts/build_industrial_energy_demand_per_node_today.py-9-
+scripts/build_industrial_energy_demand_per_node_today.py:10:This rule maps the industrial energy demand per country `industrial_energy_demand_per_country_today.csv` to each bus region.
+scripts/build_industrial_energy_demand_per_node_today.py-11-The energy demand per country is multiplied by the mapping value from the file ``industrial_distribution_key_base_s_{clusters}.csv`` between 0 and 1 to get the industrial energy demand per bus.
+scripts/build_industrial_energy_demand_per_node_today.py-12-
+scripts/build_industrial_energy_demand_per_node_today.py-13-The unit of the energy demand is TWh/a.
+scripts/build_industrial_energy_demand_per_node_today.py-14-"""
+scripts/build_industrial_energy_demand_per_node_today.py-15-
+scripts/build_industrial_energy_demand_per_node_today.py-16-import logging
+scripts/build_industrial_energy_demand_per_node_today.py-17-from itertools import product
+scripts/build_industrial_energy_demand_per_node_today.py-18-
+scripts/build_industrial_energy_demand_per_node_today.py-19-import numpy as np
+scripts/build_industrial_energy_demand_per_node_today.py-20-import pandas as pd
+scripts/build_industrial_energy_demand_per_node_today.py-21-
+scripts/build_industrial_energy_demand_per_node_today.py-22-from scripts._helpers import configure_logging, set_scenario_config
+scripts/build_industrial_energy_demand_per_node_today.py-23-
+scripts/build_industrial_energy_demand_per_node_today.py-24-logger = logging.getLogger(__name__)
+scripts/build_industrial_energy_demand_per_node_today.py-25-
+scripts/build_industrial_energy_demand_per_node_today.py-26-# map JRC/our sectors to hotmaps sector, where mapping exist
+scripts/build_industrial_energy_demand_per_node_today.py-27-sector_mapping = {
+scripts/build_industrial_energy_demand_per_node_today.py-28-    "Electric arc": "EAF",
+scripts/build_industrial_energy_demand_per_node_today.py-29-    "Integrated steelworks": "Integrated steelworks",
+scripts/build_industrial_energy_demand_per_node_today.py-30-    "DRI + Electric arc": "DRI + EAF",
+--
+scripts/build_industrial_energy_demand_per_node_today.py-36-    "Ceramics & other NMM": "Non-metallic mineral products",
+scripts/build_industrial_energy_demand_per_node_today.py-37-    "Glass production": "Glass",
+scripts/build_industrial_energy_demand_per_node_today.py-38-    "Pulp production": "Paper and printing",
+scripts/build_industrial_energy_demand_per_node_today.py-39-    "Paper production": "Paper and printing",
+scripts/build_industrial_energy_demand_per_node_today.py-40-    "Printing and media reproduction": "Paper and printing",
+scripts/build_industrial_energy_demand_per_node_today.py-41-    "Alumina production": "Non-ferrous metals",
+scripts/build_industrial_energy_demand_per_node_today.py-42-    "Aluminium - primary production": "Non-ferrous metals",
+scripts/build_industrial_energy_demand_per_node_today.py-43-    "Aluminium - secondary production": "Non-ferrous metals",
+scripts/build_industrial_energy_demand_per_node_today.py-44-    "Other non-ferrous metals": "Non-ferrous metals",
+scripts/build_industrial_energy_demand_per_node_today.py-45-}
+scripts/build_industrial_energy_demand_per_node_today.py-46-
+scripts/build_industrial_energy_demand_per_node_today.py-47-
+scripts/build_industrial_energy_demand_per_node_today.py:48:def build_nodal_industrial_energy_demand():
+scripts/build_industrial_energy_demand_per_node_today.py:49:    fn = snakemake.input.industrial_energy_demand_per_country_today
+scripts/build_industrial_energy_demand_per_node_today.py:50:    industrial_demand = pd.read_csv(fn, header=[0, 1], index_col=0)
+scripts/build_industrial_energy_demand_per_node_today.py-51-
+scripts/build_industrial_energy_demand_per_node_today.py-52-    fn = snakemake.input.industrial_distribution_key
+scripts/build_industrial_energy_demand_per_node_today.py-53-    keys = pd.read_csv(fn, index_col=0)
+scripts/build_industrial_energy_demand_per_node_today.py-54-    keys["country"] = keys.index.str[:2]
+scripts/build_industrial_energy_demand_per_node_today.py-55-
+scripts/build_industrial_energy_demand_per_node_today.py-56-    nodal_demand = pd.DataFrame(
+scripts/build_industrial_energy_demand_per_node_today.py:57:        0.0, dtype=float, index=keys.index, columns=industrial_demand.index
+scripts/build_industrial_energy_demand_per_node_today.py-58-    )
+scripts/build_industrial_energy_demand_per_node_today.py-59-
+scripts/build_industrial_energy_demand_per_node_today.py-60-    countries = keys.country.unique()
+scripts/build_industrial_energy_demand_per_node_today.py:61:    sectors = industrial_demand.columns.unique(1)
+scripts/build_industrial_energy_demand_per_node_today.py-62-
+scripts/build_industrial_energy_demand_per_node_today.py-63-    for country, sector in product(countries, sectors):
+scripts/build_industrial_energy_demand_per_node_today.py-64-        buses = keys.index[keys.country == country]
+scripts/build_industrial_energy_demand_per_node_today.py-65-        mapping = sector_mapping.get(sector, "population")
+scripts/build_industrial_energy_demand_per_node_today.py-66-
+scripts/build_industrial_energy_demand_per_node_today.py-67-        key = keys.loc[buses, mapping]
+scripts/build_industrial_energy_demand_per_node_today.py:68:        demand = industrial_demand[country, sector]
+scripts/build_industrial_energy_demand_per_node_today.py-69-
+scripts/build_industrial_energy_demand_per_node_today.py-70-        outer = pd.DataFrame(
+scripts/build_industrial_energy_demand_per_node_today.py-71-            np.outer(key, demand), index=key.index, columns=demand.index
+scripts/build_industrial_energy_demand_per_node_today.py-72-        )
+scripts/build_industrial_energy_demand_per_node_today.py-73-
+scripts/build_industrial_energy_demand_per_node_today.py-74-        nodal_demand.loc[buses] += outer
+scripts/build_industrial_energy_demand_per_node_today.py-75-
+scripts/build_industrial_energy_demand_per_node_today.py-76-    nodal_demand.index.name = "TWh/a"
+scripts/build_industrial_energy_demand_per_node_today.py-77-
+scripts/build_industrial_energy_demand_per_node_today.py:78:    nodal_demand.to_csv(snakemake.output.industrial_energy_demand_per_node_today)
+scripts/build_industrial_energy_demand_per_node_today.py-79-
+scripts/build_industrial_energy_demand_per_node_today.py-80-
+scripts/build_industrial_energy_demand_per_node_today.py-81-if __name__ == "__main__":
+scripts/build_industrial_energy_demand_per_node_today.py-82-    if "snakemake" not in globals():
+scripts/build_industrial_energy_demand_per_node_today.py-83-        from scripts._helpers import mock_snakemake
+scripts/build_industrial_energy_demand_per_node_today.py-84-
+scripts/build_industrial_energy_demand_per_node_today.py-85-        snakemake = mock_snakemake(
+scripts/build_industrial_energy_demand_per_node_today.py:86:            "build_industrial_energy_demand_per_node_today",
+scripts/build_industrial_energy_demand_per_node_today.py-87-            clusters=48,
+scripts/build_industrial_energy_demand_per_node_today.py-88-        )
+scripts/build_industrial_energy_demand_per_node_today.py-89-    configure_logging(snakemake)
+scripts/build_industrial_energy_demand_per_node_today.py-90-    set_scenario_config(snakemake)
+scripts/build_industrial_energy_demand_per_node_today.py-91-
+scripts/build_industrial_energy_demand_per_node_today.py:92:    build_nodal_industrial_energy_demand()
+--
+scripts/build_industry_sector_ratios_intermediate.py-62-import numpy as np
+scripts/build_industry_sector_ratios_intermediate.py-63-import pandas as pd
+scripts/build_industry_sector_ratios_intermediate.py-64-
+scripts/build_industry_sector_ratios_intermediate.py-65-from scripts._helpers import configure_logging, set_scenario_config
+scripts/build_industry_sector_ratios_intermediate.py-66-from scripts.prepare_sector_network import get
+scripts/build_industry_sector_ratios_intermediate.py-67-
+scripts/build_industry_sector_ratios_intermediate.py-68-logger = logging.getLogger(__name__)
+scripts/build_industry_sector_ratios_intermediate.py-69-
+scripts/build_industry_sector_ratios_intermediate.py-70-
+scripts/build_industry_sector_ratios_intermediate.py-71-def build_industry_sector_ratios_intermediate():
+scripts/build_industry_sector_ratios_intermediate.py-72-    # in TWh/a
+scripts/build_industry_sector_ratios_intermediate.py-73-    demand = pd.read_csv(
+scripts/build_industry_sector_ratios_intermediate.py:74:        snakemake.input.industrial_energy_demand_per_country_today,
+scripts/build_industry_sector_ratios_intermediate.py-75-        header=[0, 1],
+scripts/build_industry_sector_ratios_intermediate.py-76-        index_col=0,
+scripts/build_industry_sector_ratios_intermediate.py-77-    )
+scripts/build_industry_sector_ratios_intermediate.py-78-
+scripts/build_industry_sector_ratios_intermediate.py-79-    # in Mt/a
+scripts/build_industry_sector_ratios_intermediate.py-80-    production = (
+scripts/build_industry_sector_ratios_intermediate.py-81-        pd.read_csv(snakemake.input.industrial_production_per_country, index_col=0)
+scripts/build_industry_sector_ratios_intermediate.py-82-        / 1e3
+scripts/build_industry_sector_ratios_intermediate.py-83-    ).stack()
+scripts/build_industry_sector_ratios_intermediate.py-84-    production.index.names = [None, None]
+scripts/build_industry_sector_ratios_intermediate.py-85-
+scripts/build_industry_sector_ratios_intermediate.py-86-    # in MWh/t
+scripts/build_industry_sector_ratios_intermediate.py-87-    future_sector_ratios = pd.read_csv(
+scripts/build_industry_sector_ratios_intermediate.py-88-        snakemake.input.industry_sector_ratios, index_col=0
+scripts/build_industry_sector_ratios_intermediate.py-89-    )
+scripts/build_industry_sector_ratios_intermediate.py-90-
+scripts/build_industry_sector_ratios_intermediate.py-91-    today_sector_ratios = demand.div(production, axis=1).replace([np.inf, -np.inf], 0)
+scripts/build_industry_sector_ratios_intermediate.py-92-
+scripts/build_industry_sector_ratios_intermediate.py-93-    today_sector_ratios.dropna(how="all", axis=1, inplace=True)
+scripts/build_industry_sector_ratios_intermediate.py-94-
+--
+scripts/prepare_sector_network.py-4753-            capital_cost=costs.at["solid biomass to hydrogen", "capital_cost"]
+scripts/prepare_sector_network.py-4754-            * costs.at["solid biomass to hydrogen", "efficiency"]
+scripts/prepare_sector_network.py-4755-            + costs.at["biomass CHP capture", "capital_cost"]
+scripts/prepare_sector_network.py-4756-            * costs.at["solid biomass", "CO2 intensity"],
+scripts/prepare_sector_network.py-4757-            marginal_cost=0.0,
+scripts/prepare_sector_network.py-4758-            lifetime=25,  # TODO: add value to technology-data
+scripts/prepare_sector_network.py-4759-        )
+scripts/prepare_sector_network.py-4760-
+scripts/prepare_sector_network.py-4761-
+scripts/prepare_sector_network.py-4762-def add_industry(
+scripts/prepare_sector_network.py-4763-    n: pypsa.Network,
+scripts/prepare_sector_network.py-4764-    costs: pd.DataFrame,
+scripts/prepare_sector_network.py:4765:    industrial_demand_file: str,
+scripts/prepare_sector_network.py-4766-    pop_layout: pd.DataFrame,
+scripts/prepare_sector_network.py-4767-    pop_weighted_energy_totals: pd.DataFrame,
+scripts/prepare_sector_network.py-4768-    options: dict,
+scripts/prepare_sector_network.py-4769-    spatial: SimpleNamespace,
+scripts/prepare_sector_network.py-4770-    cf_industry: dict,
+scripts/prepare_sector_network.py-4771-    investment_year: int,
+scripts/prepare_sector_network.py-4772-):
+scripts/prepare_sector_network.py-4773-    """
+scripts/prepare_sector_network.py-4774-    Add industry and their corresponding carrier buses to the network.
+scripts/prepare_sector_network.py-4775-
+scripts/prepare_sector_network.py-4776-    Parameters
+scripts/prepare_sector_network.py-4777-    ----------
+scripts/prepare_sector_network.py-4778-    n : pypsa.Network
+scripts/prepare_sector_network.py-4779-        The PyPSA network container object
+scripts/prepare_sector_network.py-4780-    costs : pd.DataFrame
+scripts/prepare_sector_network.py-4781-        Costs data including carbon capture, fuel costs, etc.
+scripts/prepare_sector_network.py:4782:    industrial_demand_file : str
+scripts/prepare_sector_network.py-4783-        Path to CSV file containing industrial demand data
+scripts/prepare_sector_network.py-4784-    pop_layout : pd.DataFrame
+scripts/prepare_sector_network.py-4785-        Population layout data with index of nodes
+scripts/prepare_sector_network.py-4786-    pop_weighted_energy_totals : pd.DataFrame
+scripts/prepare_sector_network.py-4787-        Population-weighted energy totals including aviation and navigation data
+scripts/prepare_sector_network.py-4788-    options : dict
+scripts/prepare_sector_network.py-4789-        Dictionary of configuration options including:
+scripts/prepare_sector_network.py-4790-        - biomass_spatial
+scripts/prepare_sector_network.py-4791-        - biomass_transport
+scripts/prepare_sector_network.py-4792-        - gas_network
+scripts/prepare_sector_network.py-4793-        - methanol configuration
+scripts/prepare_sector_network.py-4794-        - regional_oil_demand
+scripts/prepare_sector_network.py-4795-        - shipping shares (hydrogen, methanol, oil)
+scripts/prepare_sector_network.py-4796-        - and others
+scripts/prepare_sector_network.py-4797-    spatial : object
+scripts/prepare_sector_network.py-4798-        Object containing spatial configuration for different carriers
+scripts/prepare_sector_network.py-4799-        (biomass, gas, oil, methanol, etc.)
+scripts/prepare_sector_network.py-4800-    cf_industry : dict
+scripts/prepare_sector_network.py-4801-        Industry-specific configuration parameters
+scripts/prepare_sector_network.py-4802-    investment_year : int
+--
+scripts/prepare_sector_network.py-4845-        carrier="methanol",
+scripts/prepare_sector_network.py-4846-        costs=costs,
+scripts/prepare_sector_network.py-4847-        spatial=spatial,
+scripts/prepare_sector_network.py-4848-        options=options,
+scripts/prepare_sector_network.py-4849-        cf_industry=cf_industry,
+scripts/prepare_sector_network.py-4850-    )
+scripts/prepare_sector_network.py-4851-
+scripts/prepare_sector_network.py-4852-    nodes = pop_layout.index
+scripts/prepare_sector_network.py-4853-    nhours = n.snapshot_weightings.generators.sum()
+scripts/prepare_sector_network.py-4854-    nyears = nhours / 8760
+scripts/prepare_sector_network.py-4855-
+scripts/prepare_sector_network.py-4856-    # 1e6 to convert TWh to MWh
+scripts/prepare_sector_network.py:4857:    industrial_demand = pd.read_csv(industrial_demand_file, index_col=0) * 1e6 * nyears
+scripts/prepare_sector_network.py-4858-
+scripts/prepare_sector_network.py-4859-    if not options["biomass"]:
+scripts/prepare_sector_network.py-4860-        raise ValueError(
+scripts/prepare_sector_network.py-4861-            "Industry demand includes solid biomass, but `sector.biomass` is disabled. "
+scripts/prepare_sector_network.py-4862-            "Enable `sector: {biomass: true}` in config."
+scripts/prepare_sector_network.py-4863-        )
+scripts/prepare_sector_network.py-4864-
+scripts/prepare_sector_network.py-4865-    n.add(
+scripts/prepare_sector_network.py-4866-        "Bus",
+scripts/prepare_sector_network.py-4867-        spatial.biomass.industry,
+scripts/prepare_sector_network.py-4868-        location=spatial.biomass.locations,
+scripts/prepare_sector_network.py-4869-        carrier="solid biomass for industry",
+scripts/prepare_sector_network.py-4870-        unit="MWh_LHV",
+scripts/prepare_sector_network.py-4871-    )
+scripts/prepare_sector_network.py-4872-
+scripts/prepare_sector_network.py-4873-    if options.get("biomass_spatial", options["biomass_transport"]):
+scripts/prepare_sector_network.py-4874-        p_set = (
+scripts/prepare_sector_network.py:4875:            industrial_demand.loc[spatial.biomass.locations, "solid biomass"].rename(
+scripts/prepare_sector_network.py-4876-                index=lambda x: x + " solid biomass for industry"
+scripts/prepare_sector_network.py-4877-            )
+scripts/prepare_sector_network.py-4878-            / nhours
+scripts/prepare_sector_network.py-4879-        )
+scripts/prepare_sector_network.py-4880-    else:
+scripts/prepare_sector_network.py:4881:        p_set = industrial_demand["solid biomass"].sum() / nhours
+scripts/prepare_sector_network.py-4882-
+scripts/prepare_sector_network.py-4883-    n.add(
+scripts/prepare_sector_network.py-4884-        "Load",
+scripts/prepare_sector_network.py-4885-        spatial.biomass.industry,
+scripts/prepare_sector_network.py-4886-        bus=spatial.biomass.industry,
+scripts/prepare_sector_network.py-4887-        carrier="solid biomass for industry",
+scripts/prepare_sector_network.py-4888-        p_set=p_set,
+scripts/prepare_sector_network.py-4889-    )
+scripts/prepare_sector_network.py-4890-
+scripts/prepare_sector_network.py-4891-    n.add(
+scripts/prepare_sector_network.py-4892-        "Link",
+scripts/prepare_sector_network.py-4893-        spatial.biomass.industry,
+scripts/prepare_sector_network.py-4894-        bus0=spatial.biomass.nodes,
+scripts/prepare_sector_network.py-4895-        bus1=spatial.biomass.industry,
+scripts/prepare_sector_network.py-4896-        carrier="solid biomass for industry",
+scripts/prepare_sector_network.py-4897-        p_nom_extendable=True,
+scripts/prepare_sector_network.py-4898-        efficiency=1.0,
+scripts/prepare_sector_network.py-4899-    )
+scripts/prepare_sector_network.py-4900-
+scripts/prepare_sector_network.py-4901-    if len(spatial.biomass.industry_cc) <= 1 and len(spatial.co2.nodes) > 1:
+--
+scripts/prepare_sector_network.py-4923-        * costs.at["cement capture", "capture_rate"],
+scripts/prepare_sector_network.py-4924-        lifetime=costs.at["cement capture", "lifetime"],
+scripts/prepare_sector_network.py-4925-    )
+scripts/prepare_sector_network.py-4926-
+scripts/prepare_sector_network.py-4927-    n.add(
+scripts/prepare_sector_network.py-4928-        "Bus",
+scripts/prepare_sector_network.py-4929-        spatial.gas.industry,
+scripts/prepare_sector_network.py-4930-        location=spatial.gas.demand_locations,
+scripts/prepare_sector_network.py-4931-        carrier="gas for industry",
+scripts/prepare_sector_network.py-4932-        unit="MWh_LHV",
+scripts/prepare_sector_network.py-4933-    )
+scripts/prepare_sector_network.py-4934-
+scripts/prepare_sector_network.py:4935:    gas_demand = industrial_demand.loc[nodes, "methane"] / nhours
+scripts/prepare_sector_network.py-4936-
+scripts/prepare_sector_network.py-4937-    if options["gas_network"] or options["regional_gas_demand"]:
+scripts/prepare_sector_network.py-4938-        spatial_gas_demand = gas_demand.rename(index=lambda x: x + " gas for industry")
+scripts/prepare_sector_network.py-4939-    else:
+scripts/prepare_sector_network.py-4940-        spatial_gas_demand = gas_demand.sum()
+scripts/prepare_sector_network.py-4941-
+scripts/prepare_sector_network.py-4942-    n.add(
+scripts/prepare_sector_network.py-4943-        "Load",
+scripts/prepare_sector_network.py-4944-        spatial.gas.industry,
+scripts/prepare_sector_network.py-4945-        bus=spatial.gas.industry,
+scripts/prepare_sector_network.py-4946-        carrier="gas for industry",
+scripts/prepare_sector_network.py-4947-        p_set=spatial_gas_demand,
+scripts/prepare_sector_network.py-4948-    )
+scripts/prepare_sector_network.py-4949-
+scripts/prepare_sector_network.py-4950-    n.add(
+scripts/prepare_sector_network.py-4951-        "Link",
+scripts/prepare_sector_network.py-4952-        spatial.gas.industry,
+scripts/prepare_sector_network.py-4953-        bus0=spatial.gas.nodes,
+scripts/prepare_sector_network.py-4954-        bus1=spatial.gas.industry,
+scripts/prepare_sector_network.py-4955-        bus2="co2 atmosphere",
+--
+scripts/prepare_sector_network.py-4977-        * (1 - costs.at["cement capture", "capture_rate"]),
+scripts/prepare_sector_network.py-4978-        efficiency3=costs.at["gas", "CO2 intensity"]
+scripts/prepare_sector_network.py-4979-        * costs.at["cement capture", "capture_rate"],
+scripts/prepare_sector_network.py-4980-        lifetime=costs.at["cement capture", "lifetime"],
+scripts/prepare_sector_network.py-4981-    )
+scripts/prepare_sector_network.py-4982-
+scripts/prepare_sector_network.py-4983-    n.add(
+scripts/prepare_sector_network.py-4984-        "Load",
+scripts/prepare_sector_network.py-4985-        nodes,
+scripts/prepare_sector_network.py-4986-        suffix=" H2 for industry",
+scripts/prepare_sector_network.py-4987-        bus=nodes + " H2",
+scripts/prepare_sector_network.py-4988-        carrier="H2 for industry",
+scripts/prepare_sector_network.py:4989:        p_set=industrial_demand.loc[nodes, "hydrogen"] / nhours,
+scripts/prepare_sector_network.py-4990-    )
+scripts/prepare_sector_network.py-4991-
+scripts/prepare_sector_network.py-4992-    # methanol for industry
+scripts/prepare_sector_network.py-4993-
+scripts/prepare_sector_network.py-4994-    n.add(
+scripts/prepare_sector_network.py-4995-        "Bus",
+scripts/prepare_sector_network.py-4996-        spatial.methanol.industry,
+scripts/prepare_sector_network.py-4997-        carrier="industry methanol",
+scripts/prepare_sector_network.py-4998-        location=spatial.methanol.demand_locations,
+scripts/prepare_sector_network.py-4999-        unit="MWh_LHV",
+scripts/prepare_sector_network.py-5000-    )
+scripts/prepare_sector_network.py-5001-
+scripts/prepare_sector_network.py-5002-    p_set_methanol = (
+scripts/prepare_sector_network.py:5003:        industrial_demand["methanol"].rename(lambda x: x + " industry methanol")
+scripts/prepare_sector_network.py-5004-        / nhours
+scripts/prepare_sector_network.py-5005-    )
+scripts/prepare_sector_network.py-5006-
+scripts/prepare_sector_network.py-5007-    if not options["methanol"]["regional_methanol_demand"]:
+scripts/prepare_sector_network.py-5008-        p_set_methanol = p_set_methanol.sum()
+scripts/prepare_sector_network.py-5009-
+scripts/prepare_sector_network.py-5010-    n.add(
+scripts/prepare_sector_network.py-5011-        "Load",
+scripts/prepare_sector_network.py-5012-        spatial.methanol.industry,
+scripts/prepare_sector_network.py-5013-        bus=spatial.methanol.industry,
+scripts/prepare_sector_network.py-5014-        carrier="industry methanol",
+scripts/prepare_sector_network.py-5015-        p_set=p_set_methanol,
+scripts/prepare_sector_network.py-5016-    )
+scripts/prepare_sector_network.py-5017-
+scripts/prepare_sector_network.py-5018-    n.add(
+scripts/prepare_sector_network.py-5019-        "Link",
+scripts/prepare_sector_network.py-5020-        spatial.methanol.industry,
+scripts/prepare_sector_network.py-5021-        bus0=spatial.methanol.nodes,
+scripts/prepare_sector_network.py-5022-        bus1=spatial.methanol.industry,
+scripts/prepare_sector_network.py-5023-        bus2="co2 atmosphere",
+--
+scripts/prepare_sector_network.py-5097-        p_nom_extendable=True,
+scripts/prepare_sector_network.py-5098-        p_min_pu=options["min_part_load_fischer_tropsch"],
+scripts/prepare_sector_network.py-5099-        lifetime=costs.at["Fischer-Tropsch", "lifetime"],
+scripts/prepare_sector_network.py-5100-    )
+scripts/prepare_sector_network.py-5101-
+scripts/prepare_sector_network.py-5102-    # naphtha
+scripts/prepare_sector_network.py-5103-    demand_factor = options["HVC_demand_factor"]
+scripts/prepare_sector_network.py-5104-    if demand_factor != 1:
+scripts/prepare_sector_network.py-5105-        logger.warning(f"Changing HVC demand by {demand_factor * 100 - 100:+.2f}%.")
+scripts/prepare_sector_network.py-5106-
+scripts/prepare_sector_network.py-5107-    p_set_naphtha = (
+scripts/prepare_sector_network.py-5108-        demand_factor
+scripts/prepare_sector_network.py:5109:        * industrial_demand.loc[nodes, "naphtha"].rename(
+scripts/prepare_sector_network.py-5110-            lambda x: x + " naphtha for industry"
+scripts/prepare_sector_network.py-5111-        )
+scripts/prepare_sector_network.py-5112-        / nhours
+scripts/prepare_sector_network.py-5113-    )
+scripts/prepare_sector_network.py-5114-
+scripts/prepare_sector_network.py-5115-    if not options["regional_oil_demand"]:
+scripts/prepare_sector_network.py-5116-        p_set_naphtha = p_set_naphtha.sum()
+scripts/prepare_sector_network.py-5117-
+scripts/prepare_sector_network.py-5118-    n.add(
+scripts/prepare_sector_network.py-5119-        "Bus",
+scripts/prepare_sector_network.py-5120-        spatial.oil.naphtha,
+scripts/prepare_sector_network.py-5121-        location=spatial.oil.demand_locations,
+scripts/prepare_sector_network.py-5122-        carrier="naphtha for industry",
+scripts/prepare_sector_network.py-5123-        unit="MWh_LHV",
+scripts/prepare_sector_network.py-5124-    )
+scripts/prepare_sector_network.py-5125-
+scripts/prepare_sector_network.py-5126-    n.add(
+scripts/prepare_sector_network.py-5127-        "Load",
+scripts/prepare_sector_network.py-5128-        spatial.oil.naphtha,
+scripts/prepare_sector_network.py-5129-        bus=spatial.oil.naphtha,
+scripts/prepare_sector_network.py-5130-        carrier="naphtha for industry",
+scripts/prepare_sector_network.py-5131-        p_set=p_set_naphtha,
+scripts/prepare_sector_network.py-5132-    )
+scripts/prepare_sector_network.py-5133-    # some CO2 from naphtha are process emissions from steam cracker
+scripts/prepare_sector_network.py-5134-    # rest of CO2 released to atmosphere either in waste-to-energy or decay
+scripts/prepare_sector_network.py-5135-    process_co2_per_naphtha = (
+scripts/prepare_sector_network.py:5136:        industrial_demand.loc[nodes, "process emission from feedstock"].sum()
+scripts/prepare_sector_network.py:5137:        / industrial_demand.loc[nodes, "naphtha"].sum()
+scripts/prepare_sector_network.py-5138-    )
+scripts/prepare_sector_network.py-5139-    # link to supply the naphtha for industry load
+scripts/prepare_sector_network.py-5140-    n.add(
+scripts/prepare_sector_network.py-5141-        "Link",
+scripts/prepare_sector_network.py-5142-        spatial.oil.naphtha,
+scripts/prepare_sector_network.py-5143-        bus0=spatial.oil.nodes,
+scripts/prepare_sector_network.py-5144-        bus1=spatial.oil.naphtha,
+scripts/prepare_sector_network.py-5145-        bus2=spatial.co2.process_emissions,
+scripts/prepare_sector_network.py-5146-        carrier="naphtha for industry",
+scripts/prepare_sector_network.py-5147-        p_nom_extendable=True,
+scripts/prepare_sector_network.py-5148-        efficiency2=process_co2_per_naphtha,
+scripts/prepare_sector_network.py-5149-    )
+scripts/prepare_sector_network.py-5150-
+scripts/prepare_sector_network.py-5151-    non_sequestered = 1 - get(
+scripts/prepare_sector_network.py-5152-        cf_industry["HVC_environment_sequestration_fraction"],
+scripts/prepare_sector_network.py-5153-        investment_year,
+scripts/prepare_sector_network.py-5154-    )
+scripts/prepare_sector_network.py-5155-    # energetic efficiency from naphtha to HVC
+scripts/prepare_sector_network.py-5156-    HVC_per_naphtha = (
+scripts/prepare_sector_network.py-5157-        costs.at["oil", "CO2 intensity"] - process_co2_per_naphtha
+--
+scripts/prepare_sector_network.py-5282-        "Load",
+scripts/prepare_sector_network.py-5283-        nodes,
+scripts/prepare_sector_network.py-5284-        suffix=" low-temperature heat for industry",
+scripts/prepare_sector_network.py-5285-        bus=[
+scripts/prepare_sector_network.py-5286-            (
+scripts/prepare_sector_network.py-5287-                node + " urban central heat"
+scripts/prepare_sector_network.py-5288-                if node + " urban central heat" in n.buses.index
+scripts/prepare_sector_network.py-5289-                else node + " services urban decentral heat"
+scripts/prepare_sector_network.py-5290-            )
+scripts/prepare_sector_network.py-5291-            for node in nodes
+scripts/prepare_sector_network.py-5292-        ],
+scripts/prepare_sector_network.py-5293-        carrier="low-temperature heat for industry",
+scripts/prepare_sector_network.py:5294:        p_set=industrial_demand.loc[nodes, "low-temperature heat"] / nhours,
+scripts/prepare_sector_network.py-5295-    )
+scripts/prepare_sector_network.py-5296-
+scripts/prepare_sector_network.py-5297-    # remove today's industrial electricity demand by scaling down total electricity demand
+scripts/prepare_sector_network.py-5298-    for ct in n.buses.country.dropna().unique():
+scripts/prepare_sector_network.py-5299-        # TODO map onto n.bus.country
+scripts/prepare_sector_network.py-5300-
+scripts/prepare_sector_network.py-5301-        loads_i = n.loads.index[
+scripts/prepare_sector_network.py-5302-            (n.loads.index.str[:2] == ct) & (n.loads.carrier == "electricity")
+scripts/prepare_sector_network.py-5303-        ]
+scripts/prepare_sector_network.py-5304-        if n.loads_t.p_set[loads_i].empty:
+scripts/prepare_sector_network.py-5305-            continue
+scripts/prepare_sector_network.py-5306-        factor = (
+scripts/prepare_sector_network.py-5307-            1
+scripts/prepare_sector_network.py:5308:            - industrial_demand.loc[loads_i, "current electricity"].sum()
+scripts/prepare_sector_network.py-5309-            / n.loads_t.p_set[loads_i].sum().sum()
+scripts/prepare_sector_network.py-5310-        )
+scripts/prepare_sector_network.py-5311-        n.loads_t.p_set[loads_i] *= factor
+scripts/prepare_sector_network.py-5312-
+scripts/prepare_sector_network.py-5313-    n.add(
+scripts/prepare_sector_network.py-5314-        "Load",
+scripts/prepare_sector_network.py-5315-        nodes,
+scripts/prepare_sector_network.py-5316-        suffix=" industry electricity",
+scripts/prepare_sector_network.py-5317-        bus=nodes,
+scripts/prepare_sector_network.py-5318-        carrier="industry electricity",
+scripts/prepare_sector_network.py:5319:        p_set=industrial_demand.loc[nodes, "electricity"] / nhours,
+scripts/prepare_sector_network.py-5320-    )
+scripts/prepare_sector_network.py-5321-
+scripts/prepare_sector_network.py-5322-    n.add(
+scripts/prepare_sector_network.py-5323-        "Bus",
+scripts/prepare_sector_network.py-5324-        spatial.co2.process_emissions,
+scripts/prepare_sector_network.py-5325-        location=spatial.co2.locations,
+scripts/prepare_sector_network.py-5326-        carrier="process emissions",
+scripts/prepare_sector_network.py-5327-        unit="t_co2",
+scripts/prepare_sector_network.py-5328-    )
+scripts/prepare_sector_network.py-5329-
+scripts/prepare_sector_network.py-5330-    if options["co2_spatial"] or options["co2_network"]:
+scripts/prepare_sector_network.py-5331-        p_set = (
+scripts/prepare_sector_network.py:5332:            -industrial_demand.loc[nodes, "process emission"].rename(
+scripts/prepare_sector_network.py-5333-                index=lambda x: x + " process emissions"
+scripts/prepare_sector_network.py-5334-            )
+scripts/prepare_sector_network.py-5335-            / nhours
+scripts/prepare_sector_network.py-5336-        )
+scripts/prepare_sector_network.py-5337-    else:
+scripts/prepare_sector_network.py:5338:        p_set = -industrial_demand.loc[nodes, "process emission"].sum() / nhours
+scripts/prepare_sector_network.py-5339-
+scripts/prepare_sector_network.py-5340-    n.add(
+scripts/prepare_sector_network.py-5341-        "Load",
+scripts/prepare_sector_network.py-5342-        spatial.co2.process_emissions,
+scripts/prepare_sector_network.py-5343-        bus=spatial.co2.process_emissions,
+scripts/prepare_sector_network.py-5344-        carrier="process emissions",
+scripts/prepare_sector_network.py-5345-        p_set=p_set,
+scripts/prepare_sector_network.py-5346-    )
+scripts/prepare_sector_network.py-5347-
+scripts/prepare_sector_network.py-5348-    n.add(
+scripts/prepare_sector_network.py-5349-        "Link",
+scripts/prepare_sector_network.py-5350-        spatial.co2.process_emissions,
+scripts/prepare_sector_network.py-5351-        bus0=spatial.co2.process_emissions,
+scripts/prepare_sector_network.py-5352-        bus1="co2 atmosphere",
+scripts/prepare_sector_network.py-5353-        carrier="process emissions",
+scripts/prepare_sector_network.py-5354-        p_nom_extendable=True,
+scripts/prepare_sector_network.py-5355-        efficiency=1.0,
+scripts/prepare_sector_network.py-5356-    )
+scripts/prepare_sector_network.py-5357-
+scripts/prepare_sector_network.py-5358-    # assume enough local waste heat for CC
+--
+scripts/prepare_sector_network.py-5366-        carrier="process emissions CC",
+scripts/prepare_sector_network.py-5367-        p_nom_extendable=True,
+scripts/prepare_sector_network.py-5368-        capital_cost=costs.at["cement capture", "capital_cost"],
+scripts/prepare_sector_network.py-5369-        onight_cost=costs.at["cement capture", "investment"],
+scripts/prepare_sector_network.py-5370-        efficiency=1 - costs.at["cement capture", "capture_rate"],
+scripts/prepare_sector_network.py-5371-        efficiency2=costs.at["cement capture", "capture_rate"],
+scripts/prepare_sector_network.py-5372-        lifetime=costs.at["cement capture", "lifetime"],
+scripts/prepare_sector_network.py-5373-    )
+scripts/prepare_sector_network.py-5374-
+scripts/prepare_sector_network.py-5375-    if options["ammonia"]:
+scripts/prepare_sector_network.py-5376-        if options["ammonia"] == "regional":
+scripts/prepare_sector_network.py-5377-            p_set = (
+scripts/prepare_sector_network.py:5378:                industrial_demand.loc[spatial.ammonia.locations, "ammonia"].rename(
+scripts/prepare_sector_network.py-5379-                    index=lambda x: x + " NH3"
+scripts/prepare_sector_network.py-5380-                )
+scripts/prepare_sector_network.py-5381-                / nhours
+scripts/prepare_sector_network.py-5382-            )
+scripts/prepare_sector_network.py-5383-        else:
+scripts/prepare_sector_network.py:5384:            p_set = industrial_demand["ammonia"].sum() / nhours
+scripts/prepare_sector_network.py-5385-
+scripts/prepare_sector_network.py-5386-        n.add(
+scripts/prepare_sector_network.py-5387-            "Load",
+scripts/prepare_sector_network.py-5388-            spatial.ammonia.nodes,
+scripts/prepare_sector_network.py-5389-            bus=spatial.ammonia.nodes,
+scripts/prepare_sector_network.py-5390-            carrier="NH3",
+scripts/prepare_sector_network.py-5391-            p_set=p_set,
+scripts/prepare_sector_network.py-5392-        )
+scripts/prepare_sector_network.py-5393-
+scripts/prepare_sector_network.py:5394:    if industrial_demand[["coke", "coal"]].sum().sum() > 0:
+scripts/prepare_sector_network.py-5395-        add_carrier_buses(
+scripts/prepare_sector_network.py-5396-            n,
+scripts/prepare_sector_network.py-5397-            carrier="coal",
+scripts/prepare_sector_network.py-5398-            costs=costs,
+scripts/prepare_sector_network.py-5399-            spatial=spatial,
+scripts/prepare_sector_network.py-5400-            options=options,
+scripts/prepare_sector_network.py-5401-            cf_industry=cf_industry,
+scripts/prepare_sector_network.py-5402-        )
+scripts/prepare_sector_network.py-5403-
+scripts/prepare_sector_network.py-5404-        mwh_coal_per_mwh_coke = 1.366  # from eurostat energy balance
+scripts/prepare_sector_network.py-5405-        p_set = (
+scripts/prepare_sector_network.py:5406:            industrial_demand["coal"]
+scripts/prepare_sector_network.py:5407:            + mwh_coal_per_mwh_coke * industrial_demand["coke"]
+scripts/prepare_sector_network.py-5408-        ) / nhours
+scripts/prepare_sector_network.py-5409-
+scripts/prepare_sector_network.py-5410-        p_set.rename(lambda x: x + " coal for industry", inplace=True)
+scripts/prepare_sector_network.py-5411-
+scripts/prepare_sector_network.py-5412-        if not options["regional_coal_demand"]:
+scripts/prepare_sector_network.py-5413-            p_set = p_set.sum()
+scripts/prepare_sector_network.py-5414-
+scripts/prepare_sector_network.py-5415-        n.add(
+scripts/prepare_sector_network.py-5416-            "Bus",
+scripts/prepare_sector_network.py-5417-            spatial.coal.industry,
+scripts/prepare_sector_network.py-5418-            location=spatial.coal.demand_locations,
+scripts/prepare_sector_network.py-5419-            carrier="coal for industry",
+scripts/prepare_sector_network.py-5420-            unit="MWh_LHV",
+scripts/prepare_sector_network.py-5421-        )
+scripts/prepare_sector_network.py-5422-
+scripts/prepare_sector_network.py-5423-        n.add(
+scripts/prepare_sector_network.py-5424-            "Load",
+scripts/prepare_sector_network.py-5425-            spatial.coal.industry,
+scripts/prepare_sector_network.py-5426-            bus=spatial.coal.industry,
+scripts/prepare_sector_network.py-5427-            carrier="coal for industry",
+--
+scripts/prepare_sector_network.py-6750-        )
+scripts/prepare_sector_network.py-6751-
+scripts/prepare_sector_network.py-6752-    if options["ammonia"]:
+scripts/prepare_sector_network.py-6753-        add_ammonia(n, costs, pop_layout, spatial, cf_industry)
+scripts/prepare_sector_network.py-6754-
+scripts/prepare_sector_network.py-6755-    if options["methanol"]:
+scripts/prepare_sector_network.py-6756-        add_methanol(n, costs, options=options, spatial=spatial, pop_layout=pop_layout)
+scripts/prepare_sector_network.py-6757-
+scripts/prepare_sector_network.py-6758-    if options["industry"]:
+scripts/prepare_sector_network.py-6759-        add_industry(
+scripts/prepare_sector_network.py-6760-            n=n,
+scripts/prepare_sector_network.py-6761-            costs=costs,
+scripts/prepare_sector_network.py:6762:            industrial_demand_file=snakemake.input.industrial_demand,
+scripts/prepare_sector_network.py-6763-            pop_layout=pop_layout,
+scripts/prepare_sector_network.py-6764-            pop_weighted_energy_totals=pop_weighted_energy_totals,
+scripts/prepare_sector_network.py-6765-            options=options,
+scripts/prepare_sector_network.py-6766-            spatial=spatial,
+scripts/prepare_sector_network.py-6767-            cf_industry=cf_industry,
+scripts/prepare_sector_network.py-6768-            investment_year=investment_year,
+scripts/prepare_sector_network.py-6769-        )
+scripts/prepare_sector_network.py-6770-
+scripts/prepare_sector_network.py-6771-    if options["shipping"]:
+scripts/prepare_sector_network.py-6772-        add_shipping(
+scripts/prepare_sector_network.py-6773-            n=n,
+scripts/prepare_sector_network.py-6774-            costs=costs,
+scripts/prepare_sector_network.py-6775-            shipping_demand_file=snakemake.input.shipping_demand,
+scripts/prepare_sector_network.py-6776-            pop_layout=pop_layout,
+scripts/prepare_sector_network.py-6777-            pop_weighted_energy_totals=pop_weighted_energy_totals,
+scripts/prepare_sector_network.py-6778-            options=options,
+scripts/prepare_sector_network.py-6779-            spatial=spatial,
+scripts/prepare_sector_network.py-6780-            investment_year=investment_year,
+scripts/prepare_sector_network.py-6781-        )
+scripts/prepare_sector_network.py-6782-
+--
+scripts/pypsa-de/modify_prenetwork.py-515-        lifetime=costs.at["General liquid hydrocarbon storage (product)", "lifetime"],
+scripts/pypsa-de/modify_prenetwork.py-516-    )
+scripts/pypsa-de/modify_prenetwork.py-517-    # check for loads
+scripts/pypsa-de/modify_prenetwork.py-518-    # industry load
+scripts/pypsa-de/modify_prenetwork.py-519-    if "EU industry methanol" in n.loads.index:
+scripts/pypsa-de/modify_prenetwork.py-520-        n.add(
+scripts/pypsa-de/modify_prenetwork.py-521-            "Bus",
+scripts/pypsa-de/modify_prenetwork.py-522-            "DE industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-523-            carrier="industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-524-            location="DE",
+scripts/pypsa-de/modify_prenetwork.py-525-            unit="MWh_LHV",
+scripts/pypsa-de/modify_prenetwork.py-526-        )
+scripts/pypsa-de/modify_prenetwork.py:527:        industrial_demand = (
+scripts/pypsa-de/modify_prenetwork.py:528:            pd.read_csv(snakemake.input.industrial_demand, index_col=0) * 1e6
+scripts/pypsa-de/modify_prenetwork.py-529-        )  # TWh/a to MWh/a
+scripts/pypsa-de/modify_prenetwork.py-530-        DE_meoh = (
+scripts/pypsa-de/modify_prenetwork.py:531:            industrial_demand["methanol"].filter(like="DE").sum() / 8760
+scripts/pypsa-de/modify_prenetwork.py-532-        )  # MWh/a to MW hourly resolution
+scripts/pypsa-de/modify_prenetwork.py-533-        n.add(
+scripts/pypsa-de/modify_prenetwork.py-534-            "Load",
+scripts/pypsa-de/modify_prenetwork.py-535-            "DE industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-536-            bus="DE industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-537-            carrier="industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-538-            p_set=DE_meoh,
+scripts/pypsa-de/modify_prenetwork.py-539-        )
+scripts/pypsa-de/modify_prenetwork.py-540-        n.loads.loc["EU industry methanol", "p_set"] -= DE_meoh
+scripts/pypsa-de/modify_prenetwork.py-541-
+scripts/pypsa-de/modify_prenetwork.py-542-        n.add(
+scripts/pypsa-de/modify_prenetwork.py-543-            "Link",
+scripts/pypsa-de/modify_prenetwork.py-544-            "DE industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-545-            bus0="DE methanol",
+scripts/pypsa-de/modify_prenetwork.py-546-            bus1="DE industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-547-            bus2="co2 atmosphere",
+scripts/pypsa-de/modify_prenetwork.py-548-            carrier="industry methanol",
+scripts/pypsa-de/modify_prenetwork.py-549-            p_nom_extendable=True,
+scripts/pypsa-de/modify_prenetwork.py-550-            efficiency2=n.links.loc["EU industry methanol", "efficiency2"],
+scripts/pypsa-de/modify_prenetwork.py-551-        )
+--
+scripts/pypsa-de/modify_prenetwork.py-1592-    scale_capacity(n, snakemake.params.scale_capacity)
+scripts/pypsa-de/modify_prenetwork.py-1593-
+scripts/pypsa-de/modify_prenetwork.py-1594-    sanitize_custom_columns(n)
+scripts/pypsa-de/modify_prenetwork.py-1595-
+scripts/pypsa-de/modify_prenetwork.py-1596-    if current_year in snakemake.params.uba_for_industry:
+scripts/pypsa-de/modify_prenetwork.py-1597-        if current_year not in [2025, 2030, 2035]:
+scripts/pypsa-de/modify_prenetwork.py-1598-            logger.error(
+scripts/pypsa-de/modify_prenetwork.py-1599-                "The UBA for industry data is only available for 2025, 2030 and 2035. Please check your config."
+scripts/pypsa-de/modify_prenetwork.py-1600-            )
+scripts/pypsa-de/modify_prenetwork.py-1601-        modify_industry_demand(
+scripts/pypsa-de/modify_prenetwork.py-1602-            n,
+scripts/pypsa-de/modify_prenetwork.py-1603-            current_year,
+scripts/pypsa-de/modify_prenetwork.py:1604:            snakemake.input.new_industrial_energy_demand,
+scripts/pypsa-de/modify_prenetwork.py-1605-            snakemake.input.industrial_production_per_country_tomorrow,
+scripts/pypsa-de/modify_prenetwork.py-1606-            snakemake.input.industry_sector_ratios,
+scripts/pypsa-de/modify_prenetwork.py-1607-            scale_non_energy=snakemake.params.scale_industry_non_energy,
+scripts/pypsa-de/modify_prenetwork.py-1608-        )
+scripts/pypsa-de/modify_prenetwork.py-1609-
+scripts/pypsa-de/modify_prenetwork.py-1610-    if current_year in snakemake.params.limit_cross_border_flows_ac:
+scripts/pypsa-de/modify_prenetwork.py-1611-        limit_cross_border_flows_ac(
+scripts/pypsa-de/modify_prenetwork.py-1612-            n, snakemake.params.limit_cross_border_flows_ac[current_year]
+scripts/pypsa-de/modify_prenetwork.py-1613-        )
+scripts/pypsa-de/modify_prenetwork.py-1614-
+scripts/pypsa-de/modify_prenetwork.py-1615-    n.export_to_netcdf(snakemake.output.network)

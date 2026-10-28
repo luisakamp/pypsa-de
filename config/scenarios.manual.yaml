@@ -249,3 +249,36 @@ KN2045_NFhoch:
       2040: 0.24
       2045: 0.29
       2050: 0.33
+
+## LuKa
+
+SR27_S3:
+  electricity:
+    H2_plants:
+      # Default 2045: ab dann werden ALLE extendable DE-Gasturbinen gelöscht und
+      # bestehende auf H2 umgerüstet (modify_prenetwork.force_retrofit).
+      # Szenario 3: Umstellung verzögert, 2045 bleiben 19 GWel Methankraftwerke.
+      force: 2050
+      
+      # Teilumruestung: fester Methanbestand wird bei Bedarf reduziert.
+      sr27_methane_target_gw:
+        2040: 50
+        2045: 19
+  solving:
+    constraints:
+      # Gesamte elektrische H2-Kraftwerksleistung, einschliesslich Bestand.
+      sr27_h2_capacity_gw:
+        2040: 10
+        2045: 41
+
+      # Gesamte elektrische Methankraftwerksleistung.
+      sr27_methane_capacity_gw:
+        2040: 50
+        2045: 19
+
+      limits_capacity_min:
+        Link:
+          H2 Electrolysis:      # Tab. 57: Elektrolyse "mindestens 17 GWel" (2040 und 2045)
+            DE:
+              2040: 17
+              2045: 17

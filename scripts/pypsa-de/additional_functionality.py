@@ -826,6 +826,169 @@ def adapt_nuclear_output(n):
         carrier_attribute="",
     )
 
+####### Anpassung LuKa #############
+
+def add_sr27_h2_capacity(n, investment_year, targets_gw):
+    """Aktive deutsche H2-Kraftwerksleistung auf Zielwert in GW_el setzen."""
+    target = targets_gw.get(
+        investment_year, targets_gw.get(str(investment_year))
+    )
+    if target is None:
+        return
+
+    target_mw = float(target) * 1e3
+    if not 0 <= target_mw < float("inf"):
+        raise ValueError("H2-Ziel muss endlich und nicht negativ sein.")
+
+    links = n.links
+    h2_carriers = [
+        "H2 OCGT",
+        "H2 CCGT",
+        "H2 retrofit OCGT",
+        "H2 retrofit CCGT",
+        "urban central H2 CHP",
+        "urban central H2 retrofit CHP",
+    ]
+
+    selected = (
+        links.carrier.isin(h2_carriers)
+        & links.bus1.str.startswith("DE", na=False)
+        & links.bus1.map(n.buses.carrier).eq("AC")
+        & links.active
+    )
+
+    efficiency = links.loc[selected, "efficiency"]
+    if (
+        efficiency.isna().any()
+        or (~efficiency.gt(0)).any()
+        or (~efficiency.lt(float("inf"))).any()
+    ):
+        raise ValueError("H2-Kraftwerke haben ungültige Wirkungsgrade.")
+
+    fixed = selected & ~links.p_nom_extendable
+    extendable = links.index[selected & links.p_nom_extendable]
+
+    existing_mw = (
+        links.loc[fixed, "p_nom"] * links.loc[fixed, "efficiency"]
+    ).sum()
+    remaining_mw = target_mw - existing_mw
+
+    if remaining_mw < -1e-3:
+        raise ValueError(
+            f"SR27 {investment_year}: fester H2-Bestand "
+            f"{existing_mw / 1e3:.3f} GW_el übersteigt "
+            f"Ziel {target_mw / 1e3:.3f} GW_el."
+        )
+
+    if extendable.empty:
+        if abs(remaining_mw) > 1e-3:
+            raise ValueError(
+                f"SR27 {investment_year}: H2-Ziel nicht erreichbar, "
+                "keine ausbaubaren H2-Kraftwerke vorhanden."
+            )
+        return
+
+    # Link-p_nom ist Eingangsleistung; Wirkungsgrad liefert MW_el.
+    nom = n.model["Link-p_nom"].loc[extendable]
+    eta = links.loc[extendable, "efficiency"].to_numpy()
+    lhs = (nom * eta).sum()
+
+    n.model.add_constraints(
+        lhs == max(remaining_mw, 0.0),
+        name=f"SR27-H2-capacity-DE-{investment_year}",
+    )
+
+    logger.info(
+        f"SR27 {investment_year}: H2-Gesamtziel "
+        f"{target_mw / 1e3:.3f} GW_el, davon "
+        f"{existing_mw / 1e3:.3f} GW_el fester Bestand."
+    )
+
+def add_sr27_methane_capacity(n, investment_year, targets_gw):
+    """Aktive deutsche Methankraftwerksleistung auf Ziel in GW_el setzen."""
+    target = targets_gw.get(
+        investment_year, targets_gw.get(str(investment_year))
+    )
+    if target is None:
+        return
+
+    target_mw = float(target) * 1e3
+    if not 0 <= target_mw < float("inf"):
+        raise ValueError(
+            "Methan-Gesamtziel muss endlich und nicht negativ sein."
+        )
+
+    links = n.links
+    gas_carriers = [
+        "OCGT",
+        "CCGT",
+        "urban central gas CHP",
+        "urban central gas CHP CC",
+    ]
+
+    selected = (
+        links.carrier.isin(gas_carriers)
+        & links.bus1.str.startswith("DE", na=False)
+        & links.bus1.map(n.buses.carrier).eq("AC")
+        & links.active
+    )
+
+    efficiency = links.loc[selected, "efficiency"]
+    if (
+        efficiency.isna().any()
+        or (~efficiency.gt(0)).any()
+        or (~efficiency.lt(float("inf"))).any()
+    ):
+        raise ValueError(
+            "Methankraftwerke haben ungueltige Wirkungsgrade."
+        )
+
+    fixed = selected & ~links.p_nom_extendable
+    extendable = links.index[selected & links.p_nom_extendable]
+
+    existing_mw = (
+        links.loc[fixed, "p_nom"] * links.loc[fixed, "efficiency"]
+    ).sum()
+    remaining_mw = target_mw - existing_mw
+
+    if remaining_mw < -1e-3:
+        raise ValueError(
+            f"SR27 {investment_year}: fester Methanbestand "
+            f"{existing_mw / 1e3:.3f} GW_el uebersteigt "
+            f"Gesamtziel {target_mw / 1e3:.3f} GW_el."
+        )
+
+    if extendable.empty:
+        if abs(remaining_mw) > 1e-3:
+            raise ValueError(
+                f"SR27 {investment_year}: Methan-Gesamtziel "
+                "nicht erreichbar, keine ausbaubaren "
+                "Methankraftwerke vorhanden."
+            )
+
+        logger.info(
+            f"SR27 {investment_year}: Methan-Gesamtziel bereits "
+            f"durch festen Bestand erfuellt: "
+            f"{existing_mw / 1e3:.3f} GW_el."
+        )
+        return
+
+    # Link-p_nom ist Eingangsleistung; Umrechnung in MW_el.
+    nom = n.model["Link-p_nom"].loc[extendable]
+    eta = links.loc[extendable, "efficiency"].to_numpy()
+    lhs = (nom * eta).sum()
+
+    n.model.add_constraints(
+        lhs == max(remaining_mw, 0.0),
+        name=f"SR27-methane-capacity-DE-{investment_year}",
+    )
+
+    logger.info(
+        f"SR27 {investment_year}: Methan-Gesamtziel "
+        f"{target_mw / 1e3:.3f} GW_el, davon "
+        f"{existing_mw / 1e3:.3f} GW_el fester Bestand."
+    )
+###########################################################################################
 
 def additional_functionality(n, snapshots, snakemake):
     logger.info("Adding Ariadne-specific functionality")
@@ -840,6 +1003,20 @@ def additional_functionality(n, snapshots, snakemake):
     add_capacity_limits(
         n, investment_year, constraints["limits_capacity_max"], "maximum"
     )
+
+    # Anpassung LuKa: SR27-H2-Summenbedingung aufrufen
+    add_sr27_h2_capacity(
+        n,
+        investment_year,
+        constraints.get("sr27_h2_capacity_gw", {}),
+    )
+
+    add_sr27_methane_capacity(
+        n,
+        investment_year,
+        constraints.get("sr27_methane_capacity_gw", {}),
+    )
+    ############
 
     add_power_limits(n, investment_year, constraints["limits_power_max"])
 

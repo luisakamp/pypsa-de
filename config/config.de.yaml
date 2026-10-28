@@ -4,10 +4,10 @@
 
 # docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#run
 run:
-  prefix: 20260422_small_changes
+  prefix: "20261027_2" # 20260422_small_changes
   name:
   # - ExPol
-  - KN2045_Mix
+  # - KN2045_Mix
   # - KN2045_Mix_LowDecentralDiscount
   # - KN2045_Mix_HighDecentralDiscount
   # - KN2045_Mix_H2plantsEU
@@ -15,6 +15,8 @@ run:
   # - KN2045_H2
   # - KN2045_NFniedrig
   # - KN2045_NFhoch
+  - SR27_S3
+
   scenarios:
     enable: true
     manual_file: config/scenarios.manual.yaml
