@@ -25,6 +25,9 @@ gurobi.log
 /logs
 /notebooks
 /data/*
+# Allow certain data for oge-workflow
+!/data/LuKa_data/
+!/data/LuKa_data/**
 # Allowlist a small subset under data/pypsa-de.
 # Important: parent directories must be un-ignored for negations to take effect.
 !/data/pypsa-de/
