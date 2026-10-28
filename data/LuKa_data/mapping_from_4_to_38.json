@@ -1,0 +1,3218 @@
+[
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1001000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600001,
+    "name_to": "Flensburg, Kreisfreie Stadt",
+    "kuerzel_to": "DEF01"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1003000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600003,
+    "name_to": "Lübeck, Kreisfreie Stadt",
+    "kuerzel_to": "DEF03"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1004000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600004,
+    "name_to": "Neumünster, Kreisfreie Stadt",
+    "kuerzel_to": "DEF04"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1051000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600005,
+    "name_to": "Dithmarschen",
+    "kuerzel_to": "DEF05"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1053000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600006,
+    "name_to": "Herzogtum Lauenburg",
+    "kuerzel_to": "DEF06"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1054000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600007,
+    "name_to": "Nordfriesland",
+    "kuerzel_to": "DEF07"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1055000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600008,
+    "name_to": "Ostholstein",
+    "kuerzel_to": "DEF08"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1056000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600009,
+    "name_to": "Pinneberg",
+    "kuerzel_to": "DEF09"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1057000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600010,
+    "name_to": "Plön",
+    "kuerzel_to": "DEF0A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1002000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600011,
+    "name_to": "Rendsburg-Eckernförde",
+    "kuerzel_to": "DEF0B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1058000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600011,
+    "name_to": "Rendsburg-Eckernförde",
+    "kuerzel_to": "DEF0B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1059000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600012,
+    "name_to": "Schleswig-Flensburg",
+    "kuerzel_to": "DEF0C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1060000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600013,
+    "name_to": "Segeberg",
+    "kuerzel_to": "DEF0D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1061000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600014,
+    "name_to": "Steinburg",
+    "kuerzel_to": "DEF0E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 1062000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600015,
+    "name_to": "Stormarn",
+    "kuerzel_to": "DEF0F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 2000000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600016,
+    "name_to": "Hamburg",
+    "kuerzel_to": "DE600"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3101000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600017,
+    "name_to": "Braunschweig, Kreisfreie Stadt",
+    "kuerzel_to": "DE911"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3102000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600018,
+    "name_to": "Salzgitter, Kreisfreie Stadt",
+    "kuerzel_to": "DE912"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3103000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600019,
+    "name_to": "Wolfsburg, Kreisfreie Stadt",
+    "kuerzel_to": "DE913"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3151000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600020,
+    "name_to": "Gifhorn",
+    "kuerzel_to": "DE914"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3152000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600021,
+    "name_to": "Göttingen",
+    "kuerzel_to": "DE915"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3153000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600022,
+    "name_to": "Goslar",
+    "kuerzel_to": "DE916"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3154000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600023,
+    "name_to": "Helmstedt",
+    "kuerzel_to": "DE917"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3155000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600024,
+    "name_to": "Northeim",
+    "kuerzel_to": "DE918"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3156000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600025,
+    "name_to": "Osterode am Harz",
+    "kuerzel_to": "DE919"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3157000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600026,
+    "name_to": "Peine",
+    "kuerzel_to": "DE91A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3158000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600027,
+    "name_to": "Wolfenbüttel",
+    "kuerzel_to": "DE91B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3241000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600028,
+    "name_to": "Region Hannover",
+    "kuerzel_to": "DE929"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3251000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600029,
+    "name_to": "Diepholz",
+    "kuerzel_to": "DE922"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3252000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600030,
+    "name_to": "Hameln-Pyrmont",
+    "kuerzel_to": "DE923"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3254000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600031,
+    "name_to": "Hildesheim",
+    "kuerzel_to": "DE925"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3255000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600032,
+    "name_to": "Holzminden",
+    "kuerzel_to": "DE926"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3256000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600033,
+    "name_to": "Nienburg (Weser)",
+    "kuerzel_to": "DE927"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3257000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600034,
+    "name_to": "Schaumburg",
+    "kuerzel_to": "DE928"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3351000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600035,
+    "name_to": "Celle",
+    "kuerzel_to": "DE931"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3352000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600036,
+    "name_to": "Cuxhaven",
+    "kuerzel_to": "DE932"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3353000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600037,
+    "name_to": "Harburg",
+    "kuerzel_to": "DE933"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3354000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600038,
+    "name_to": "Lüchow-Dannenberg",
+    "kuerzel_to": "DE934"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3355000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600039,
+    "name_to": "Lüneburg, Landkreis",
+    "kuerzel_to": "DE935"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3356000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600040,
+    "name_to": "Osterholz",
+    "kuerzel_to": "DE936"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3357000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600041,
+    "name_to": "Rotenburg (Wümme)",
+    "kuerzel_to": "DE937"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3453000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600042,
+    "name_to": "Cloppenburg",
+    "kuerzel_to": "DE948"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3454000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600043,
+    "name_to": "Emsland",
+    "kuerzel_to": "DE949"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3358000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600044,
+    "name_to": "Heidekreis",
+    "kuerzel_to": "DE938"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3359000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600045,
+    "name_to": "Stade",
+    "kuerzel_to": "DE939"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3360000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600046,
+    "name_to": "Uelzen",
+    "kuerzel_to": "DE93A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3361000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600047,
+    "name_to": "Verden",
+    "kuerzel_to": "DE93B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3401000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600048,
+    "name_to": "Delmenhorst, Kreisfreie Stadt",
+    "kuerzel_to": "DE941"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3402000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600049,
+    "name_to": "Emden, Kreisfreie Stadt",
+    "kuerzel_to": "DE942"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3403000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600050,
+    "name_to": "Oldenburg (Oldenburg), Kreisfreie Stadt",
+    "kuerzel_to": "DE943"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3404000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600051,
+    "name_to": "Osnabrück, Kreisfreie Stadt",
+    "kuerzel_to": "DE944"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3405000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600052,
+    "name_to": "Wilhelmshaven, Kreisfreie Stadt",
+    "kuerzel_to": "DE945"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3451000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600053,
+    "name_to": "Ammerland",
+    "kuerzel_to": "DE946"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3452000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600054,
+    "name_to": "Aurich",
+    "kuerzel_to": "DE947"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3455000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600055,
+    "name_to": "Friesland (DE)",
+    "kuerzel_to": "DE94A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3456000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600056,
+    "name_to": "Grafschaft Bentheim",
+    "kuerzel_to": "DE94B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3457000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600057,
+    "name_to": "Leer",
+    "kuerzel_to": "DE94C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3458000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600058,
+    "name_to": "Oldenburg, Landkreis",
+    "kuerzel_to": "DE94D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3459000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600059,
+    "name_to": "Osnabrück, Landkreis",
+    "kuerzel_to": "DE94E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3460000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600060,
+    "name_to": "Vechta",
+    "kuerzel_to": "DE94F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3461000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600061,
+    "name_to": "Wesermarsch",
+    "kuerzel_to": "DE94G"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 3462000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600062,
+    "name_to": "Wittmund",
+    "kuerzel_to": "DE94H"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 4011000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600063,
+    "name_to": "Bremen, Kreisfreie Stadt",
+    "kuerzel_to": "DE501"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 4012000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600064,
+    "name_to": "Bremerhaven, Kreisfreie Stadt",
+    "kuerzel_to": "DE502"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5111000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600065,
+    "name_to": "Düsseldorf, Kreisfreie Stadt",
+    "kuerzel_to": "DEA11"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5112000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600066,
+    "name_to": "Duisburg, Kreisfreie Stadt",
+    "kuerzel_to": "DEA12"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5113000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600067,
+    "name_to": "Essen, Kreisfreie Stadt",
+    "kuerzel_to": "DEA13"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5114000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600068,
+    "name_to": "Krefeld, Kreisfreie Stadt",
+    "kuerzel_to": "DEA14"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5116000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600069,
+    "name_to": "Mönchengladbach, Kreisfreie Stadt",
+    "kuerzel_to": "DEA15"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5117000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600070,
+    "name_to": "Mülheim an der Ruhr,Kreisfreie Stadt",
+    "kuerzel_to": "DEA16"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5119000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600071,
+    "name_to": "Oberhausen, Kreisfreie Stadt",
+    "kuerzel_to": "DEA17"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5120000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600072,
+    "name_to": "Remscheid, Kreisfreie Stadt",
+    "kuerzel_to": "DEA18"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5122000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600073,
+    "name_to": "Solingen, Kreisfreie Stadt",
+    "kuerzel_to": "DEA19"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5124000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600074,
+    "name_to": "Wuppertal, Kreisfreie Stadt",
+    "kuerzel_to": "DEA1A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5154000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600075,
+    "name_to": "Kleve",
+    "kuerzel_to": "DEA1B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5158000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600076,
+    "name_to": "Mettmann",
+    "kuerzel_to": "DEA1C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5162000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600077,
+    "name_to": "Rhein-Kreis Neuss",
+    "kuerzel_to": "DEA1D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5166000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600078,
+    "name_to": "Viersen",
+    "kuerzel_to": "DEA1E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5170000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600079,
+    "name_to": "Wesel",
+    "kuerzel_to": "DEA1F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5314000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600081,
+    "name_to": "Bonn, Kreisfreie Stadt",
+    "kuerzel_to": "DEA22"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5315000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600082,
+    "name_to": "Köln, Kreisfreie Stadt",
+    "kuerzel_to": "DEA23"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5316000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600083,
+    "name_to": "Leverkusen, Kreisfreie Stadt",
+    "kuerzel_to": "DEA24"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5358000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600085,
+    "name_to": "Düren",
+    "kuerzel_to": "DEA26"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5362000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600086,
+    "name_to": "Rhein-Erft-Kreis",
+    "kuerzel_to": "DEA27"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5366000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600087,
+    "name_to": "Euskirchen",
+    "kuerzel_to": "DEA28"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5370000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600088,
+    "name_to": "Heinsberg",
+    "kuerzel_to": "DEA29"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5374000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600089,
+    "name_to": "Oberbergischer Kreis",
+    "kuerzel_to": "DEA2A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5378000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600090,
+    "name_to": "Rheinisch-Bergischer Kreis",
+    "kuerzel_to": "DEA2B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5382000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600091,
+    "name_to": "Rhein-Sieg-Kreis",
+    "kuerzel_to": "DEA2C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5512000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600092,
+    "name_to": "Bottrop, Kreisfreie Stadt",
+    "kuerzel_to": "DEA31"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5513000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600093,
+    "name_to": "Gelsenkirchen, Kreisfreie Stadt",
+    "kuerzel_to": "DEA32"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5515000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600094,
+    "name_to": "Münster, Kreisfreie Stadt",
+    "kuerzel_to": "DEA33"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5554000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600095,
+    "name_to": "Borken",
+    "kuerzel_to": "DEA34"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5558000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600096,
+    "name_to": "Coesfeld",
+    "kuerzel_to": "DEA35"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5562000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600097,
+    "name_to": "Recklinghausen",
+    "kuerzel_to": "DEA36"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5566000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600098,
+    "name_to": "Steinfurt",
+    "kuerzel_to": "DEA37"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5570000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600099,
+    "name_to": "Warendorf",
+    "kuerzel_to": "DEA38"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5711000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600100,
+    "name_to": "Bielefeld, Kreisfreie Stadt",
+    "kuerzel_to": "DEA41"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5754000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600101,
+    "name_to": "Gütersloh",
+    "kuerzel_to": "DEA42"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5978000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600102,
+    "name_to": "Unna",
+    "kuerzel_to": "DEA5C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6411000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600103,
+    "name_to": "Darmstadt, Kreisfreie Stadt",
+    "kuerzel_to": "DE711"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6412000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600104,
+    "name_to": "Frankfurt am Main, Kreisfreie Stadt",
+    "kuerzel_to": "DE712"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6413000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600105,
+    "name_to": "Offenbach am Main, Kreisfreie Stadt",
+    "kuerzel_to": "DE713"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6414000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600106,
+    "name_to": "Wiesbaden, Kreisfreie Stadt",
+    "kuerzel_to": "DE714"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6431000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600107,
+    "name_to": "Bergstraße",
+    "kuerzel_to": "DE715"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6432000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600108,
+    "name_to": "Darmstadt-Dieburg",
+    "kuerzel_to": "DE716"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6433000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600109,
+    "name_to": "Groß-Gerau",
+    "kuerzel_to": "DE717"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6434000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600110,
+    "name_to": "Hochtaunuskreis",
+    "kuerzel_to": "DE718"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6435000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600111,
+    "name_to": "Main-Kinzig-Kreis",
+    "kuerzel_to": "DE719"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5758000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600112,
+    "name_to": "Herford",
+    "kuerzel_to": "DEA43"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5762000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600113,
+    "name_to": "Höxter",
+    "kuerzel_to": "DEA44"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5766000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600114,
+    "name_to": "Lippe",
+    "kuerzel_to": "DEA45"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5770000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600115,
+    "name_to": "Minden-Lübbecke",
+    "kuerzel_to": "DEA46"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5774000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600116,
+    "name_to": "Paderborn",
+    "kuerzel_to": "DEA47"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5911000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600117,
+    "name_to": "Bochum, Kreisfreie Stadt",
+    "kuerzel_to": "DEA51"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5913000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600118,
+    "name_to": "Dortmund, Kreisfreie Stadt",
+    "kuerzel_to": "DEA52"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5914000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600119,
+    "name_to": "Hagen, Kreisfreie Stadt",
+    "kuerzel_to": "DEA53"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5915000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600120,
+    "name_to": "Hamm, Kreisfreie Stadt",
+    "kuerzel_to": "DEA54"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5916000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600121,
+    "name_to": "Herne, Kreisfreie Stadt",
+    "kuerzel_to": "DEA55"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5954000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600122,
+    "name_to": "Ennepe-Ruhr-Kreis",
+    "kuerzel_to": "DEA56"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5958000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600123,
+    "name_to": "Hochsauerlandkreis",
+    "kuerzel_to": "DEA57"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5962000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600124,
+    "name_to": "Märkischer Kreis",
+    "kuerzel_to": "DEA58"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5966000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600125,
+    "name_to": "Olpe",
+    "kuerzel_to": "DEA59"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5970000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600126,
+    "name_to": "Siegen-Wittgenstein",
+    "kuerzel_to": "DEA5A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5974000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600127,
+    "name_to": "Soest",
+    "kuerzel_to": "DEA5B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6436000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600128,
+    "name_to": "Main-Taunus-Kreis",
+    "kuerzel_to": "DE71A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6437000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600129,
+    "name_to": "Odenwaldkreis",
+    "kuerzel_to": "DE71B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6438000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600130,
+    "name_to": "Offenbach, Landkreis",
+    "kuerzel_to": "DE71C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6439000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600131,
+    "name_to": "Rheingau-Taunus-Kreis",
+    "kuerzel_to": "DE71D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6440000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600132,
+    "name_to": "Wetteraukreis",
+    "kuerzel_to": "DE71E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6531000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600133,
+    "name_to": "Gießen, Landkreis",
+    "kuerzel_to": "DE721"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6532000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600134,
+    "name_to": "Lahn-Dill-Kreis",
+    "kuerzel_to": "DE722"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6533000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600135,
+    "name_to": "Limburg-Weilburg",
+    "kuerzel_to": "DE723"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6534000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600136,
+    "name_to": "Marburg-Biedenkopf",
+    "kuerzel_to": "DE724"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6535000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600137,
+    "name_to": "Vogelsbergkreis",
+    "kuerzel_to": "DE725"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6611000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600138,
+    "name_to": "Kassel, Kreisfreie Stadt",
+    "kuerzel_to": "DE731"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6631000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600139,
+    "name_to": "Fulda",
+    "kuerzel_to": "DE732"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6632000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600140,
+    "name_to": "Hersfeld-Rotenburg",
+    "kuerzel_to": "DE733"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6633000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600141,
+    "name_to": "Kassel, Landkreis",
+    "kuerzel_to": "DE734"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6634000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600142,
+    "name_to": "Schwalm-Eder-Kreis",
+    "kuerzel_to": "DE735"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6635000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600143,
+    "name_to": "Waldeck-Frankenberg",
+    "kuerzel_to": "DE736"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 6636000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600144,
+    "name_to": "Werra-Meißner-Kreis",
+    "kuerzel_to": "DE737"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7111000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600145,
+    "name_to": "Koblenz, Kreisfreie Stadt",
+    "kuerzel_to": "DEB11"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7131000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600146,
+    "name_to": "Ahrweiler",
+    "kuerzel_to": "DEB12"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7132000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600147,
+    "name_to": "Altenkirchen (Westerwald)",
+    "kuerzel_to": "DEB13"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7133000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600148,
+    "name_to": "Bad Kreuznach",
+    "kuerzel_to": "DEB14"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7134000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600149,
+    "name_to": "Birkenfeld",
+    "kuerzel_to": "DEB15"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7135000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600150,
+    "name_to": "Cochem-Zell",
+    "kuerzel_to": "DEB16"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7137000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600151,
+    "name_to": "Mayen-Koblenz",
+    "kuerzel_to": "DEB17"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7138000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600152,
+    "name_to": "Neuwied",
+    "kuerzel_to": "DEB18"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7143000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600153,
+    "name_to": "Westerwaldkreis",
+    "kuerzel_to": "DEB1B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7140000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600154,
+    "name_to": "Rhein-Hunsrück-Kreis",
+    "kuerzel_to": "DEB19"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7141000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600155,
+    "name_to": "Rhein-Lahn-Kreis",
+    "kuerzel_to": "DEB1A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7211000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600156,
+    "name_to": "Trier, Kreisfreie Stadt",
+    "kuerzel_to": "DEB21"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7231000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600157,
+    "name_to": "Bernkastel-Wittlich",
+    "kuerzel_to": "DEB22"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7232000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600158,
+    "name_to": "Eifelkreis Bitburg-Prüm",
+    "kuerzel_to": "DEB23"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7233000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600159,
+    "name_to": "Vulkaneifel",
+    "kuerzel_to": "DEB24"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7235000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600160,
+    "name_to": "Trier-Saarburg",
+    "kuerzel_to": "DEB25"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7311000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600161,
+    "name_to": "Frankenthal (Pfalz), Kreisfreie Stadt",
+    "kuerzel_to": "DEB31"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7312000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600162,
+    "name_to": "Kaiserslautern, Kreisfreie Stadt",
+    "kuerzel_to": "DEB32"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7313000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600163,
+    "name_to": "Landau in der Pfalz, Kreisfreie Stadt",
+    "kuerzel_to": "DEB33"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7337000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600163,
+    "name_to": "Landau in der Pfalz, Kreisfreie Stadt",
+    "kuerzel_to": "DEB33"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7314000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600164,
+    "name_to": "Ludwigshafen am Rhein, Kreisfreie Stadt",
+    "kuerzel_to": "DEB34"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7315000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600165,
+    "name_to": "Mainz, Kreisfreie Stadt",
+    "kuerzel_to": "DEB35"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7316000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600166,
+    "name_to": "Neustadt an der Weinstraße, Kreisfreie Stadt",
+    "kuerzel_to": "DEB36"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7317000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600167,
+    "name_to": "Pirmasens, Kreisfreie Stadt",
+    "kuerzel_to": "DEB37"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7318000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600168,
+    "name_to": "Speyer, Kreisfreie Stadt",
+    "kuerzel_to": "DEB38"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7319000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600169,
+    "name_to": "Worms, Kreisfreie Stadt",
+    "kuerzel_to": "DEB39"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7320000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600170,
+    "name_to": "Zweibrücken, Kreisfreie Stadt",
+    "kuerzel_to": "DEB3A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7331000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600171,
+    "name_to": "Alzey-Worms",
+    "kuerzel_to": "DEB3B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7332000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600172,
+    "name_to": "Bad Dürkheim",
+    "kuerzel_to": "DEB3C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7333000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600173,
+    "name_to": "Donnersbergkreis",
+    "kuerzel_to": "DEB3D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7334000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600174,
+    "name_to": "Germersheim",
+    "kuerzel_to": "DEB3E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7335000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600175,
+    "name_to": "Kaiserslautern, Landkreis",
+    "kuerzel_to": "DEB3F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7336000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600176,
+    "name_to": "Kusel",
+    "kuerzel_to": "DEB3G"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7338000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600178,
+    "name_to": "Rhein-Pfalz-Kreis",
+    "kuerzel_to": "DEB3I"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7339000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600179,
+    "name_to": "Mainz-Bingen",
+    "kuerzel_to": "DEB3J"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 7340000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600180,
+    "name_to": "Südwestpfalz",
+    "kuerzel_to": "DEB3K"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8111000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600181,
+    "name_to": "Stuttgart, Stadtkreis",
+    "kuerzel_to": "DE111"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8115000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600182,
+    "name_to": "Böblingen",
+    "kuerzel_to": "DE112"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8116000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600183,
+    "name_to": "Esslingen",
+    "kuerzel_to": "DE113"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8117000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600184,
+    "name_to": "Göppingen",
+    "kuerzel_to": "DE114"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8118000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600185,
+    "name_to": "Ludwigsburg",
+    "kuerzel_to": "DE115"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8119000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600186,
+    "name_to": "Rems-Murr-Kreis",
+    "kuerzel_to": "DE116"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8121000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600187,
+    "name_to": "Heilbronn, Stadtkreis",
+    "kuerzel_to": "DE117"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8125000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600188,
+    "name_to": "Heilbronn, Landkreis",
+    "kuerzel_to": "DE118"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8126000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600189,
+    "name_to": "Hohenlohekreis",
+    "kuerzel_to": "DE119"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8127000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600190,
+    "name_to": "Schwäbisch Hall",
+    "kuerzel_to": "DE11A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8128000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600191,
+    "name_to": "Main-Tauber-Kreis",
+    "kuerzel_to": "DE11B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8135000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600192,
+    "name_to": "Heidenheim",
+    "kuerzel_to": "DE11C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8136000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600193,
+    "name_to": "Ostalbkreis",
+    "kuerzel_to": "DE11D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8211000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600194,
+    "name_to": "Baden-Baden, Stadtkreis",
+    "kuerzel_to": "DE121"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8212000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600195,
+    "name_to": "Karlsruhe, Stadtkreis",
+    "kuerzel_to": "DE122"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8215000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600196,
+    "name_to": "Karlsruhe, Landkreis",
+    "kuerzel_to": "DE123"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8216000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600197,
+    "name_to": "Rastatt",
+    "kuerzel_to": "DE124"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8221000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600198,
+    "name_to": "Heidelberg, Stadtkreis",
+    "kuerzel_to": "DE125"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8222000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600199,
+    "name_to": "Mannheim, Stadtkreis",
+    "kuerzel_to": "DE126"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8225000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600200,
+    "name_to": "Neckar-Odenwald-Kreis",
+    "kuerzel_to": "DE127"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8226000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600201,
+    "name_to": "Rhein-Neckar-Kreis",
+    "kuerzel_to": "DE128"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8231000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600202,
+    "name_to": "Pforzheim, Stadtkreis",
+    "kuerzel_to": "DE129"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8235000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600203,
+    "name_to": "Calw",
+    "kuerzel_to": "DE12A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8236000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600204,
+    "name_to": "Enzkreis",
+    "kuerzel_to": "DE12B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8237000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600205,
+    "name_to": "Freudenstadt",
+    "kuerzel_to": "DE12C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8311000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600206,
+    "name_to": "Freiburg im Breisgau, Stadtkreis",
+    "kuerzel_to": "DE131"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8315000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600207,
+    "name_to": "Breisgau-Hochschwarzwald",
+    "kuerzel_to": "DE132"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8316000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600208,
+    "name_to": "Emmendingen",
+    "kuerzel_to": "DE133"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8317000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600209,
+    "name_to": "Ortenaukreis",
+    "kuerzel_to": "DE134"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8325000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600210,
+    "name_to": "Rottweil",
+    "kuerzel_to": "DE135"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8326000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600211,
+    "name_to": "Schwarzwald-Baar-Kreis",
+    "kuerzel_to": "DE136"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8327000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600212,
+    "name_to": "Tuttlingen",
+    "kuerzel_to": "DE137"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8335000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600213,
+    "name_to": "Konstanz",
+    "kuerzel_to": "DE138"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8336000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600214,
+    "name_to": "Lörrach",
+    "kuerzel_to": "DE139"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8337000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600215,
+    "name_to": "Waldshut",
+    "kuerzel_to": "DE13A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8415000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600216,
+    "name_to": "Reutlingen",
+    "kuerzel_to": "DE141"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8416000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600217,
+    "name_to": "Tübingen, Landkreis",
+    "kuerzel_to": "DE142"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8417000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600218,
+    "name_to": "Zollernalbkreis",
+    "kuerzel_to": "DE143"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8421000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600219,
+    "name_to": "Ulm, Stadtkreis",
+    "kuerzel_to": "DE144"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8425000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600220,
+    "name_to": "Alb-Donau-Kreis",
+    "kuerzel_to": "DE145"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8426000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600221,
+    "name_to": "Biberach",
+    "kuerzel_to": "DE146"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8435000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600222,
+    "name_to": "Bodenseekreis",
+    "kuerzel_to": "DE147"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8436000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600223,
+    "name_to": "Ravensburg",
+    "kuerzel_to": "DE148"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 8437000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600224,
+    "name_to": "Sigmaringen",
+    "kuerzel_to": "DE149"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9161000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600225,
+    "name_to": "Ingolstadt, Kreisfreie Stadt",
+    "kuerzel_to": "DE211"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9162000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600226,
+    "name_to": "München, Kreisfreie Stadt",
+    "kuerzel_to": "DE212"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9163000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600227,
+    "name_to": "Rosenheim, Kreisfreie Stadt",
+    "kuerzel_to": "DE213"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9171000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600228,
+    "name_to": "Altötting",
+    "kuerzel_to": "DE214"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9172000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600229,
+    "name_to": "Berchtesgadener Land",
+    "kuerzel_to": "DE215"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9173000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600230,
+    "name_to": "Bad Tölz-Wolfratshausen",
+    "kuerzel_to": "DE216"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9174000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600231,
+    "name_to": "Dachau",
+    "kuerzel_to": "DE217"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9175000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600232,
+    "name_to": "Ebersberg",
+    "kuerzel_to": "DE218"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9176000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600233,
+    "name_to": "Eichstätt",
+    "kuerzel_to": "DE219"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9177000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600234,
+    "name_to": "Erding",
+    "kuerzel_to": "DE21A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9178000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600235,
+    "name_to": "Freising",
+    "kuerzel_to": "DE21B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9179000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600236,
+    "name_to": "Fürstenfeldbruck",
+    "kuerzel_to": "DE21C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9180000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600237,
+    "name_to": "Garmisch-Partenkirchen",
+    "kuerzel_to": "DE21D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9181000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600238,
+    "name_to": "Landsberg am Lech",
+    "kuerzel_to": "DE21E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9182000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600239,
+    "name_to": "Miesbach",
+    "kuerzel_to": "DE21F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9183000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600240,
+    "name_to": "Mühldorf a. Inn",
+    "kuerzel_to": "DE21G"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9184000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600241,
+    "name_to": "München, Landkreis",
+    "kuerzel_to": "DE21H"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9185000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600242,
+    "name_to": "Neuburg-Schrobenhausen",
+    "kuerzel_to": "DE21I"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9186000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600243,
+    "name_to": "Pfaffenhofen a. d. Ilm",
+    "kuerzel_to": "DE21J"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9187000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600244,
+    "name_to": "Rosenheim, Landkreis",
+    "kuerzel_to": "DE21K"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9188000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600245,
+    "name_to": "Starnberg",
+    "kuerzel_to": "DE21L"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9189000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600246,
+    "name_to": "Traunstein",
+    "kuerzel_to": "DE21M"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9190000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600247,
+    "name_to": "Weilheim-Schongau",
+    "kuerzel_to": "DE21N"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9261000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600248,
+    "name_to": "Landshut, Kreisfreie Stadt",
+    "kuerzel_to": "DE221"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9262000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600249,
+    "name_to": "Passau, Kreisfreie Stadt",
+    "kuerzel_to": "DE222"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9263000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600250,
+    "name_to": "Straubing, Kreisfreie Stadt",
+    "kuerzel_to": "DE223"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9271000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600251,
+    "name_to": "Deggendorf",
+    "kuerzel_to": "DE224"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9272000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600252,
+    "name_to": "Freyung-Grafenau",
+    "kuerzel_to": "DE225"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9273000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600253,
+    "name_to": "Kelheim",
+    "kuerzel_to": "DE226"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9274000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600254,
+    "name_to": "Landshut, Landkreis",
+    "kuerzel_to": "DE227"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9275000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600255,
+    "name_to": "Passau, Landkreis",
+    "kuerzel_to": "DE228"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9276000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600256,
+    "name_to": "Regen",
+    "kuerzel_to": "DE229"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9277000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600257,
+    "name_to": "Rottal-Inn",
+    "kuerzel_to": "DE22A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9278000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600258,
+    "name_to": "Straubing-Bogen",
+    "kuerzel_to": "DE22B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9279000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600259,
+    "name_to": "Dingolfing-Landau",
+    "kuerzel_to": "DE22C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9361000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600260,
+    "name_to": "Amberg, Kreisfreie Stadt",
+    "kuerzel_to": "DE231"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9362000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600261,
+    "name_to": "Regensburg, Kreisfreie Stadt",
+    "kuerzel_to": "DE232"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9363000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600262,
+    "name_to": "Weiden i. d. Opf, Kreisfreie Stadt",
+    "kuerzel_to": "DE233"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9371000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600263,
+    "name_to": "Amberg-Sulzbach",
+    "kuerzel_to": "DE234"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9372000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600264,
+    "name_to": "Cham",
+    "kuerzel_to": "DE235"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9373000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600265,
+    "name_to": "Neumarkt i. d. OPf.",
+    "kuerzel_to": "DE236"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9374000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600266,
+    "name_to": "Neustadt a. d. Waldnaab",
+    "kuerzel_to": "DE237"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9375000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600267,
+    "name_to": "Regensburg, Landkreis",
+    "kuerzel_to": "DE238"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9376000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600268,
+    "name_to": "Schwandorf",
+    "kuerzel_to": "DE239"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9377000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600269,
+    "name_to": "Tirschenreuth",
+    "kuerzel_to": "DE23A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9461000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600270,
+    "name_to": "Bamberg, Kreisfreie Stadt",
+    "kuerzel_to": "DE241"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9462000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600271,
+    "name_to": "Bayreuth, Kreisfreie Stadt",
+    "kuerzel_to": "DE242"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9463000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600272,
+    "name_to": "Coburg, Kreisfreie Stadt",
+    "kuerzel_to": "DE243"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9464000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600273,
+    "name_to": "Hof, Kreisfreie Stadt",
+    "kuerzel_to": "DE244"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9471000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600274,
+    "name_to": "Bamberg, Landkreis",
+    "kuerzel_to": "DE245"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9472000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600275,
+    "name_to": "Bayreuth, Landkreis",
+    "kuerzel_to": "DE246"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9473000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600276,
+    "name_to": "Coburg, Landkreis",
+    "kuerzel_to": "DE247"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9474000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600277,
+    "name_to": "Forchheim",
+    "kuerzel_to": "DE248"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9475000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600278,
+    "name_to": "Hof, Landkreis",
+    "kuerzel_to": "DE249"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9476000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600279,
+    "name_to": "Kronach",
+    "kuerzel_to": "DE24A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9477000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600280,
+    "name_to": "Kulmbach",
+    "kuerzel_to": "DE24B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9478000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600281,
+    "name_to": "Lichtenfels",
+    "kuerzel_to": "DE24C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9479000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600282,
+    "name_to": "Wunsiedel i. Fichtelgebirge",
+    "kuerzel_to": "DE24D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9561000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600283,
+    "name_to": "Ansbach, Kreisfreie Stadt",
+    "kuerzel_to": "DE251"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9562000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600284,
+    "name_to": "Erlangen, Kreisfreie Stadt",
+    "kuerzel_to": "DE252"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9563000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600285,
+    "name_to": "Fürth, Kreisfreie Stadt",
+    "kuerzel_to": "DE253"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9564000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600286,
+    "name_to": "Nürnberg, Kreisfreie Stadt",
+    "kuerzel_to": "DE254"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9565000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600287,
+    "name_to": "Schwabach, Kreisfreie Stadt",
+    "kuerzel_to": "DE255"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9571000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600288,
+    "name_to": "Ansbach, Landkreis",
+    "kuerzel_to": "DE256"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9572000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600289,
+    "name_to": "Erlangen-Höchstadt",
+    "kuerzel_to": "DE257"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9573000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600290,
+    "name_to": "Fürth, Landkreis",
+    "kuerzel_to": "DE258"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9574000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600291,
+    "name_to": "Nürnberger Land",
+    "kuerzel_to": "DE259"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9575000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600292,
+    "name_to": "Neustadt a. d. Aisch-Bad Windsheim",
+    "kuerzel_to": "DE25A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9576000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600293,
+    "name_to": "Roth",
+    "kuerzel_to": "DE25B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9577000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600294,
+    "name_to": "Weißenburg-Gunzenhausen",
+    "kuerzel_to": "DE25C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9661000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600295,
+    "name_to": "Aschaffenburg, Kreisfreie Stadt",
+    "kuerzel_to": "DE261"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9662000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600296,
+    "name_to": "Schweinfurt, Kreisfreie Stadt",
+    "kuerzel_to": "DE262"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9663000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600297,
+    "name_to": "Würzburg, Kreisfreie Stadt",
+    "kuerzel_to": "DE263"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9671000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600298,
+    "name_to": "Aschaffenburg, Landkreis",
+    "kuerzel_to": "DE264"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9672000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600299,
+    "name_to": "Bad Kissingen",
+    "kuerzel_to": "DE265"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9673000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600300,
+    "name_to": "Rhön-Grabfeld",
+    "kuerzel_to": "DE266"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9674000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600301,
+    "name_to": "Haßberge",
+    "kuerzel_to": "DE267"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9675000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600302,
+    "name_to": "Kitzingen",
+    "kuerzel_to": "DE268"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9676000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600303,
+    "name_to": "Miltenberg",
+    "kuerzel_to": "DE269"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9677000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600304,
+    "name_to": "Main-Spessart",
+    "kuerzel_to": "DE26A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9678000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600305,
+    "name_to": "Schweinfurt, Landkreis",
+    "kuerzel_to": "DE26B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9679000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600306,
+    "name_to": "Würzburg, Landkreis",
+    "kuerzel_to": "DE26C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9761000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600307,
+    "name_to": "Augsburg, Kreisfreie Stadt",
+    "kuerzel_to": "DE271"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9762000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600308,
+    "name_to": "Kaufbeuren, Kreisfreie Stadt",
+    "kuerzel_to": "DE272"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9763000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600309,
+    "name_to": "Kempten (Allgäu), Kreisfreie Stadt",
+    "kuerzel_to": "DE273"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9764000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600310,
+    "name_to": "Memmingen, Kreisfreie Stadt",
+    "kuerzel_to": "DE274"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9771000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600311,
+    "name_to": "Aichach-Friedberg",
+    "kuerzel_to": "DE275"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9772000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600312,
+    "name_to": "Augsburg, Landkreis",
+    "kuerzel_to": "DE276"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9773000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600313,
+    "name_to": "Dillingen a.d. Donau",
+    "kuerzel_to": "DE277"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9774000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600314,
+    "name_to": "Günzburg",
+    "kuerzel_to": "DE278"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9775000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600315,
+    "name_to": "Neu-Ulm",
+    "kuerzel_to": "DE279"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9776000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600316,
+    "name_to": "Lindau (Bodensee)",
+    "kuerzel_to": "DE27A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9777000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600317,
+    "name_to": "Ostallgäu",
+    "kuerzel_to": "DE27B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9778000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600318,
+    "name_to": "Unterallgäu",
+    "kuerzel_to": "DE27C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9779000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600319,
+    "name_to": "Donau-Ries",
+    "kuerzel_to": "DE27D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 9780000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600320,
+    "name_to": "Oberallgäu",
+    "kuerzel_to": "DE27E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 10041000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600321,
+    "name_to": "Regionalverband Saarbrücken",
+    "kuerzel_to": "DEC01"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 10042000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600322,
+    "name_to": "Merzig-Wadern",
+    "kuerzel_to": "DEC02"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 10043000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600323,
+    "name_to": "Neunkirchen",
+    "kuerzel_to": "DEC03"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 10044000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600324,
+    "name_to": "Saarlouis",
+    "kuerzel_to": "DEC04"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 10045000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600325,
+    "name_to": "Saarpfalz-Kreis",
+    "kuerzel_to": "DEC05"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 10046000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600326,
+    "name_to": "St. Wendel",
+    "kuerzel_to": "DEC06"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 11000000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600327,
+    "name_to": "Berlin",
+    "kuerzel_to": "DE300"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12051000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600328,
+    "name_to": "Brandenburg an der Havel, Kreisfreie Stadt",
+    "kuerzel_to": "DE401"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12052000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600329,
+    "name_to": "Cottbus, Kreisfreie Stadt",
+    "kuerzel_to": "DE402"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12053000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600330,
+    "name_to": "Frankfurt (Oder), Kreisfreie Stadt",
+    "kuerzel_to": "DE403"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12054000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600331,
+    "name_to": "Potsdam, Kreisfreie Stadt",
+    "kuerzel_to": "DE404"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12060000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600332,
+    "name_to": "Barnim",
+    "kuerzel_to": "DE405"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12061000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600333,
+    "name_to": "Dahme-Spreewald",
+    "kuerzel_to": "DE406"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12062000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600334,
+    "name_to": "Elbe-Elster",
+    "kuerzel_to": "DE407"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12063000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600335,
+    "name_to": "Havelland",
+    "kuerzel_to": "DE408"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12064000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600336,
+    "name_to": "Märkisch-Oderland",
+    "kuerzel_to": "DE409"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12065000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600337,
+    "name_to": "Oberhavel",
+    "kuerzel_to": "DE40A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12066000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600338,
+    "name_to": "Oberspreewald-Lausitz",
+    "kuerzel_to": "DE40B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12067000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600339,
+    "name_to": "Oder-Spree",
+    "kuerzel_to": "DE40C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12068000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600340,
+    "name_to": "Ostprignitz-Ruppin",
+    "kuerzel_to": "DE40D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12069000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600341,
+    "name_to": "Potsdam-Mittelmark",
+    "kuerzel_to": "DE40E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12070000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600342,
+    "name_to": "Prignitz",
+    "kuerzel_to": "DE40F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12071000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600343,
+    "name_to": "Spree-Neiße",
+    "kuerzel_to": "DE40G"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12072000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600344,
+    "name_to": "Teltow-Fläming",
+    "kuerzel_to": "DE40H"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 12073000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600345,
+    "name_to": "Uckermark",
+    "kuerzel_to": "DE40I"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13003000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600348,
+    "name_to": "Rostock, Kreisfreie Stadt",
+    "kuerzel_to": "DE803"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13004000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600349,
+    "name_to": "Schwerin, Kreisfreie Stadt",
+    "kuerzel_to": "DE804"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14511000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600364,
+    "name_to": "Chemnitz, Kreisfreie Stadt",
+    "kuerzel_to": "DED41"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14521000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600365,
+    "name_to": "Erzgebirgskreis",
+    "kuerzel_to": "DED42"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14522000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600366,
+    "name_to": "Mittelsachsen",
+    "kuerzel_to": "DED43"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14523000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600367,
+    "name_to": "Vogtlandkreis",
+    "kuerzel_to": "DED44"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14524000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600368,
+    "name_to": "Zwickau",
+    "kuerzel_to": "DED45"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14612000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600369,
+    "name_to": "Dresden, Kreisfreie Stadt",
+    "kuerzel_to": "DED21"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14625000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600370,
+    "name_to": "Bautzen",
+    "kuerzel_to": "DED2C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14626000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600371,
+    "name_to": "Görlitz",
+    "kuerzel_to": "DED2D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14627000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600372,
+    "name_to": "Meißen",
+    "kuerzel_to": "DED2E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14628000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600373,
+    "name_to": "Sächsische Schweiz-Osterzgebirge",
+    "kuerzel_to": "DED2F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14713000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600374,
+    "name_to": "Leipzig, Kreisfreie Stadt",
+    "kuerzel_to": "DED51"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14729000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600375,
+    "name_to": "Leipzig",
+    "kuerzel_to": "DED52"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 14730000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600376,
+    "name_to": "Nordsachsen",
+    "kuerzel_to": "DED53"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15001000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600377,
+    "name_to": "Dessau-Roßlau, Kreisfreie Stadt",
+    "kuerzel_to": "DEE01"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15002000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600378,
+    "name_to": "Halle (Saale), Kreisfreie Stadt",
+    "kuerzel_to": "DEE02"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15003000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600379,
+    "name_to": "Magdeburg, Kreisfreie Stadt",
+    "kuerzel_to": "DEE03"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15081000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600380,
+    "name_to": "Altmarkkreis Salzwedel",
+    "kuerzel_to": "DEE04"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15082000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600381,
+    "name_to": "Anhalt-Bitterfeld",
+    "kuerzel_to": "DEE05"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15083000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600382,
+    "name_to": "Börde",
+    "kuerzel_to": "DEE07"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15084000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600383,
+    "name_to": "Burgenlandkreis",
+    "kuerzel_to": "DEE08"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15085000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600384,
+    "name_to": "Harz",
+    "kuerzel_to": "DEE09"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15086000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600385,
+    "name_to": "Jerichower Land",
+    "kuerzel_to": "DEE06"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15087000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600386,
+    "name_to": "Mansfeld-Südharz",
+    "kuerzel_to": "DEE0A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15088000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600387,
+    "name_to": "Saalekreis",
+    "kuerzel_to": "DEE0B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15089000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600388,
+    "name_to": "Salzlandkreis",
+    "kuerzel_to": "DEE0C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15090000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600389,
+    "name_to": "Stendal",
+    "kuerzel_to": "DEE0D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 15091000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600390,
+    "name_to": "Wittenberg",
+    "kuerzel_to": "DEE0E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16051000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600391,
+    "name_to": "Erfurt, Kreisfreie Stadt",
+    "kuerzel_to": "DEG01"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16052000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600392,
+    "name_to": "Gera, Kreisfreie Stadt",
+    "kuerzel_to": "DEG02"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16053000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600393,
+    "name_to": "Jena, Kreisfreie Stadt",
+    "kuerzel_to": "DEG03"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16054000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600394,
+    "name_to": "Suhl, Kreisfreie Stadt",
+    "kuerzel_to": "DEG04"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16055000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600395,
+    "name_to": "Weimar, Kreisfreie Stadt",
+    "kuerzel_to": "DEG05"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16056000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600396,
+    "name_to": "Eisenach, Kreisfreie Stadt",
+    "kuerzel_to": "DEG0N"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16061000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600397,
+    "name_to": "Eichsfeld",
+    "kuerzel_to": "DEG06"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16062000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600398,
+    "name_to": "Nordhausen",
+    "kuerzel_to": "DEG07"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16063000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600399,
+    "name_to": "Wartburgkreis",
+    "kuerzel_to": "DEG0P"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16064000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600400,
+    "name_to": "Unstrut-Hainich-Kreis",
+    "kuerzel_to": "DEG09"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16065000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600401,
+    "name_to": "Kyffhäuserkreis",
+    "kuerzel_to": "DEG0A"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16066000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600402,
+    "name_to": "Schmalkalden-Meiningen",
+    "kuerzel_to": "DEG0B"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16067000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600403,
+    "name_to": "Gotha",
+    "kuerzel_to": "DEG0C"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16068000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600404,
+    "name_to": "Sömmerda",
+    "kuerzel_to": "DEG0D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16069000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600405,
+    "name_to": "Hildburghausen",
+    "kuerzel_to": "DEG0E"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16070000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600406,
+    "name_to": "Ilm-Kreis",
+    "kuerzel_to": "DEG0F"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16071000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600407,
+    "name_to": "Weimarer Land",
+    "kuerzel_to": "DEG0G"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16072000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600408,
+    "name_to": "Sonneberg",
+    "kuerzel_to": "DEG0H"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16073000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600409,
+    "name_to": "Saalfeld-Rudolstadt",
+    "kuerzel_to": "DEG0I"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16074000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600410,
+    "name_to": "Saale-Holzland-Kreis",
+    "kuerzel_to": "DEG0J"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16075000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600411,
+    "name_to": "Saale-Orla-Kreis",
+    "kuerzel_to": "DEG0K"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16076000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600412,
+    "name_to": "Greiz",
+    "kuerzel_to": "DEG0L"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 16077000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600413,
+    "name_to": "Altenburger Land",
+    "kuerzel_to": "DEG0M"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 5334000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600415,
+    "name_to": "Städteregion Aachen",
+    "kuerzel_to": "DEA2D"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13071000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600416,
+    "name_to": "Mecklenburgische Seenplatte",
+    "kuerzel_to": "DE80J"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13072000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600417,
+    "name_to": "Landkreis Rostock",
+    "kuerzel_to": "DE80K"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13073000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600418,
+    "name_to": "Vorpommern-Rügen",
+    "kuerzel_to": "DE80L"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13074000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600419,
+    "name_to": "Nordwestmecklenburg",
+    "kuerzel_to": "DE80M"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13075000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600420,
+    "name_to": "Vorpommern-Greifswald",
+    "kuerzel_to": "DE80N"
+  },
+  {
+    "id_region_type_from": 4,
+    "id_region_from": 13076000,
+    "id_region_type_to": 38,
+    "id_region_to": 27600421,
+    "name_to": "Ludwigslust-Parchim",
+    "kuerzel_to": "DE80O"
+  }
+]
