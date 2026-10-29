@@ -264,6 +264,9 @@ rule modify_prenetwork:
         sr27_industry_demand_twh=config_provider(
             "pypsa-de", "sr27_industry_demand_twh", default={}
         ),
+        sr27_biogas_potential_twh=config_provider(
+            "pypsa-de", "sr27_biogas_potential_twh", default={}
+        ),
     script:
         scripts("pypsa-de/modify_prenetwork.py")
 

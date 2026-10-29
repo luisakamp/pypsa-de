@@ -266,6 +266,12 @@ SR27_S3:
         2040: 130
         2045: 101
 
+    # Biogaspotenzial DE in TWh (Heizwert): SR S3 nennt 107 TWh Potenzial.
+    # Standard in PyPSA-DE nur Gülle und Klärschlamm (rund 29 TWh).
+    sr27_biogas_potential_twh:
+      2040: 107
+      2045: 107
+
   electricity:
     H2_plants:
       # Default 2045: ab dann werden ALLE extendable DE-Gasturbinen gelöscht und
@@ -288,6 +294,11 @@ SR27_S3:
       sr27_methane_capacity_gw:
         2040: 50
         2045: 19
+
+      # Biomethan-Einspeisung aus deutscher Aufbereitung (TWh, Heizwert), SR S3.
+      sr27_biomethane_twh:
+        2040: 70
+        2045: 70
 
       limits_capacity_min:
         Link:

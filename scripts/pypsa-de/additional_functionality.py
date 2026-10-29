@@ -988,6 +988,48 @@ def add_sr27_methane_capacity(n, investment_year, targets_gw):
         f"{target_mw / 1e3:.3f} GW_el, davon "
         f"{existing_mw / 1e3:.3f} GW_el fester Bestand."
     )
+
+
+def add_sr27_biomethane(n, investment_year, targets_twh):
+    """Biomethan-Einspeisung aus deutscher Aufbereitung auf Ziel in TWh setzen."""
+    target = targets_twh.get(investment_year, targets_twh.get(str(investment_year)))
+    if target is None:
+        return
+
+    target_mwh = float(target) * 1e6
+    if not 0 <= target_mwh < float("inf"):
+        raise ValueError("Biomethan-Ziel muss endlich und nicht negativ sein.")
+
+    links = n.links
+    links_i = links.index[
+        links.carrier.isin(["biogas to gas", "biogas to gas CC"])
+        & links.bus0.str.startswith("DE", na=False)
+        & links.active
+    ]
+    if links_i.empty:
+        raise ValueError(
+            f"SR27 {investment_year}: keine deutschen Biogas-Aufbereitungen gefunden."
+        )
+
+    # Link-p ist Biogas-Eingang; Gewichtung x Wirkungsgrad ergibt MWh Biomethan.
+    p = n.model["Link-p"].loc[:, links_i]
+    weights = n.snapshot_weightings.generators.loc[n.snapshots].to_numpy()
+    efficiency = links.loc[links_i, "efficiency"].to_numpy()
+    coeff = DataArray(
+        weights[:, None] * efficiency[None, :],
+        coords=[p.coords[dim] for dim in p.dims],
+    )
+    lhs = (p * coeff).sum()
+
+    n.model.add_constraints(
+        lhs == target_mwh,
+        name=f"SR27-biomethane-DE-{investment_year}",
+    )
+
+    logger.info(
+        f"SR27 {investment_year}: Biomethan-Einspeisung DE auf "
+        f"{target_mwh / 1e6:.2f} TWh/a gesetzt."
+    )
 ###########################################################################################
 
 def additional_functionality(n, snapshots, snakemake):
@@ -1015,6 +1057,12 @@ def additional_functionality(n, snapshots, snakemake):
         n,
         investment_year,
         constraints.get("sr27_methane_capacity_gw", {}),
+    )
+
+    add_sr27_biomethane(
+        n,
+        investment_year,
+        constraints.get("sr27_biomethane_twh", {}),
     )
     ############
 

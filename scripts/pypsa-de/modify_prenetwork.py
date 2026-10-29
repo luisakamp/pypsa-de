@@ -1211,6 +1211,40 @@ def scale_industry_demand_sr27(n, investment_year, targets_twh):
             f"skaliert (Faktor {factor:.3f})."
         )
 
+
+def scale_biogas_potential_sr27(n, investment_year, targets_twh):
+    """Deutsches Biogaspotenzial auf Jahreswert in TWh skalieren."""
+    target = targets_twh.get(investment_year, targets_twh.get(str(investment_year)))
+    if target is None:
+        return
+
+    target_mwh = float(target) * 1e6
+    if not 0 <= target_mwh < float("inf"):
+        raise ValueError("Biogaspotenzial muss endlich und nicht negativ sein.")
+
+    gens_i = n.generators.index[
+        n.generators.carrier.eq("biogas")
+        & n.generators.bus.str.startswith("DE", na=False)
+    ]
+    if gens_i.empty:
+        raise ValueError("Keine deutschen Biogas-Generatoren gefunden.")
+
+    current_mwh = n.generators.loc[gens_i, "e_sum_max"].sum()
+    if not 0 < current_mwh < float("inf"):
+        raise ValueError(
+            f"Biogaspotenzial in DE ist nicht endlich positiv: {current_mwh} MWh."
+        )
+
+    # p_nom entspricht in prepare_sector_network dem Jahrespotenzial.
+    factor = target_mwh / current_mwh
+    n.generators.loc[gens_i, ["e_sum_max", "p_nom"]] *= factor
+
+    logger.info(
+        f"SR27 {investment_year}: Biogaspotenzial DE von "
+        f"{current_mwh / 1e6:.2f} auf {target_mwh / 1e6:.2f} TWh/a "
+        f"skaliert (Faktor {factor:.3f})."
+    )
+
 ############
 
 def force_retrofit(n, params):
@@ -1655,6 +1689,13 @@ if __name__ == "__main__":
         n,
         current_year,
         snakemake.params.sr27_industry_demand_twh,
+    )
+
+    #### Anpassung LuKa: Biogaspotenzial
+    scale_biogas_potential_sr27(
+        n,
+        current_year,
+        snakemake.params.sr27_biogas_potential_twh,
     )
 
     if current_year in snakemake.params.limit_cross_border_flows_ac:
