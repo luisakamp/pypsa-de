@@ -614,7 +614,9 @@ def unravel_carbonaceous_fuels(n):
         )
 
 
-def unravel_gasbus(n, costs):
+## Anpassung LuKa: Gasspeicher
+
+def unravel_gasbus(n, costs, gas_storage):
     """
     Unravel European gas bus to enable energy balances for import of gas
     products.
@@ -641,26 +643,69 @@ def unravel_gasbus(n, costs):
         unit="MWh_LHV",
     )
 
+    # n.add(
+    #     "Store",
+    #     "DE gas Store",
+    #     bus="DE gas",
+    #     carrier="gas",
+    #     e_nom_extendable=True,
+    #     e_cyclic=True,
+    #     capital_cost=costs.at["gas storage", "capital_cost"],
+    #     onight_cost=costs.at["gas storage", "investment"],
+    #     lifetime=costs.at["gas storage", "lifetime"],
+    # )
+
+    ## LUISA: Gasspeicher
+    GAS_STORAGE_CAPACITY_MWH = 200e6  # Beispiel: 200 TWh
+    INITIAL_FILL_LEVEL = 0.40          # Beispiel: 60 %
+
     n.add(
         "Store",
         "DE gas Store",
         bus="DE gas",
         carrier="gas",
-        e_nom_extendable=True,
-        e_cyclic=True,
-        capital_cost=costs.at["gas storage", "capital_cost"],
-        onight_cost=costs.at["gas storage", "investment"],
-        lifetime=costs.at["gas storage", "lifetime"],
+
+        # Physische Speicherkapazität fest vorgeben
+        e_nom=GAS_STORAGE_CAPACITY_MWH,
+        e_nom_extendable=False,
+
+        # Anfangsfüllstand in MWh vorgeben
+        e_initial=GAS_STORAGE_CAPACITY_MWH * INITIAL_FILL_LEVEL,
+
+        # Wichtig: Anfangs- und Endfüllstand nicht gleichsetzen
+        e_cyclic=False,
+
+        standing_loss=0.0,
     )
 
-    n.add(
-        "Generator",
-        "DE gas primary",
-        bus="DE gas primary",
-        p_nom_extendable=True,
-        carrier="gas primary",
-        marginal_cost=costs.at["gas", "fuel"],
+    n.stores_t.e_min_pu.loc[:, "DE gas Store"] = 0.0
+    n.stores_t.e_min_pu.loc[n.snapshots[-1], "DE gas Store"] = INITIAL_FILL_LEVEL
+
+    logger.info(
+    "DE gas Store e_min_pu tail:\n%s",
+    n.stores_t.e_min_pu["DE gas Store"].tail(),
     )
+    
+    n.add(
+    "Generator",
+    "DE gas primary",
+    bus="DE gas primary",
+    p_nom=200e3,                                # 200 GW in MW
+    p_nom_extendable=False,
+    carrier="gas primary",                      # kein freier Ausbau
+    marginal_cost=costs.at["gas", "fuel"],
+    )
+
+    # n.add(
+    #     "Generator",
+    #     "DE gas primary",
+    #     bus="DE gas primary",
+    #     p_nom_extendable=True,
+    #     carrier="gas primary",
+    #     marginal_cost=costs.at["gas", "fuel"],
+    # )
+
+    #################### END MODIFICATION ####################
 
     # add link for DE gas compressing
     n.add(
