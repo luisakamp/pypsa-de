@@ -254,8 +254,10 @@ KN2045_NFhoch:
 
 SR27_S3:
   pypsa-de:
-    # Industrielle Jahresnachfrage DE in TWh, abgeleitet aus den
-    # Ausspeiseleistungen (GWh/h) mit ca. 5.060-5.100 Vollbenutzungsstunden.
+    # Industrielle Jahresnachfrage DE in TWh (Heizwert), abgeleitet aus den
+    # Mantelzahlen (GWh/h, Brennwert): TWh = GWh/h * h/a / Hs-Hi-Faktor.
+    # H2: 6.000 h/a (Wert aus S1, S3 nennt keine), / 1,18.
+    # CH4: 5.650 h/a, / 1,11. S3 nennt als LFS-Basis nur 61 / 2 TWh, Mantelzahl angepasst.
     # Bestehende Lasten werden proportional skaliert (Knotenverteilung bleibt).
     sr27_industry_demand_twh:
       H2 for industry:     # 17 GWh/h (2040), 21 GWh/h (2045)
