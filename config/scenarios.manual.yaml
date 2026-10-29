@@ -254,18 +254,17 @@ KN2045_NFhoch:
 
 SR27_S3:
   pypsa-de:
-    # Industrielle Jahresnachfrage DE in TWh (Heizwert), abgeleitet aus den
-    # Mantelzahlen (GWh/h, Brennwert): TWh = GWh/h * h/a / Hs-Hi-Faktor.
-    # H2: 6.000 h/a (Wert aus S1, S3 nennt keine), / 1,18.
-    # CH4: 5.650 h/a, / 1,11. S3 nennt als LFS-Basis nur 61 / 2 TWh, Mantelzahl angepasst.
+    # Industrielle Jahresnachfrage DE in TWh (Heizwert) laut Mantelzahlentabelle
+    # SR NEP2027, Szenario 3 (Entwurf, Stand 14.04.2026). Mengen sind laut
+    # SR Kap. 4.1 Heizwert, Leistungen (GWh/h) Brennwert.
     # Bestehende Lasten werden proportional skaliert (Knotenverteilung bleibt).
     sr27_industry_demand_twh:
-      H2 for industry:     # 17 GWh/h (2040), 21 GWh/h (2045)
-        2040: 86
-        2045: 107
-      gas for industry:    # 27 GWh/h (2040), 21 GWh/h (2045)
-        2040: 137
-        2045: 107
+      H2 for industry:     # Mantelzahl 17 GWh/h (2040), 21 GWh/h (2045)
+        2040: 79
+        2045: 101
+      gas for industry:    # Mantelzahl 27 GWh/h (2040), 21 GWh/h (2045)
+        2040: 130
+        2045: 101
 
   electricity:
     H2_plants:
