@@ -1168,6 +1168,49 @@ def partial_retrofit_sr27(n, investment_year, targets_gw):
         f"verbleibt bei {target_mw / 1e3:.3f} GW_el."
     )
 
+
+def scale_industry_demand_sr27(n, investment_year, targets_twh):
+    """Deutsche H2-/CH4-Industrielasten auf Jahresziele in TWh skalieren."""
+    weightings = n.snapshot_weightings.generators
+
+    for carrier, targets in targets_twh.items():
+        target = targets.get(investment_year, targets.get(str(investment_year)))
+        if target is None:
+            continue
+
+        target_mwh = float(target) * 1e6
+        if not 0 <= target_mwh < float("inf"):
+            raise ValueError(
+                f"Industrieziel für '{carrier}' muss endlich und nicht negativ sein."
+            )
+
+        loads_i = n.loads.index[
+            n.loads.carrier.eq(carrier)
+            & n.loads.bus.str.startswith("DE", na=False)
+        ]
+        if loads_i.empty:
+            raise ValueError(f"Keine deutschen Lasten mit Carrier '{carrier}'.")
+
+        # Industrielasten sind konstant; Zeitreihen würden nicht skaliert.
+        if loads_i.isin(n.loads_t.p_set.columns).any():
+            raise ValueError(
+                f"Zeitabhängiges p_set für '{carrier}' vorhanden: "
+                "vor der Skalierung gesondert behandeln."
+            )
+
+        current_mwh = n.loads.loc[loads_i, "p_set"].sum() * weightings.sum()
+        if current_mwh <= 0:
+            raise ValueError(f"Basisnachfrage für '{carrier}' ist null.")
+
+        factor = target_mwh / current_mwh
+        n.loads.loc[loads_i, "p_set"] *= factor
+
+        logger.info(
+            f"SR27 {investment_year}: {carrier} in DE von "
+            f"{current_mwh / 1e6:.2f} auf {target_mwh / 1e6:.2f} TWh/a "
+            f"skaliert (Faktor {factor:.3f})."
+        )
+
 ############
 
 def force_retrofit(n, params):
@@ -1606,6 +1649,13 @@ if __name__ == "__main__":
             snakemake.input.industry_sector_ratios,
             scale_non_energy=snakemake.params.scale_industry_non_energy,
         )
+
+    #### Anpassung LuKa: Industrienachfrage H2/CH4
+    scale_industry_demand_sr27(
+        n,
+        current_year,
+        snakemake.params.sr27_industry_demand_twh,
+    )
 
     if current_year in snakemake.params.limit_cross_border_flows_ac:
         limit_cross_border_flows_ac(

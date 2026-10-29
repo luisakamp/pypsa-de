@@ -253,6 +253,18 @@ KN2045_NFhoch:
 ## LuKa
 
 SR27_S3:
+  pypsa-de:
+    # Industrielle Jahresnachfrage DE in TWh, abgeleitet aus den
+    # Ausspeiseleistungen (GWh/h) mit ca. 5.060-5.100 Vollbenutzungsstunden.
+    # Bestehende Lasten werden proportional skaliert (Knotenverteilung bleibt).
+    sr27_industry_demand_twh:
+      H2 for industry:     # 17 GWh/h (2040), 21 GWh/h (2045)
+        2040: 86
+        2045: 107
+      gas for industry:    # 27 GWh/h (2040), 21 GWh/h (2045)
+        2040: 137
+        2045: 107
+
   electricity:
     H2_plants:
       # Default 2045: ab dann werden ALLE extendable DE-Gasturbinen gelöscht und

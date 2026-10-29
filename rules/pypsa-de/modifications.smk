@@ -261,6 +261,9 @@ rule modify_prenetwork:
         limit_cross_border_flows_ac=config_provider(
             "pypsa-de", "limit_cross_border_flows_ac"
         ),
+        sr27_industry_demand_twh=config_provider(
+            "pypsa-de", "sr27_industry_demand_twh", default={}
+        ),
     script:
         scripts("pypsa-de/modify_prenetwork.py")
 
