@@ -724,11 +724,6 @@ data:
   ariadne_template:
     source: archive
     version: latest
-  # Archiv-Snapshot (2026-02-16) statt Live-Download vom BFE: neue BFE-Fassungen
-  # haben andere Zeilennamen (KeyError 'Total Endenergieverbrauch').
-  swiss_energy_balances:
-    source: archive
-    version: latest
   open_mastr:
     source: archive
     version: latest

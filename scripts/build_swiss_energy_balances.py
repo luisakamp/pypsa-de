@@ -21,6 +21,21 @@ def load_sheet(xlsx: pd.ExcelFile, sheet_name: str, index_col: str) -> pd.DataFr
     return df
 
 
+def get_row(df: pd.DataFrame, *labels: str) -> pd.Series:
+    """Return the first row found among labels (BFE renames rows between editions)."""
+    for label in labels:
+        if label in df.index:
+            return df.loc[label]
+    raise KeyError(f"None of the rows {labels} found in sheet.")
+
+
+def get_cooking(df: pd.DataFrame) -> pd.Series:
+    # Up to the 2024 edition one row; from the 2025 edition split into two.
+    if "Kochen / Geschirrspüler" in df.index:
+        return df.loc["Kochen / Geschirrspüler"]
+    return df.loc["Kochen"] + df.loc["Geschirrspüler"]
+
+
 if __name__ == "__main__":
     if "snakemake" not in globals():
         from scripts._helpers import mock_snakemake
@@ -47,26 +62,26 @@ if __name__ == "__main__":
     tab38 = load_sheet(xlsx, "Tabelle38", index_col="Verkehrsträger")
 
     data = {
-        "total residential": tab17.loc["Total Endenergieverbrauch"],
+        "total residential": get_row(tab17, "Total Endenergieverbrauch", "Total"),
         "total residential space": tab17.loc["Raumwärme"],
         "total residential water": tab17.loc["Warmwasser"],
-        "total residential cooking": tab17.loc["Kochen / Geschirrspüler"],
+        "total residential cooking": get_cooking(tab17),
         "electricity residential": tab18.loc["Total"],
         "electricity residential space": tab18.loc["Raumwärme"],
         "electricity residential water": tab18.loc["Warmwasser"],
         "electricity residential cooking": tab18.loc["Kochherde"],
-        "total services": tab26.loc["Total Endenergie"],
+        "total services": get_row(tab26, "Total Endenergie", "Total"),
         "total services space": tab26.loc["Raumwärme"],
         "total services water": tab26.loc["Warmwasser"],
         "total services cooking": tab26.loc["Prozesswärme"],
-        "electricity services": tab28.loc["Total Elektrizität"],
+        "electricity services": get_row(tab28, "Total Elektrizität", "Total"),
         "electricity services space": tab28.loc["Raumwärme"],
         "electricity services water": tab28.loc["Warmwasser"],
         "electricity services cooking": tab28.loc["Prozesswärme"],
         "total rail": tab35.loc["Schiene"],
         "total road": tab35.loc["Strasse"],
         "electricity road": tab38.loc["Strasse"],
-        "electricity rail": tab38.loc["Schiene"],
+        "electricity rail": get_row(tab38, "Schiene", "Schiene*"),
         "total domestic aviation": tab35.loc["Luft (Inland)"],
         "total international aviation": tab1.loc["int. Flugverkehr"],
         "total domestic navigation": tab35.loc["Wasser"],
