@@ -253,6 +253,11 @@ KN2045_NFhoch:
 ## LuKa
 
 SR27_S3:
+  # Verzögerungsszenario: Gas bleibt in Gebäuden. Kesselverbot für neue
+  # dezentrale Gas-/Ölkessel erst nach 2050 (Standard DE: 2029).
+  new_decentral_fossil_boiler_ban:
+    DE: 2050
+
   pypsa-de:
     # Industrielle Jahresnachfrage DE in TWh (Heizwert) laut Mantelzahlentabelle
     # SR NEP2027, Szenario 3 (Entwurf, Stand 14.04.2026). Mengen sind laut
@@ -299,6 +304,12 @@ SR27_S3:
       sr27_biomethane_twh:
         2040: 70
         2045: 70
+
+      # Gaseinsatz dezentraler Kessel DE (TWh, Heizwert), SR S3:
+      # Private Haushalte 164 / 42 + GHD 55 / 33. Fernwärme bewusst nicht vorgegeben.
+      sr27_building_gas_twh:
+        2040: 219
+        2045: 75
 
       limits_capacity_min:
         Link:

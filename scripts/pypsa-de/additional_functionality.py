@@ -1030,6 +1030,45 @@ def add_sr27_biomethane(n, investment_year, targets_twh):
         f"SR27 {investment_year}: Biomethan-Einspeisung DE auf "
         f"{target_mwh / 1e6:.2f} TWh/a gesetzt."
     )
+
+
+def add_sr27_building_gas(n, investment_year, targets_twh):
+    """Gaseinsatz dezentraler Kessel in DE (Haushalte + GHD) auf Ziel in TWh setzen."""
+    target = targets_twh.get(investment_year, targets_twh.get(str(investment_year)))
+    if target is None:
+        return
+
+    target_mwh = float(target) * 1e6
+    if not 0 <= target_mwh < float("inf"):
+        raise ValueError("Gebäude-Gasziel muss endlich und nicht negativ sein.")
+
+    links = n.links
+    links_i = links.index[
+        links.carrier.str.contains("gas boiler")
+        & ~links.carrier.str.contains("urban central")
+        & links.index.str.startswith("DE")
+        & links.active
+    ]
+    if links_i.empty:
+        raise ValueError(
+            f"SR27 {investment_year}: keine deutschen dezentralen Gaskessel gefunden; "
+            "Kesselverbot (new_decentral_fossil_boiler_ban) prüfen."
+        )
+
+    # Link-p ist der Gaseinsatz (Heizwert); die SR-Mengen sind Gas-Ausspeisung.
+    p = n.model["Link-p"].loc[:, links_i]
+    weights = n.snapshot_weightings.generators.loc[n.snapshots]
+    lhs = (p * weights).sum()
+
+    n.model.add_constraints(
+        lhs == target_mwh,
+        name=f"SR27-building-gas-DE-{investment_year}",
+    )
+
+    logger.info(
+        f"SR27 {investment_year}: Gaseinsatz dezentraler Kessel DE auf "
+        f"{target_mwh / 1e6:.2f} TWh/a gesetzt ({len(links_i)} Links)."
+    )
 ###########################################################################################
 
 def additional_functionality(n, snapshots, snakemake):
@@ -1063,6 +1102,12 @@ def additional_functionality(n, snapshots, snakemake):
         n,
         investment_year,
         constraints.get("sr27_biomethane_twh", {}),
+    )
+
+    add_sr27_building_gas(
+        n,
+        investment_year,
+        constraints.get("sr27_building_gas_twh", {}),
     )
     ############
 
