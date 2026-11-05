@@ -16,6 +16,7 @@ run:
   # - KN2045_NFniedrig
   # - KN2045_NFhoch
   - SR27_S3
+  - SR27_S3_CO2Preis
 
   scenarios:
     enable: true

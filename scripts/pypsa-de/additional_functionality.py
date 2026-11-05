@@ -1131,7 +1131,13 @@ def additional_functionality(n, snapshots, snakemake):
     # force_boiler_profiles_existing_per_load(n)
     force_boiler_profiles_existing_per_boiler(n)
 
-    if isinstance(constraints["co2_budget_national"], dict):
+    # Anpassung LuKa: in Jahren mit CO2-Preis statt Obergrenze kein DE-Budget
+    if investment_year in constraints.get("co2_budget_national_skip_years", []):
+        logger.info(
+            f"National CO2 budget skipped for {investment_year} "
+            "(co2_budget_national_skip_years)."
+        )
+    elif isinstance(constraints["co2_budget_national"], dict):
         add_national_co2_budgets(
             n,
             snakemake,
