@@ -254,7 +254,18 @@ def run(results_dir, years=YEARS, out_dir=None, pattern=FILE_PATTERN):
     return summary, balances
 
 
-if __name__ == "__main__":
+def _in_notebook() -> bool:
+    try:
+        from IPython import get_ipython
+
+        return get_ipython() is not None
+    except ImportError:
+        return False
+
+
+if __name__ == "__main__" and not _in_notebook():
+    # In a notebook (Databricks/Jupyter) the cell only defines the functions;
+    # call run(...) afterwards instead of using the command line interface.
     ap = argparse.ArgumentParser()
     ap.add_argument("results_dir")
     ap.add_argument("--out", default=None)
