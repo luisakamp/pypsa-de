@@ -125,6 +125,9 @@ def _div(a, b):
     return a / b if b else np.nan
 
 
+MIN_GW_FOR_RATIO = 100.0  # MW; below this the ESL/ASL ratio is numerical noise
+
+
 def duration_stats(p: pd.Series, w: pd.Series, prefix: str) -> dict:
     """ASL/ESL statistics for a store dispatch series in MW (p>0 discharge)."""
     out = {}
@@ -136,14 +139,18 @@ def duration_stats(p: pd.Series, w: pd.Series, prefix: str) -> dict:
         out[f"{prefix}ESL_max_{lab}"] = -s.min()
         out[f"{prefix}ASL_q995_{lab}"] = s.quantile(0.995)
         out[f"{prefix}ESL_q995_{lab}"] = -s.quantile(0.005)
-    out[f"{prefix}ESL/ASL_max_snap"] = _div(out[f"{prefix}ESL_max_snap"], out[f"{prefix}ASL_max_snap"])
-    out[f"{prefix}ESL/ASL_max_day"] = _div(out[f"{prefix}ESL_max_day"], out[f"{prefix}ASL_max_day"])
+    for lab in ["snap", "day"]:
+        asl, esl = out[f"{prefix}ASL_max_{lab}"], out[f"{prefix}ESL_max_{lab}"]
+        out[f"{prefix}ESL/ASL_max_{lab}"] = (
+            _div(esl, asl) if max(asl, esl) >= MIN_GW_FOR_RATIO else np.nan
+        )
     dis = (p.clip(lower=0) * w).sum()
     cha = (-p.clip(upper=0) * w).sum()
     out[f"{prefix}discharge_TWh"] = dis / 1e6
     out[f"{prefix}charge_TWh"] = cha / 1e6
-    out[f"{prefix}FLH_ASL_h"] = _div(dis, out[f"{prefix}ASL_max_snap"])
-    out[f"{prefix}FLH_ESL_h"] = _div(cha, out[f"{prefix}ESL_max_snap"])
+    big = max(out[f"{prefix}ASL_max_snap"], out[f"{prefix}ESL_max_snap"]) >= MIN_GW_FOR_RATIO
+    out[f"{prefix}FLH_ASL_h"] = _div(dis, out[f"{prefix}ASL_max_snap"]) if big else np.nan
+    out[f"{prefix}FLH_ESL_h"] = _div(cha, out[f"{prefix}ESL_max_snap"]) if big else np.nan
     return out
 
 
@@ -198,7 +205,9 @@ def check_network(n: pypsa.Network, year: int) -> tuple[dict, pd.DataFrame]:
 
     e = ts(n.stores_t.e, st.index, n.snapshots).sum(axis=1)
     info["AGV_used_TWh"] = (e.max() - e.min()) / 1e6
-    info["cycles"] = _div(info["all_discharge_TWh"], info["AGV_used_TWh"])
+    info["cycles"] = (
+        _div(info["all_discharge_TWh"], info["AGV_used_TWh"]) if info["AGV_used_TWh"] > 0.01 else np.nan
+    )
 
     # --- capacities (DE)
     def cap(carriers, attr="p_nom_opt", by_output=False):
