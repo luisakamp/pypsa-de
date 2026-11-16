@@ -49,7 +49,7 @@ rule export_ariadne_variables:
         mem_mb=16000,
     params:
         planning_horizons=config_provider("planning_horizons"),
-        hours=config_provider("clustering", "temporal", "resolution_sector"),
+        time_resolution=config_provider("clustering", "temporal"),
         config_industry=config_provider("industry"),
         energy_totals_year=config_provider("energy", "energy_totals_year"),
         co2_sequestration_cost=config_provider("sector", "co2_sequestration_cost"),
@@ -202,7 +202,7 @@ rule plot_ariadne_report:
         foresight=config_provider("foresight"),
         post_discretization=config_provider("solving", "options", "post_discretization"),
         NEP_year=lambda w: config_provider("costs", "custom_cost_fn")(w)[-8:-4],
-        hours=config_provider("clustering", "temporal", "resolution_sector"),
+        time_resolution=config_provider("clustering", "temporal"),
         NEP_transmission=config_provider("costs", "transmission"),
     script:
         scripts("pypsa-de/plot_ariadne_report.py")
