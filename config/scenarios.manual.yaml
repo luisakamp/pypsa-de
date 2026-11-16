@@ -74,6 +74,17 @@ KN2045_Mix:
 # dient als Referenzszenario in der Familie der Ariadne-Szenarien
 
 
+KN2045_Mix_3H:
+# Wie KN2045_Mix, aber 3-stündliche Zeitauflösung statt 365H-Mittelung.
+# Zweck: Auswertung der Ein-/Ausspeicherleistung von H2-Speichern (ESL/ASL),
+# Auswertung mit analysis/h2_storage/ (Branch h2_kraftwerke_ESL-ASL).
+# Speicherbedarf beim Lösen deutlich höher (Größenordnung 150+ GB bei 27 Knoten).
+  pypsa-de:
+    reference_scenario: KN2045_Mix
+  clustering:
+    temporal:
+      resolution_sector: 3H
+
 KN2045_Mix_LowDecentralDiscount:
   costs:
     custom_cost_fn: data/pypsa-de/custom_costs_nep_2023_low_decentral_discount.csv
