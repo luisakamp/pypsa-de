@@ -714,6 +714,11 @@ scale_capacity:
       "urban central gas CHP": 22000
 
 data:
+  # BFE hat die Excel-Datei aktualisiert (Tabelle17 ohne 'Total Endenergieverbrauch'),
+  # daher die archivierte Fassung vom 16.02.2026 verwenden.
+  swiss_energy_balances:
+    source: archive
+    version: latest
   ariadne_database:
     source: archive
     version: latest
