@@ -1415,6 +1415,95 @@ def limit_cross_border_flows_ac(n, s_max_pu):
     n.lines.loc[cross_border_lines, "s_max_pu"] = s_max_pu
 
 
+def add_h2_storage_power_costs(n, params, current_year):
+    """
+    Split underground H2 storage (salt caverns) into volume and power components.
+
+    By default a cavern is a single ``Store`` on the H2 bus: only the volume has
+    costs, injection and withdrawal power are unlimited and free. With this option
+    each cavern store is moved to its own bus ``<node> H2 Store`` and connected to
+    the H2 bus by two extendable links with their own capital costs:
+
+    - ``H2 Store charger`` (H2 bus -> store bus): injection capacity (ESL), e.g. compressors
+    - ``H2 Store discharger`` (store bus -> H2 bus): withdrawal capacity (ASL), e.g. drying
+
+    Only stores on H2 buses with a finite ``e_nom_max`` (salt cavern potential) are
+    converted; overground tanks are left unchanged. Stores from previous horizons that
+    were already converted sit on the store bus and are kept as they are.
+
+    Investment costs are given in EUR/kW (lower heating value) and annualised with
+    the given lifetime and discount rate, plus fixed O&M as share of investment.
+    """
+    from scripts.add_electricity import calculate_annuity
+
+    h2_buses = n.buses.index[n.buses.carrier == "H2"]
+    caverns = n.stores[
+        (n.stores.carrier == "H2 Store")
+        & n.stores.bus.isin(h2_buses)
+        & np.isfinite(n.stores.e_nom_max)
+    ]
+    countries = params.get("countries")
+    if countries:
+        caverns = caverns[caverns.bus.str[:2].isin(countries)]
+
+    # nodes with caverns built in earlier horizons (stores already on a store bus)
+    old = n.stores[(n.stores.carrier == "H2 Store") & n.stores.bus.str.endswith(" H2 Store")]
+    nodes = pd.Index(
+        sorted(set(caverns.bus.str.removesuffix(" H2")) | set(old.bus.str.removesuffix(" H2 Store")))
+    )
+    if nodes.empty:
+        logger.info("No H2 caverns found, H2 storage power costs not added.")
+        return
+
+    store_buses = nodes + " H2 Store"
+    if "H2 Store" not in n.carriers.index:
+        n.add("Carrier", "H2 Store")
+    for carrier in ["H2 Store charger", "H2 Store discharger"]:
+        if carrier not in n.carriers.index:
+            n.add("Carrier", carrier)
+    new_buses = store_buses.difference(n.buses.index)
+    n.add(
+        "Bus",
+        new_buses,
+        carrier="H2 Store",
+        location=new_buses.str.removesuffix(" H2 Store"),
+        unit="MWh_LHV",
+    )
+
+    # move this horizon's cavern stores to their store bus
+    n.stores.loc[caverns.index, "bus"] = caverns.bus.str.removesuffix(" H2") + " H2 Store"
+    factor = params.get("store_cost_factor", 1.0)
+    if factor != 1.0:
+        n.stores.loc[caverns.index, "capital_cost"] *= factor
+
+    r = params.get("discount_rate", 0.07)
+    new_nodes = caverns.bus.str.removesuffix(" H2").unique()
+    for kind, bus0, bus1 in [
+        ("charger", " H2", " H2 Store"),
+        ("discharger", " H2 Store", " H2"),
+    ]:
+        cfg = params[kind]
+        invest = cfg["investment"] * 1e3  # EUR/kW -> EUR/MW
+        capital_cost = (calculate_annuity(cfg["lifetime"], r) + cfg.get("fom", 0.0)) * invest
+        names = pd.Index(new_nodes) + f" H2 Store {kind}-{current_year}"
+        n.add(
+            "Link",
+            names,
+            bus0=pd.Index(new_nodes) + bus0,
+            bus1=pd.Index(new_nodes) + bus1,
+            carrier=f"H2 Store {kind}",
+            efficiency=1.0,
+            p_nom_extendable=True,
+            capital_cost=capital_cost,
+            lifetime=cfg["lifetime"],
+            build_year=current_year,
+        )
+        logger.info(
+            f"Added {len(names)} 'H2 Store {kind}' links: investment {cfg['investment']} EUR/kW, "
+            f"capital cost {capital_cost / 1e3:.1f} EUR/kW/a."
+        )
+
+
 if __name__ == "__main__":
     if "snakemake" not in globals():
         snakemake = mock_snakemake(
@@ -1489,6 +1578,10 @@ if __name__ == "__main__":
     force_connection_nep_offshore(n, current_year, costs)
 
     scale_capacity(n, snakemake.params.scale_capacity)
+
+    h2_storage_power = snakemake.params.get("h2_storage_power") or {}
+    if h2_storage_power.get("enable", False):
+        add_h2_storage_power_costs(n, h2_storage_power, current_year)
 
     sanitize_custom_columns(n)
 

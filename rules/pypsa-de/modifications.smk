@@ -257,6 +257,7 @@ rule modify_prenetwork:
         limit_cross_border_flows_ac=config_provider(
             "pypsa-de", "limit_cross_border_flows_ac"
         ),
+        h2_storage_power=config_provider("pypsa-de", "h2_storage_power", default={}),
     script:
         scripts("pypsa-de/modify_prenetwork.py")
 

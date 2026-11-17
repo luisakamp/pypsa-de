@@ -85,6 +85,32 @@ KN2045_Mix_3H:
     temporal:
       resolution_sector: 3H
 
+KN2045_Mix_3H_LK:
+# Wie KN2045_Mix_3H, aber mit Leistungskosten für H2-Kavernen (Phase 2):
+# eigene Links für Ein- und Ausspeicherung, Kosten nach DBI 2.0 (Beispielkaverne).
+  pypsa-de:
+    reference_scenario: KN2045_Mix
+    h2_storage_power:
+      enable: true
+  clustering:
+    temporal:
+      resolution_sector: 3H
+
+KN2045_Mix_3H_LKEWI:
+# Wie KN2045_Mix_3H_LK, aber pauschale Leistungskosten nach EWI (2024):
+# 163 TEUR/MW für beide Richtungen.
+  pypsa-de:
+    reference_scenario: KN2045_Mix
+    h2_storage_power:
+      enable: true
+      charger:
+        investment: 163
+      discharger:
+        investment: 163
+  clustering:
+    temporal:
+      resolution_sector: 3H
+
 KN2045_Mix_LowDecentralDiscount:
   costs:
     custom_cost_fn: data/pypsa-de/custom_costs_nep_2023_low_decentral_discount.csv

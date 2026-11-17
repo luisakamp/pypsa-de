@@ -9,6 +9,8 @@ run:
   # - ExPol
   - KN2045_Mix
   - KN2045_Mix_3H
+  - KN2045_Mix_3H_LK
+  - KN2045_Mix_3H_LKEWI
   # - KN2045_Mix_LowDecentralDiscount
   # - KN2045_Mix_HighDecentralDiscount
   # - KN2045_Mix_H2plantsEU
@@ -55,6 +57,22 @@ pypsa-de:
     2040: 0.49
     2045: 0.49
     2050: 0.49
+  # Leistungskosten für H2-Kavernenspeicher: Store (Volumen) + Einspeicher-Link (ESL)
+  # + Ausspeicher-Link (ASL). Standard aus (Ein-/Ausspeicherung unbegrenzt und kostenlos).
+  # Investition in EUR/kW Heizwert. Umrechnung aus Brennwert: EUR/kW_Hs * 1,189.
+  h2_storage_power:
+    enable: false
+    countries: []        # leer = alle Länder, sonst z. B. [DE]
+    discount_rate: 0.07
+    store_cost_factor: 1.0  # Skalierung der Volumenkosten (Doppelzählung prüfen)
+    charger:             # Einspeicherung (ESL), v. a. Verdichter
+      investment: 134.4  # DBI 2.0 Beispielkaverne: ca. 113 EUR/kW_Hs
+      lifetime: 25
+      fom: 0.0           # fixe Betriebskosten als Anteil der Investition pro Jahr
+    discharger:          # Ausspeicherung (ASL), v. a. Trocknung
+      investment: 73.7   # DBI 2.0 Beispielkaverne: ca. 62 EUR/kW_Hs
+      lifetime: 25
+      fom: 0.0
 
 # docs in https://pypsa-eur.readthedocs.io/en/latest/configuration.html#foresight
 foresight: myopic
