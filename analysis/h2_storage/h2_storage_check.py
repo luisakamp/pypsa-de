@@ -52,10 +52,24 @@ def de_h2_buses(n: pypsa.Network, country: str = "DE") -> pd.Index:
     return b.index[(b.carrier == "H2") & b.index.str.startswith(country)]
 
 
+STORE_LINK_CARRIERS = ["H2 Store charger", "H2 Store discharger"]
+
+
+def store_node_bus(bus: pd.Series) -> pd.Series:
+    """Map store buses '<node> H2 Store' (Variante mit Leistungskosten) to '<node> H2'."""
+    return bus.str.replace(r" H2 Store$", " H2", regex=True)
+
+
 def classify_h2_stores(n: pypsa.Network, buses: pd.Index) -> pd.DataFrame:
-    st = n.stores[(n.stores.carrier == "H2 Store") & n.stores.bus.isin(buses)].copy()
-    cavern_buses = st.bus[np.isfinite(st.e_nom_max)].unique()
-    st["type"] = np.where(st.bus.isin(cavern_buses), "cavern", "tank")
+    """
+    H2-Speicher an den gegebenen H2-Bussen. Mit Leistungskosten (Phase 2) sitzen die
+    Kavernen auf einem eigenen Bus '<node> H2 Store'; 'node_bus' ist dann der H2-Bus.
+    """
+    st = n.stores[n.stores.carrier == "H2 Store"].copy()
+    st["node_bus"] = store_node_bus(st.bus)
+    st = st[st.node_bus.isin(buses)]
+    cavern_buses = st.node_bus[np.isfinite(st.e_nom_max) | st.bus.str.endswith(" H2 Store")].unique()
+    st["type"] = np.where(st.node_bus.isin(cavern_buses), "cavern", "tank")
     return st
 
 
@@ -88,7 +102,8 @@ def h2_injections(n: pypsa.Network, buses: pd.Index, country: str = "DE") -> pd.
 
     # stores
     st = classify_h2_stores(n, buses)
-    for typ, idx in st.groupby("type").groups.items():
+    direct = st[st.bus.isin(buses)]  # Speicher direkt am H2-Bus (ohne Leistungs-Links)
+    for typ, idx in direct.groupby("type").groups.items():
         add(f"H2 Store ({typ})", ts(n.stores_t.p, idx, sns).sum(axis=1))
     other_st = n.stores[n.stores.bus.isin(buses) & ~n.stores.index.isin(st.index)]
     for carrier, idx in other_st.groupby("carrier").groups.items():
@@ -114,7 +129,8 @@ def h2_injections(n: pypsa.Network, buses: pd.Index, country: str = "DE") -> pd.
             add("DE pipelines (losses)", inj[sub.index[internal]].sum(axis=1))
         rest = sub[~is_pipe]
         for carrier, idx in rest.groupby("carrier").groups.items():
-            add(carrier, inj[idx].sum(axis=1))
+            label = "H2 Store (cavern)" if carrier in STORE_LINK_CARRIERS else carrier
+            add(label, inj[idx].sum(axis=1))
 
     df = pd.DataFrame(cols)
     df["balance residual"] = df.sum(axis=1)
@@ -186,7 +202,7 @@ def check_network(n: pypsa.Network, year: int) -> tuple[dict, pd.DataFrame]:
     st = classify_h2_stores(n, buses)
     for typ in ["cavern", "tank"]:
         s = st[st.type == typ]
-        info[f"{typ}_buses"] = ",".join(sorted(s.bus.unique()))
+        info[f"{typ}_buses"] = ",".join(sorted(s.node_bus.unique()))
         info[f"{typ}_e_nom_opt_TWh"] = s.e_nom_opt.sum() / 1e6
         info[f"{typ}_e_nom_max_TWh"] = (
             s.groupby("bus").e_nom_max.max().replace(np.inf, np.nan).sum() / 1e6
@@ -195,11 +211,14 @@ def check_network(n: pypsa.Network, year: int) -> tuple[dict, pd.DataFrame]:
             json.dumps(s.capital_cost.round(2).unique().tolist()) if len(s) else ""
         )
     # any power limit on stores? (should be none -> unconstrained ASL/ESL)
-    h2_store_links = n.links.index[
-        n.links.bus0.isin(buses) & n.links.bus1.str.contains("H2 Store", na=False)
-        | n.links.bus1.isin(buses) & n.links.bus0.str.contains("H2 Store", na=False)
-    ]
-    info["store_charger_links"] = len(h2_store_links)
+    sl = n.links[n.links.carrier.isin(STORE_LINK_CARRIERS) & n.links.index.str.startswith("DE")]
+    info["store_charger_links"] = len(sl)
+    if len(sl):
+        info["ESL_capacity_GW"] = sl.p_nom_opt[sl.carrier == "H2 Store charger"].sum() / 1e3
+        info["ASL_capacity_GW"] = sl.p_nom_opt[sl.carrier == "H2 Store discharger"].sum() / 1e3
+        info["storage_link_capital_cost_EUR_per_kW_a"] = json.dumps(
+            (sl.groupby("carrier").capital_cost.first() / 1e3).round(2).to_dict()
+        )
 
     # --- balance and dispatch
     inj = h2_injections(n, buses)
@@ -274,7 +293,7 @@ def regional_stats(n: pypsa.Network, country: str = "DE") -> pd.DataFrame:
     buses = de_h2_buses(n, country)
     st = classify_h2_stores(n, buses)
     w = n.snapshot_weightings.generators
-    p = ts(n.stores_t.p, st.index, n.snapshots).T.groupby(st.bus).sum().T
+    p = ts(n.stores_t.p, st.index, n.snapshots).T.groupby(st.node_bus).sum().T
     rows = {}
     for bus in buses:
         s_ = p[bus] if bus in p else pd.Series(0.0, index=n.snapshots)
@@ -282,12 +301,14 @@ def regional_stats(n: pypsa.Network, country: str = "DE") -> pd.DataFrame:
         links = n.links[n.links.index.str.startswith(loc + " ")]
         asl, esl = s_.max(), -s_.min()
         rows[bus] = {
-            "Typ": ",".join(st.type[st.bus == bus].unique()),
-            "AGV e_nom_opt [TWh]": st.e_nom_opt[st.bus == bus].sum() / 1e6,
+            "Typ": ",".join(st.type[st.node_bus == bus].unique()),
+            "AGV e_nom_opt [TWh]": st.e_nom_opt[st.node_bus == bus].sum() / 1e6,
             "ASL max [GW]": asl / 1e3,
             "ESL max [GW]": esl / 1e3,
             "ESL/ASL": _div(esl, asl) if max(asl, esl) >= MIN_GW_FOR_RATIO else np.nan,
             "Ausspeicherung [TWh]": (s_.clip(lower=0) * w).sum() / 1e6,
+            "ESL-Kapazität [GW]": links.p_nom_opt[links.carrier == "H2 Store charger"].sum() / 1e3,
+            "ASL-Kapazität [GW]": links.p_nom_opt[links.carrier == "H2 Store discharger"].sum() / 1e3,
             "Elektrolyse [GWel]": links.p_nom_opt[links.carrier == "H2 Electrolysis"].sum() / 1e3,
             "H2-Kraftwerke [GW_H2in]": links.p_nom_opt[
                 links.bus0.eq(bus) & links.carrier.str.contains("OCGT|CCGT|CHP|turbine|Fuel Cell")
