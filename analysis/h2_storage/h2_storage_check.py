@@ -126,6 +126,8 @@ def _div(a, b):
 
 
 MIN_GW_FOR_RATIO = 100.0  # MW; below this the ESL/ASL ratio is numerical noise
+ROLLING_WINDOWS_H = [24, 72, 168, 336]  # Fenster für gleitende Mittel der Speicherleistung
+TOP_N = 10  # Spitzen-Zeitschritte für Auswertungen "in der Spitze"
 
 
 def duration_stats(p: pd.Series, w: pd.Series, prefix: str) -> dict:
@@ -139,6 +141,13 @@ def duration_stats(p: pd.Series, w: pd.Series, prefix: str) -> dict:
         out[f"{prefix}ESL_max_{lab}"] = -s.min()
         out[f"{prefix}ASL_q995_{lab}"] = s.quantile(0.995)
         out[f"{prefix}ESL_q995_{lab}"] = -s.quantile(0.005)
+        out[f"{prefix}ASL_q99_{lab}"] = s.quantile(0.99)
+        out[f"{prefix}ESL_q99_{lab}"] = -s.quantile(0.01)
+    # gleitende Mittel: wie lange wird eine hohe Leistung gehalten?
+    for hours in ROLLING_WINDOWS_H:
+        r = p.rolling(f"{hours}h").mean()
+        out[f"{prefix}ASL_max_roll{hours}h"] = r.max()
+        out[f"{prefix}ESL_max_roll{hours}h"] = -r.min()
     for lab in ["snap", "day"]:
         asl, esl = out[f"{prefix}ASL_max_{lab}"], out[f"{prefix}ESL_max_{lab}"]
         out[f"{prefix}ESL/ASL_max_{lab}"] = (
@@ -209,6 +218,30 @@ def check_network(n: pypsa.Network, year: int) -> tuple[dict, pd.DataFrame]:
         _div(info["all_discharge_TWh"], info["AGV_used_TWh"]) if info["AGV_used_TWh"] > 0.01 else np.nan
     )
 
+    # Befüllbarkeit: Tage, um das genutzte AGV mit der ESL zu füllen
+    for k in ["snap", "day"]:
+        esl = info[f"all_ESL_max_{k}"]
+        info[f"fill_time_days_ESL_max_{k}"] = (
+            info["AGV_used_TWh"] * 1e6 / esl / 24 if esl >= MIN_GW_FOR_RATIO else np.nan
+        )
+    for frac in [0.75]:
+        esl_rule = frac * info["all_ASL_max_snap"]
+        info[f"ESL_rule_{int(frac * 100)}pct_GW"] = esl_rule / 1e3
+        info[f"fill_time_days_ESL_rule_{int(frac * 100)}pct"] = (
+            info["AGV_used_TWh"] * 1e6 / esl_rule / 24 if esl_rule >= MIN_GW_FOR_RATIO else np.nan
+        )
+
+    # Import-Kapazität: grenzüberschreitende H2-Pipelines nach DE
+    pipes = n.links[n.links.carrier.isin(H2_PIPE_CARRIERS)]
+    cross = pipes[
+        pipes.bus0.str.startswith("DE") ^ pipes.bus1.str.startswith("DE")
+    ]
+    info["import_pipeline_capacity_GW"] = cross.p_nom_opt.sum() / 1e3
+    imp = inj.get("import (pipelines)")
+    if imp is not None:
+        info["import_max_GW"] = imp.max() / 1e3
+        info["export_max_GW"] = -imp.min() / 1e3
+
     # --- capacities (DE)
     def cap(carriers, attr="p_nom_opt", by_output=False):
         sel = n.links[n.links.carrier.isin(carriers) & n.links.index.str.startswith("DE")]
@@ -236,9 +269,63 @@ def check_network(n: pypsa.Network, year: int) -> tuple[dict, pd.DataFrame]:
     return info, inj
 
 
-def run(results_dir, years=YEARS, out_dir=None, pattern=FILE_PATTERN):
+def regional_stats(n: pypsa.Network, country: str = "DE") -> pd.DataFrame:
+    """Speicher-, Elektrolyse- und Kraftwerksgrößen je H2-Bus (Region)."""
+    buses = de_h2_buses(n, country)
+    st = classify_h2_stores(n, buses)
+    w = n.snapshot_weightings.generators
+    p = ts(n.stores_t.p, st.index, n.snapshots).T.groupby(st.bus).sum().T
+    rows = {}
+    for bus in buses:
+        s_ = p[bus] if bus in p else pd.Series(0.0, index=n.snapshots)
+        loc = bus.removesuffix(" H2")
+        links = n.links[n.links.index.str.startswith(loc + " ")]
+        asl, esl = s_.max(), -s_.min()
+        rows[bus] = {
+            "Typ": ",".join(st.type[st.bus == bus].unique()),
+            "AGV e_nom_opt [TWh]": st.e_nom_opt[st.bus == bus].sum() / 1e6,
+            "ASL max [GW]": asl / 1e3,
+            "ESL max [GW]": esl / 1e3,
+            "ESL/ASL": _div(esl, asl) if max(asl, esl) >= MIN_GW_FOR_RATIO else np.nan,
+            "Ausspeicherung [TWh]": (s_.clip(lower=0) * w).sum() / 1e6,
+            "Elektrolyse [GWel]": links.p_nom_opt[links.carrier == "H2 Electrolysis"].sum() / 1e3,
+            "H2-Kraftwerke [GW_H2in]": links.p_nom_opt[
+                links.bus0.eq(bus) & links.carrier.str.contains("OCGT|CCGT|CHP|turbine|Fuel Cell")
+            ].sum() / 1e3,
+        }
+    return pd.DataFrame(rows).T
+
+
+def foreign_storage_stats(n: pypsa.Network, inj: pd.DataFrame, country: str = "DE") -> pd.DataFrame:
+    """H2-Speicher im Ausland je Land, auch in den deutschen Spitzenzeitpunkten."""
+    st = n.stores[(n.stores.carrier == "H2 Store") & ~n.stores.bus.str.startswith(country)]
+    if st.empty:
+        return pd.DataFrame()
+    p = ts(n.stores_t.p, st.index, n.snapshots).T.groupby(st.bus.str[:2]).sum().T
+    e_nom = st.groupby(st.bus.str[:2]).e_nom_opt.sum()
+    store_cols = [c for c in inj.columns if c.startswith("H2 Store")]
+    p_de = inj[store_cols].sum(axis=1)
+    top_asl, top_esl = p_de.nlargest(TOP_N).index, p_de.nsmallest(TOP_N).index
+    df = pd.DataFrame(
+        {
+            "AGV e_nom_opt [TWh]": e_nom / 1e6,
+            "ASL max [GW]": p.max() / 1e3,
+            "ESL max [GW]": -p.min() / 1e3,
+            f"Mittel in DE-Top{TOP_N}-ASL [GW]": p.loc[top_asl].mean() / 1e3,
+            f"Mittel in DE-Top{TOP_N}-ESL [GW]": p.loc[top_esl].mean() / 1e3,
+        }
+    )
+    df = df[df.abs().max(axis=1) > 0.05]
+    return df.sort_values("AGV e_nom_opt [TWh]", ascending=False)
+
+
+def run(results_dir, years=YEARS, out_dir=None, pattern=FILE_PATTERN, return_extras=False):
+    """
+    Wertet alle Jahre aus. Gibt (summary, balances) zurück, mit return_extras=True
+    zusätzlich ein Dict {jahr: {"regional": df, "foreign": df}}.
+    """
     results_dir = Path(results_dir)
-    rows, balances = [], {}
+    rows, balances, extras = [], {}, {}
     for y in years:
         f = results_dir / pattern.format(year=y)
         if not f.exists():
@@ -248,6 +335,10 @@ def run(results_dir, years=YEARS, out_dir=None, pattern=FILE_PATTERN):
         info, inj = check_network(n, y)
         rows.append(info)
         balances[y] = inj
+        extras[y] = {
+            "regional": regional_stats(n),
+            "foreign": foreign_storage_stats(n, inj),
+        }
         print(
             f"{y}: {info['n_snapshots']} snapshots | ASL {info['all_ASL_max_snap'] / 1e3:.1f} GW, "
             f"ESL {info['all_ESL_max_snap'] / 1e3:.1f} GW (Hi), ESL/ASL {info['all_ESL/ASL_max_snap']:.0%} | "
@@ -260,6 +351,10 @@ def run(results_dir, years=YEARS, out_dir=None, pattern=FILE_PATTERN):
         summary.to_csv(out / "h2_storage_summary.csv")
         for y, inj in balances.items():
             inj.to_csv(out / f"h2_balance_DE_{y}.csv")
+            extras[y]["regional"].to_csv(out / f"h2_regional_DE_{y}.csv")
+            extras[y]["foreign"].to_csv(out / f"h2_storage_foreign_{y}.csv")
+    if return_extras:
+        return summary, balances, extras
     return summary, balances
 
 
