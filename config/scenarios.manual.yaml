@@ -96,6 +96,21 @@ KN2045_Mix_3H_LK:
     temporal:
       resolution_sector: 3H
 
+KN2045_Mix_3H_LK_IMP:
+# Wie KN2045_Mix_3H_LK (Leistungskosten DBI), zusätzlich stündliche Netto-H2-Importe
+# nach DE auf 50-150 % ihres Jahresmittels begrenzt (Sensitivität Importflexibilität).
+  pypsa-de:
+    reference_scenario: KN2045_Mix
+    h2_storage_power:
+      enable: true
+  clustering:
+    temporal:
+      resolution_sector: 3H
+  solving:
+    constraints:
+      h2_import_band:
+        enable: true
+
 KN2045_Mix_3H_LKEWI:
 # Wie KN2045_Mix_3H_LK, aber pauschale Leistungskosten nach EWI (2024):
 # 163 TEUR/MW für beide Richtungen.

@@ -827,6 +827,66 @@ def adapt_nuclear_output(n):
     )
 
 
+def h2_import_band(n, investment_year, cfg):
+    """
+    Restrict hourly net H2 pipeline imports into a country to a band around
+    their (endogenous) annual mean:
+
+        lower * mean <= net_import(t) <= upper * mean    for all t
+
+    Sensitivity for the H2 storage analysis: by default imports are only limited
+    by an annual volume and can be shifted freely between hours, so they act as
+    storage. ``lower`` represents a minimum utilisation of import routes
+    (take-or-pay, pipeline/terminal operation), ``upper`` a limited peak import.
+    The mean is an auxiliary variable to keep the constraint matrix sparse.
+    """
+    if investment_year < cfg.get("from_year", 0):
+        return
+    lower, upper = cfg.get("lower"), cfg.get("upper")
+    pipeline_carrier = [
+        "H2 pipeline",
+        "H2 pipeline (Kernnetz)",
+        "H2 pipeline retrofitted",
+    ]
+    w = n.snapshot_weightings.generators
+    for ct in cfg.get("countries", ["DE"]):
+        incoming = n.links.index[
+            (n.links.carrier.isin(pipeline_carrier))
+            & (n.links.bus0.str[:2] != ct)
+            & (n.links.bus1.str[:2] == ct)
+        ]
+        outgoing = n.links.index[
+            (n.links.carrier.isin(pipeline_carrier))
+            & (n.links.bus0.str[:2] == ct)
+            & (n.links.bus1.str[:2] != ct)
+        ]
+        if incoming.empty:
+            continue
+        p = n.model["Link-p"]
+        p_in = p.loc[:, incoming]
+        other_dims = [d for d in p_in.dims if d != "snapshot"]
+        net = p_in.sum(other_dims)
+        if not outgoing.empty:
+            net = net - p.loc[:, outgoing].sum(other_dims)
+
+        mean = n.model.add_variables(lower=0, name=f"H2_import_mean-{ct}")
+        n.model.add_constraints(
+            (net * w).sum() - mean * w.sum() == 0,
+            name=f"H2_import_mean_def-{ct}",
+        )
+        if upper is not None:
+            n.model.add_constraints(
+                net - upper * mean <= 0, name=f"H2_import_band_upper-{ct}"
+            )
+        if lower is not None:
+            n.model.add_constraints(
+                net - lower * mean >= 0, name=f"H2_import_band_lower-{ct}"
+            )
+        logger.info(
+            f"Restricting hourly H2 net imports in {ct} to [{lower}, {upper}] x annual mean."
+        )
+
+
 def additional_functionality(n, snapshots, snakemake):
     logger.info("Adding Ariadne-specific functionality")
 
@@ -847,6 +907,10 @@ def additional_functionality(n, snapshots, snakemake):
         h2_import_limits(n, investment_year, constraints["limits_volume_max"])
 
         electricity_import_limits(n, investment_year, constraints["limits_volume_max"])
+
+        band = constraints.get("h2_import_band") or {}
+        if band.get("enable", False):
+            h2_import_band(n, investment_year, band)
 
     if investment_year >= 2025:
         h2_production_limits(
