@@ -12,6 +12,7 @@ run:
   - KN2045_Mix_3H_LK
   - KN2045_Mix_3H_LKEWI
   - KN2045_Mix_3H_LK_IMP
+  - KN2045_Mix_3H_LK_CAP
   # - KN2045_Mix_LowDecentralDiscount
   # - KN2045_Mix_HighDecentralDiscount
   # - KN2045_Mix_H2plantsEU
@@ -643,6 +644,14 @@ solving:
       countries: [DE]
       lower: 0.5      # Mindestauslastung (z. B. 0.5 = 50 % des Jahresmittels)
       upper: 1.5      # maximale Importleistung (z. B. 1.5 = 150 % des Jahresmittels)
+      from_year: 2035
+    # Sensitivität H2-Speicher: Ausspeicherleistung (ASL) der Kavernen je Land deckeln,
+    # in GW Heizwert (bestehend + neu). Benötigt pypsa-de.h2_storage_power.enable.
+    # 30.3 GW_Hi = 36 GWh/h_Hs (ASL-Vorgabe SR 2025).
+    h2_storage_asl_cap:
+      enable: false
+      countries:
+        DE: 30.3
       from_year: 2035
     limits_power_max: # in GW
       DE:

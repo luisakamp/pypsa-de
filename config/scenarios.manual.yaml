@@ -111,6 +111,22 @@ KN2045_Mix_3H_LK_IMP:
       h2_import_band:
         enable: true
 
+KN2045_Mix_3H_LK_CAP:
+# Wie KN2045_Mix_3H_LK (Leistungskosten DBI), zusätzlich ASL der deutschen Kavernen
+# auf 30,3 GW_Hi = 36 GWh/h_Hs gedeckelt (Vorgabe SR 2025). Frage: welche ESL braucht
+# das System bei der ASL des Szenariorahmens?
+  pypsa-de:
+    reference_scenario: KN2045_Mix
+    h2_storage_power:
+      enable: true
+  clustering:
+    temporal:
+      resolution_sector: 3H
+  solving:
+    constraints:
+      h2_storage_asl_cap:
+        enable: true
+
 KN2045_Mix_3H_LKEWI:
 # Wie KN2045_Mix_3H_LK, aber pauschale Leistungskosten nach EWI (2024):
 # 163 TEUR/MW für beide Richtungen.

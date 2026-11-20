@@ -887,6 +887,42 @@ def h2_import_band(n, investment_year, cfg):
         )
 
 
+def h2_storage_asl_cap(n, investment_year, cfg):
+    """
+    Cap the total withdrawal capacity (ASL) of H2 caverns per country.
+
+    Requires ``pypsa-de.h2_storage_power.enable`` (separate 'H2 Store discharger'
+    links). Sum of existing plus new discharger capacity <= cap (GW, lower heating
+    value), e.g. 30.3 GW_Hi = 36 GWh/h_Hs as in the NEP scenario framework 2025.
+    """
+    if investment_year < cfg.get("from_year", 0):
+        return
+    dis = n.links[n.links.carrier == "H2 Store discharger"]
+    if dis.empty:
+        logger.warning("h2_storage_asl_cap: no 'H2 Store discharger' links found, skipped.")
+        return
+    for ct, cap_gw in cfg.get("countries", {}).items():
+        sel = dis[dis.index.str.startswith(ct)]
+        ext = sel.index[sel.p_nom_extendable]
+        existing = sel.loc[~sel.p_nom_extendable, "p_nom"].sum()
+        cap = cap_gw * 1e3
+        if existing > cap:
+            logger.warning(
+                f"h2_storage_asl_cap: existing discharger capacity in {ct} "
+                f"({existing / 1e3:.1f} GW) exceeds cap ({cap_gw} GW); new capacity set to 0."
+            )
+        if ext.empty:
+            continue
+        lhs = n.model["Link-p_nom"].loc[ext].sum()
+        n.model.add_constraints(
+            lhs <= max(cap - existing, 0.0), name=f"H2_storage_ASL_cap-{ct}"
+        )
+        logger.info(
+            f"Capping H2 storage withdrawal capacity in {ct} to {cap_gw} GW "
+            f"(existing {existing / 1e3:.1f} GW)."
+        )
+
+
 def additional_functionality(n, snapshots, snakemake):
     logger.info("Adding Ariadne-specific functionality")
 
@@ -911,6 +947,10 @@ def additional_functionality(n, snapshots, snakemake):
         band = constraints.get("h2_import_band") or {}
         if band.get("enable", False):
             h2_import_band(n, investment_year, band)
+
+    asl_cap = constraints.get("h2_storage_asl_cap") or {}
+    if asl_cap.get("enable", False):
+        h2_storage_asl_cap(n, investment_year, asl_cap)
 
     if investment_year >= 2025:
         h2_production_limits(
